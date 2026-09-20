@@ -1283,17 +1283,7 @@ with st.sidebar:
             st.selectbox("District / Agro-Climatic Zone", ["-- Select State First --"], disabled=True)
             st.caption("👈 Please select your State to begin.")
 
-    # 3. AI Credentials & Engine Management (in clean Expander)
-    st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
-    with st.expander("⚙️ AI Engine & Credentials", expanded=False):
-        user_key = st.text_input("Gemini API Key", value=api_key, type="password", help="Enter your Gemini API Key from Google AI Studio")
-        if user_key:
-            api_key = user_key
-        st.caption("Active Fallback: `gemini-3.6-flash` ➔ `2.0` ➔ `1.5`")
-        if api_key:
-            st.success("✅ Gemini Multimodal Active")
-        else:
-            st.info("💡 Offline Demo Mode Active")
+
 
 
 # --- Main App Header: Clean Agro Hero (No Navbar) ---
