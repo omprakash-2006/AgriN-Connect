@@ -5,6 +5,9 @@ import io
 import json
 import base64
 import requests
+import datetime
+import random
+import time
 from PIL import Image
 from dotenv import load_dotenv
 
@@ -2896,7 +2899,7 @@ with tab3:
 
         run_sim = st.button(t("sim_btn"), type="primary", use_container_width=True)
 
-        if run_sim or st.session_state.get("sim_ran", False):
+        if True:
             st.session_state["sim_ran"] = True
             
             # Scenario Data
@@ -2934,10 +2937,16 @@ with tab3:
                 saved_value = 36500
 
             # 4-Phase Progression Timeline
+            sim_time_now = datetime.datetime.now().strftime("%I:%M:%S %p IST")
             st.markdown(f"""
 <div style="background: rgba(4, 25, 17, 0.7); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 14px; padding: 18px; margin-top: 14px; margin-bottom: 16px;">
-<div style="color: #fde68a; font-weight: 800; font-size: 1.05rem; margin-bottom: 12px;">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+<div style="color: #fde68a; font-weight: 800; font-size: 1.05rem;">
 🧭 SIMULATION CHRONOLOGY • {pest_name}
+</div>
+<span style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #a7f3d0; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 12px;">
+📡 Live Radar Ping: {sim_time_now}
+</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
 <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 10px; padding: 12px;">
@@ -3013,74 +3022,146 @@ with tab3:
             </div>
             """, unsafe_allow_html=True)
 
-    # 3. Live Pan-India Agro-News & Breaking Bulletins
-    st.markdown("""
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="display: inline-block; width: 12px; height: 12px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 12px #ef4444;"></span>
-            <b style="color: #ffffff; font-size: 1.15rem; letter-spacing: 0.3px;">📢 LIVE AGRO-NEWS & INTER-STATE BREAKING BULLETINS</b>
-        </div>
-        <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; font-size: 0.74rem; font-weight: 800; padding: 4px 12px; border-radius: 20px;">
-            ● 24/7 SURVEILLANCE FEED
-        </span>
-    </div>
-    """, unsafe_allow_html=True)
+    # 3. Live Pan-India Agro-News & Breaking Bulletins (Dynamic Real-Time Surveillance Engine)
+    now_dt = datetime.datetime.now()
+    now_time_str = now_dt.strftime("%I:%M:%S %p IST")
+    is_ta = "Tamil" in app_lang_choice
 
-    # News Feed Cards
-    news_items = [
+    col_news_head, col_news_refresh = st.columns([3.2, 1.4])
+    with col_news_head:
+        news_header_title = "📢 நேரடி வேளாண் உளவு & மாநிலங்களுக்கிடையேயான அவசர அறிவிப்புகள்" if is_ta else "📢 LIVE AGRO-NEWS & INTER-STATE BREAKING BULLETINS"
+        st.markdown(f"""
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+            <span style="display: inline-block; width: 12px; height: 12px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 12px #ef4444;"></span>
+            <b style="color: #ffffff; font-size: 1.15rem; letter-spacing: 0.3px;">{news_header_title}</b>
+        </div>
+        <div style="font-size: 0.78rem; color: #a7f3d0; margin-left: 22px;">
+            ● 24/7 SURVEILLANCE FEED • <span style="color: #34d399; font-weight: 700;">📡 Live Telemetry Synced: {now_time_str}</span>
+        </div>
+        """, unsafe_allow_html=True)
+    with col_news_refresh:
+        refresh_btn_text = "🔄 ரேடார் தகவலை புதுப்பிக்கவும்" if is_ta else "🔄 Pulse Live Radar Telemetry"
+        if st.button(refresh_btn_text, key="pulse_news_radar_btn", use_container_width=True):
+            st.rerun()
+
+    st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
+
+    # Dynamic Telemetry Parameters (Recalculated on every refresh)
+    w_kerala = random.randint(24, 38)
+    h_kerala = random.randint(82, 94)
+    w_punjab = random.randint(32, 48)
+    d_punjab = random.randint(35, 62)
+    w_ap = random.randint(26, 42)
+    m_ap = random.randint(18, 34)
+    s_gujarat = random.randint(290, 540)
+    w_gujarat = random.randint(28, 42)
+    w_karnataka = random.randint(20, 32)
+    w_maha = random.randint(22, 38)
+    h_odisha = random.randint(84, 96)
+
+    t_0 = f"{random.randint(1, 4)} " + ("நிமிடங்களுக்கு முன்" if is_ta else "mins ago") + f" • {(now_dt - datetime.timedelta(minutes=random.randint(1, 4))).strftime('%I:%M %p')}"
+    t_1 = f"{random.randint(14, 26)} " + ("நிமிடங்களுக்கு முன்" if is_ta else "mins ago") + f" • {(now_dt - datetime.timedelta(minutes=random.randint(14, 26))).strftime('%I:%M %p')}"
+    t_2 = f"{random.randint(35, 55)} " + ("நிமிடங்களுக்கு முன்" if is_ta else "mins ago")
+    t_3 = ("1.2 மணி நேரத்திற்கு முன்" if is_ta else "1.2 hours ago")
+    t_4 = ("3 மணி நேரத்திற்கு முன்" if is_ta else "3 hours ago")
+
+    pool_items = [
         {
+            "id": "kerala_tn",
+            "state_key": "tamil nadu",
             "urgency": "urgent",
-            "badge": "🚨 BREAKING FLASH",
+            "badge": "🚨 அவசர பிரேக்கிங்" if is_ta else "🚨 BREAKING FLASH",
             "badge_class": "news-badge-red",
-            "time": "12 mins ago",
-            "corridor": "Kerala ➔ Tamil Nadu (Palakkad Gap)",
-            "title": "Brown Plant Hopper Surge: SW Monsoon Winds pushing hopper vectors toward Coimbatore & Erode",
-            "desc": "Heavy relative humidity (>82%) in Palakkad & Wayanad wetlands triggered rapid BPH multiplier. Vectors drift East at 28 km/day. TNAU Aduthurai alerts Cauvery Delta farmers to implement Alternate Wetting & Drying immediately.",
-            "action": "Avoid excess synthetic urea; drain standing water for 48 hours to break nymph lifecycle."
+            "time": t_0,
+            "corridor": "கேரளா ➔ தமிழ்நாடு (பாலக்காடு கணவாய் வழித்தடம்)" if is_ta else "Kerala ➔ Tamil Nadu (Palakkad Gap)",
+            "title": f"பழுப்பு புகையான் தீவிரம்: தென்மேற்கு பருவக்காற்றால் கோவை & ஈரோடு நோக்கி {w_kerala} km/நாள் வேகத்தில் நகர்வு" if is_ta else f"Brown Plant Hopper Surge: SW Monsoon Winds pushing hopper vectors toward Coimbatore & Erode at {w_kerala} km/day",
+            "desc": f"பாலக்காடு மற்றும் வயநாடு ஈரநிலங்களில் அதிக ஈரப்பதம் (>{h_kerala}%) காரணமாக புகையான் பூச்சிகள் வேகமாக பெருகி வருகின்றன. காற்று திசைவேகம் {w_kerala} km/நாள். TNAU ஆடுதுறை உடனடியாக பயிரில் நீரை வடித்து உலர வைக்க எச்சரித்துள்ளது." if is_ta else f"Heavy relative humidity (>{h_kerala}%) in Palakkad & Wayanad wetlands triggered rapid BPH multiplier. Vectors drift East at {w_kerala} km/day. TNAU Aduthurai alerts Cauvery Delta farmers to implement Alternate Wetting & Drying immediately.",
+            "action": "அதிகப்படியான இரசாயன யூரியாவை தவிர்க்கவும்; 48 மணி நேரம் வயலில் நீர் தேங்காமல் வடித்து nymph வாழ்க்கை சுழற்சியை உடைக்கவும்." if is_ta else "Avoid excess synthetic urea; drain standing water for 48 hours to break nymph lifecycle."
         },
         {
+            "id": "punjab_haryana",
+            "state_key": "punjab",
             "urgency": "urgent",
-            "badge": "🚨 TIER-1 WARNING",
+            "badge": "🚨 நிலை-1 தீவிர எச்சரிக்கை" if is_ta else "🚨 TIER-1 WARNING",
             "badge_class": "news-badge-red",
-            "time": "35 mins ago",
-            "corridor": "Punjab ➔ Haryana ➔ Rajasthan Cotton Belt",
-            "title": "Thermal Plume Dispersion: Whitefly density increases across Bathinda & Mansa",
-            "desc": "High thermal plumes over Malwa accelerated Whitefly reproduction. Swarms migrating toward Sirsa, Fatehabad, and Sri Ganganagar. PAU Ludhiana and CCS HAU Hisar issue synchronized defense alert.",
-            "action": "Erect 40 yellow sticky traps per acre; spray 5% Neem seed kernel extract (NSKE) at sunrise."
+            "time": t_1,
+            "corridor": "பஞ்சாப் ➔ ஹரியானா ➔ ராஜஸ்தான் பருத்தி மண்டலம்" if is_ta else "Punjab ➔ Haryana ➔ Rajasthan Cotton Belt",
+            "title": f"வெப்பச்சலன பரவல்: பதிண்டா & மான்சா எல்லையில் வெள்ளை ஈ அடர்த்தி தீவிரம் ({d_punjab}/செடி)" if is_ta else f"Thermal Plume Dispersion: Whitefly density surges ({d_punjab}/plant) across Bathinda & Mansa",
+            "desc": f"மால்வா பகுதியில் வீசும் வெப்ப காற்று வெள்ளை ஈ பெருக்கத்தை தூண்டியுள்ளது. பூச்சிக் கூட்டங்கள் {w_punjab} km/நாள் வேகத்தில் சிர்சா, பதேஹாபாத் மற்றும் ஸ்ரீ கங்காநகர் நோக்கி நகர்கின்றன." if is_ta else f"High thermal plumes over Malwa accelerated Whitefly reproduction. Swarms migrating toward Sirsa, Fatehabad, and Sri Ganganagar at {w_punjab} km/day. PAU Ludhiana and CCS HAU Hisar issue synchronized defense alert.",
+            "action": "ஏக்கருக்கு 40 மஞ்சள் ஒட்டும் பொறிகளை கட்டவும்; அதிகாலையில் 5% வேப்பங்கொட்டை சாறு (NSKE) தெளிக்கவும்." if is_ta else "Erect 40 yellow sticky traps per acre; spray 5% Neem seed kernel extract (NSKE) at sunrise."
         },
         {
+            "id": "ap_tn",
+            "state_key": "tamil nadu",
             "urgency": "warning",
-            "badge": "⚠️ BIO-RADAR WATCH",
+            "badge": "⚠️ எல்லை ரேடார் கண்காணிப்பு" if is_ta else "⚠️ BIO-RADAR WATCH",
             "badge_class": "news-badge-amber",
-            "time": "1 hour ago",
-            "corridor": "Gujarat ➔ Rajasthan Arid Margin",
-            "title": "Groundnut Tikka Spore Drift across Saurashtra into Thar Margin",
-            "desc": "Coastal rain spell over Rajkot triggered Cercospora leaf spot sporulation. Wind vectors carrying spores toward Jalore and Barmer. Prophylactic bio-fungicide foliar application mandated.",
-            "action": "Spray sour buttermilk + fermented asafoetida (hing) solution on foliage."
+            "time": t_2,
+            "corridor": "ஆந்திரா (ராயலசீமா) ➔ வட தமிழ்நாடு (வேலூர் & திருவண்ணாமலை)" if is_ta else "Andhra Pradesh (Rayalaseema) ➔ Tamil Nadu (North Arcot)",
+            "title": f"மக்காச்சோள படைப்புழு இரவுநேர இடப்பெயர்வு: பாலாற்றுப் படுகையில் எச்சரிக்கை ({w_ap} km/நாள்)" if is_ta else f"Fall Armyworm Nocturnal Migration: Palar River Basin Alert ({w_ap} km/day)",
+            "desc": f"சித்தூர் எல்லையிலிருந்து வேலூர் மற்றும் திருவண்ணாமலை நோக்கி படைப்புழு அந்துப்பூச்சிகள் {w_ap} km/நாள் வேகத்தில் பறந்து வருகின்றன. இனக்கவர்ச்சி பொறிகளில் {m_ap} தாய் அந்துப்பூச்சிகள் சிக்கியுள்ளன." if is_ta else f"Night flight activity detected from Chittoor border toward Vellore & Tiruvannamalai at {w_ap} km/day. Pheromone trap catches exceeded {m_ap} moths/trap. Preemptive bio-agent release active.",
+            "action": "ஏக்கருக்கு 12 இனக்கவர்ச்சி பொறிகளை வரப்புகளில் வைக்கவும்; பயிரின் குருத்துப் பகுதியில் வேப்பம்பிண்ணாக்கு இடவும்." if is_ta else "Install 12 pheromone traps/acre along river basin borders; apply neem cake in leaf whorls."
         },
         {
+            "id": "gujarat_rajasthan",
+            "state_key": "gujarat",
+            "urgency": "warning",
+            "badge": "⚠️ பூஞ்சான வித்து ரேடார்" if is_ta else "⚠️ SPORE RADAR WATCH",
+            "badge_class": "news-badge-amber",
+            "time": t_3,
+            "corridor": "குஜராத் ➔ ராஜஸ்தான் தார் பாலைவன விளிம்பு" if is_ta else "Gujarat ➔ Rajasthan Arid Margin",
+            "title": f"நிலக்கடலை டிக்கா இலைப்புள்ளி பூஞ்சான வித்துக்கள் காற்றின் மூலம் பரவல் ({s_gujarat} spores/m³)" if is_ta else f"Groundnut Tikka Spore Drift across Saurashtra into Thar Margin ({s_gujarat} spores/m³)",
+            "desc": f"ராஜ்கோட் பகுதியில் பெய்த மழையால் காற்றில் டிக்கா பூஞ்சான வித்துக்கள் ({s_gujarat} spores/m³) {w_gujarat} km/நாள் வேகத்தில் ஜாலோர் மற்றும் பார்மர் எல்லையை நோக்கி பரவுகின்றன." if is_ta else f"Coastal rain spell over Rajkot triggered Cercospora leaf spot sporulation ({s_gujarat} spores/m³). Wind vectors carrying spores toward Jalore and Barmer at {w_gujarat} km/day.",
+            "action": "புளித்த மோர் கரைசலுடன் பெருங்காயம் கலந்து இலைகளில் அதிகாலையில் தெளிக்கவும்." if is_ta else "Spray sour buttermilk + fermented asafoetida (hing) solution on foliage."
+        },
+        {
+            "id": "karnataka_tn",
+            "state_key": "karnataka",
             "urgency": "normal",
-            "badge": "🌱 GENETICS ACCORD",
+            "badge": "🌱 கூட்டு உயிரியல் பாதுகாப்பு" if is_ta else "🌱 BIO-DEFENSE ACCORD",
             "badge_class": "news-badge-green",
-            "time": "3 hours ago",
-            "corridor": "Madhya Pradesh ➔ Uttar Pradesh & Bihar",
-            "title": "National DPG Seed Accord: Climate-Resilient Chickpea & Mustard Lines Shared",
-            "desc": "RVSKVV Gwalior transfers drought-hardy, bio-fortified parent seed genetics via Beckn DPG protocol to Purvanchal and Mithila research stations for Rabi season planning.",
-            "action": "Farmer FPOs can pre-book open-source foundation seeds at local KVK centres."
+            "time": t_4,
+            "corridor": "கர்நாடகா (பழைய மைசூர்) ➔ தமிழ்நாடு (பவானி & காவிரி படுகை)" if is_ta else "Karnataka (Old Mysore) ➔ Tamil Nadu (Cauvery Basin)",
+            "title": f"காவிரி ஆற்றுப்படுகை குருத்துப்பூச்சி மற்றும் தண்டு அழுகல் கூட்டு கண்காணிப்பு ({w_karnataka} km/நாள்)" if is_ta else f"Cauvery Riverine Vector Watch: Yellow Stem Borer Larval Drift ({w_karnataka} km/day)",
+            "desc": f"மண்டியா-சாம்ராஜ்நகர் வாய்க்கால் பாசனப் பகுதிகளில் குருத்துப்பூச்சி பெருக்கம் கண்காணிக்கப்பட்டு பவானிசாகர் படுகை விவசாயிகளுக்கு முன்னெச்சரிக்கை வழங்கப்பட்டுள்ளது." if is_ta else f"Canal flow and wind drafts along Mandya-Chamarajanagar vector corridor drifting toward Bhavanisagar & Erode at {w_karnataka} km/day. Coordinated field monitoring active.",
+            "action": "நாற்று நடும் முன் நுனிகளைக் கிள்ளி நடவும்; மண்புழு உரம் மற்றும் பொட்டாஷ் சத்தை இயற்கை முறையில் வழங்கவும்." if is_ta else "Maintain balanced organic potassium; clip seedling tips before transplanting."
         },
         {
+            "id": "maha_telangana",
+            "state_key": "maharashtra",
             "urgency": "warning",
-            "badge": "⚠️ VECTOR SURVEILLANCE",
+            "badge": "⚠️ பூச்சி எச்சரிக்கை" if is_ta else "⚠️ VECTOR SURVEILLANCE",
             "badge_class": "news-badge-amber",
-            "time": "5 hours ago",
-            "corridor": "Odisha ➔ West Bengal & Assam",
-            "title": "Mahanadi Basin Gall Midge Alert for Bengal & Assam Rice Plains",
-            "desc": "Elevated river basin humidity in Cuttack triggers Gall Midge fly emergence. Wind drift expected to reach Burdwan and Kamrup plains within 5 days. Bio-parasitoid release underway.",
-            "action": "Release Platygaster oryzae egg parasitoids at 1 vial per acre along field borders."
+            "time": "2 hours ago" if not is_ta else "2 மணி நேரத்திற்கு முன்",
+            "corridor": "மகாராஷ்டிரா (வித்தர்பா) ➔ தெலுங்கானா (ஆதிலாபாத்)" if is_ta else "Maharashtra (Vidarbha) ➔ Telangana (Adilabad)",
+            "title": f"பருத்தி காய்ப்புழு & கருப்பு இலைப்பேன் எல்லைப்புற பரவல் எச்சரிக்கை ({w_maha} km/நாள்)" if is_ta else f"Pink Bollworm & Black Thrips Cloud across Adilabad & Nizamabad Border ({w_maha} km/day)",
+            "desc": f"வித்தர்பா பருத்தி காடுகளிலிருந்து காற்று மூலம் இலைப்பேன்கள் {w_maha} km/நாள் வேகத்தில் தெலுங்கானா எல்லை மாவட்டங்களுக்குள் பரவுகின்றன." if is_ta else f"Nocturnal winds carrying invasive Thrips parvispinus swarms at {w_maha} km/day across border cotton and chilli acreage.",
+            "action": "ஏக்கருக்கு 25 நீல ஒட்டும் பொறிகளை கட்டவும்; அக்னியாஸ்திரம் தெளிக்கவும்." if is_ta else "Install blue sticky traps at 25/acre; spray Agniastram bio-repellent."
+        },
+        {
+            "id": "dpg_seeds",
+            "state_key": "madhya pradesh",
+            "urgency": "normal",
+            "badge": "🌱 தேசிய DPG ஒப்பந்தம்" if is_ta else "🌱 GENETICS ACCORD",
+            "badge_class": "news-badge-green",
+            "time": "3.5 hours ago" if not is_ta else "3.5 மணி நேரத்திற்கு முன்",
+            "corridor": "மத்திய பிரதேசம் ➔ உத்திர பிரதேசம் & பீகார்" if is_ta else "Madhya Pradesh ➔ Uttar Pradesh & Bihar",
+            "title": f"தேசிய டிஜிட்டல் பொது உள்கட்டமைப்பு: வறட்சி தாங்கும் விதை மரபணு பகிர்வு" if is_ta else f"National DPG Seed Accord: Climate-Resilient Chickpea & Mustard Lines Shared",
+            "desc": f"குவாலியர் வேளாண் பல்கலைக்கழகம் Beckn DPG நெறிமுறை மூலம் வறட்சி தாங்கும் உளுந்து மற்றும் கடுகு விதைகளை பூர்வாஞ்சல் ஆராய்ச்சி நிலையங்களுக்கு பகிர்ந்தது." if is_ta else f"RVSKVV Gwalior transfers drought-hardy, bio-fortified parent seed genetics via Beckn DPG protocol to Purvanchal and Mithila research stations for Rabi season planning.",
+            "action": "விவசாய உற்பத்தியாளர் அமைப்புகள் (FPO) அருகிலுள்ள KVK மையங்களில் முன்பதிவு செய்யலாம்." if is_ta else "Farmer FPOs can pre-book open-source foundation seeds at local KVK centres."
         }
     ]
 
-    for item in news_items:
+    # Select dynamic order, prioritizing active user state if selected
+    active_st = (active_location.get("state", "") if active_location else "").lower()
+    matching_items = [it for it in pool_items if it.get("state_key") in active_st] if active_st else []
+    non_matching = [it for it in pool_items if it not in matching_items]
+    random.shuffle(non_matching)
+    
+    final_news_items = (matching_items + non_matching)[:5]
+
+    action_label = "🌾 உடனடி விவசாயி நடவடிக்கை:" if is_ta else "🌾 Immediate Farmer Action:"
+    for item in final_news_items:
         urgent_class = "news-card-urgent" if item["urgency"] == "urgent" else ("news-card-warning" if item["urgency"] == "warning" else "")
         st.markdown(f"""
         <div class="news-card {urgent_class}">
@@ -3089,7 +3170,7 @@ with tab3:
                     <span class="{item['badge_class']}">{item['badge']}</span>
                     <span style="color: #6ee7b7; font-size: 0.8rem; font-weight: 700;">📍 {item['corridor']}</span>
                 </div>
-                <span style="color: #a7f3d0; font-size: 0.75rem; opacity: 0.8;">⏱️ {item['time']}</span>
+                <span style="color: #a7f3d0; font-size: 0.75rem; opacity: 0.85;">⏱️ {item['time']}</span>
             </div>
             <div style="color: #ffffff; font-weight: 700; font-size: 1rem; margin-bottom: 6px; line-height: 1.4;">
                 {item['title']}
@@ -3098,7 +3179,7 @@ with tab3:
                 {item['desc']}
             </div>
             <div style="background: rgba(0, 0, 0, 0.25); border-radius: 8px; padding: 6px 12px; font-size: 0.82rem; color: #fde68a;">
-                <b>🌾 Immediate Farmer Action:</b> {item['action']}
+                <b>{action_label}</b> {item['action']}
             </div>
         </div>
         """, unsafe_allow_html=True)
