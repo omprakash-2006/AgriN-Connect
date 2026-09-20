@@ -1037,6 +1037,11 @@ if agri_bg_b64:
 
 # --- Configuration & State Data ---
 api_key = os.getenv("GEMINI_API_KEY", "")
+if not api_key:
+    try:
+        api_key = st.secrets.get("GEMINI_API_KEY", "")
+    except Exception:
+        api_key = ""
 
 STATE_DISTRICTS = {
     "Tamil Nadu (தமிழ்நாடு)": {
