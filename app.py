@@ -1341,81 +1341,112 @@ with st.sidebar:
     }
     iso_lang, lang_name, bcp_lang = lang_code_map.get(app_lang_choice, ("en", "English", "en-IN"))
 
-    # 2. Location & Agro-Climatic Intelligence Section
+    # 2. Location & Agro-Climatic Intelligence Section (Highlighted & Minimal)
     st.markdown("""
-    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-        <span style="font-size: 1.05rem;">📍</span>
-        <span style="font-weight: 700; font-size: 0.88rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px;">Active Agro-Zone</span>
+    <div style="
+        background: linear-gradient(145deg, rgba(8, 33, 23, 0.95) 0%, rgba(4, 23, 16, 0.98) 100%);
+        border: 1.5px solid #10b981;
+        border-radius: 14px;
+        padding: 12px 14px 8px 14px;
+        box-shadow: 0 0 18px rgba(16, 185, 129, 0.22);
+        margin-top: 10px;
+        margin-bottom: 10px;
+    ">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 1.1rem;">📍</span>
+                <b style="color: #ffffff; font-size: 0.9rem; letter-spacing: 0.4px;">FIELD LOCATION</b>
+            </div>
+            <span style="background: rgba(16, 185, 129, 0.25); border: 1px solid #10b981; color: #a7f3d0; font-size: 9.5px; font-weight: 800; padding: 2px 8px; border-radius: 12px;">STEP 1</span>
+        </div>
+        <div style="font-size: 10.5px; color: #6ee7b7; line-height: 1.35;">
+            Select your State & District below to calibrate AI diagnosis & live weather.
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-    loc_mode = st.radio(
-        "Location Mode", 
-        ["📋 Select District", "🔍 Search ANY Town"], 
-        horizontal=True,
-        label_visibility="collapsed"
+    state_keys = list(STATE_DISTRICTS.keys())
+    state_list = ["-- 🏛️ Select State --"] + state_keys
+
+    # Default to Tamil Nadu if available
+    default_state_idx = 0
+    for idx, s in enumerate(state_keys):
+        if "Tamil Nadu" in s:
+            default_state_idx = idx + 1
+            break
+
+    curr_state_idx = default_state_idx
+    if "selected_state" in st.session_state and st.session_state["selected_state"] in state_list:
+        curr_state_idx = state_list.index(st.session_state["selected_state"])
+
+    selected_state = st.selectbox(
+        "🏛️ State / Union Territory",
+        state_list,
+        index=curr_state_idx,
+        key="state_selector_sidebar"
     )
+    st.session_state["selected_state"] = selected_state
 
     location_confirmed = False
     selected_district = None
     active_location = None
 
-    if loc_mode == "🔍 Search ANY Town":
-        search_query = st.text_input(
-            "Enter Town / Village / District:", 
-            value="",
-            placeholder="e.g. Madurai, Thanjavur, Pune...",
-            help="Search any place in India to fetch real-time live weather"
+    if selected_state != "-- 🏛️ Select State --":
+        districts_in_state = STATE_DISTRICTS[selected_state]
+        dist_keys = list(districts_in_state.keys())
+        district_list = ["-- 🌾 Select District --"] + dist_keys
+        
+        curr_dist_idx = 0
+        if "selected_district_choice" in st.session_state and st.session_state["selected_district_choice"] in district_list:
+            curr_dist_idx = district_list.index(st.session_state["selected_district_choice"])
+
+        selected_district_choice = st.selectbox(
+            "🌾 District / Agro-Climatic Zone",
+            district_list,
+            index=curr_dist_idx,
+            key="district_selector_sidebar"
         )
-        geo_result = None
-        if search_query.strip():
-            try:
-                g_url = f"https://geocoding-api.open-meteo.com/v1/search?name={search_query.strip()}&count=1&country=IN&language=en&format=json"
-                g_res = requests.get(g_url, timeout=4)
-                if g_res.status_code == 200:
-                    g_data = g_res.json()
-                    if g_data.get("results"):
-                        top = g_data["results"][0]
-                        geo_result = {
-                            "name": f"{top.get('name', search_query)}, {top.get('admin1', 'India')}",
-                            "lat": top["latitude"],
-                            "lon": top["longitude"],
-                            "state": top.get("admin1", "India"),
-                            "crop": "Localized Agro-Ecosystem"
-                        }
-            except Exception:
-                pass
-        
-        if geo_result:
-            selected_district = geo_result["name"]
-            active_location = geo_result
+        st.session_state["selected_district_choice"] = selected_district_choice
+
+        if selected_district_choice != "-- 🌾 Select District --":
+            selected_district = selected_district_choice
+            active_location = districts_in_state[selected_district]
+            active_location["state"] = selected_state
             location_confirmed = True
-            st.success(f"✅ Active: {selected_district}")
-        else:
-            if search_query.strip():
-                st.warning("⚠️ Town not found. Please verify spelling.")
-            else:
-                st.caption("👈 Type your town name above to activate.")
-    else:
-        state_list = ["-- 📍 Select State / UT --"] + list(STATE_DISTRICTS.keys())
-        selected_state = st.selectbox("State / Union Territory", state_list, index=0)
-        
-        if selected_state != "-- 📍 Select State / UT --":
-            districts_in_state = STATE_DISTRICTS[selected_state]
-            district_list = ["-- 📍 Select District / Zone --"] + list(districts_in_state.keys())
-            selected_district_choice = st.selectbox("District / Agro-Climatic Zone", district_list, index=0)
             
-            if selected_district_choice != "-- 📍 Select District / Zone --":
-                selected_district = selected_district_choice
-                active_location = districts_in_state[selected_district]
-                active_location["state"] = selected_state
-                location_confirmed = True
-                st.success(f"✅ Active: {selected_district}")
-            else:
-                st.caption("👈 Please select your district.")
+            clean_name = selected_district.split("(")[0].strip()
+            st.markdown(f"""
+            <div style="
+                background: rgba(16, 185, 129, 0.22);
+                border: 1.5px solid #10b981;
+                border-radius: 10px;
+                padding: 8px 12px;
+                margin-top: 8px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+            ">
+                <span style="font-size: 16px;">✅</span>
+                <div>
+                    <div style="font-weight: 800; font-size: 12.5px; color: #ffffff;">{clean_name}</div>
+                    <div style="font-size: 10px; color: #a7f3d0; font-family: 'JetBrains Mono', monospace;">● Live Weather & Telemetry Synced</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
         else:
-            st.selectbox("District / Agro-Climatic Zone", ["-- Select State First --"], disabled=True)
-            st.caption("👈 Please select your State to begin.")
+            st.markdown("""
+            <div style="font-size: 11px; color: #fde68a; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 8px; padding: 6px 10px; margin-top: 6px;">
+                👆 Please select your District above to activate.
+            </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.selectbox("🌾 District / Agro-Climatic Zone", ["-- Select State First --"], disabled=True)
+        st.markdown("""
+        <div style="font-size: 11px; color: #fde68a; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 8px; padding: 6px 10px; margin-top: 6px;">
+            👆 Please select your State above to begin.
+        </div>
+        """, unsafe_allow_html=True)
 
 
 
@@ -1432,13 +1463,10 @@ st.markdown("""
 <span class="pulse-dot"></span> 🇮🇳 DIGITAL PUBLIC GOOD (DPG)
 </div>
 </div>
-<h1 style="font-size: 3.4rem; font-weight: 800; line-height: 1.12; color: #ffffff; margin: 0 0 16px 0; text-shadow: 0 4px 28px rgba(0,0,0,0.65); letter-spacing: -1px;">
+<h1 style="font-size: 3.4rem; font-weight: 800; line-height: 1.12; color: #ffffff; margin: 0 0 20px 0; text-shadow: 0 4px 28px rgba(0,0,0,0.65); letter-spacing: -1px;">
 Smart Farming for<br>
 Future <span style="font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400; color: #d4f938; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">Generations</span>
 </h1>
-<p style="font-size: 1.12rem; color: #e2f8eb; line-height: 1.65; max-width: 740px; margin: 0 0 26px 0; text-shadow: 0 2px 12px rgba(0,0,0,0.7); font-weight: 500;">
-National Agricultural Intelligence & Zero-Residue Bio-Shield — Empowering Indian Smallholders with Autonomous Fungal Early Warnings, Sentinel-2 Microclimate Radar, and GramaSetu 5-KM Community Cooperation.
-</p>
 <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
 <a href="#plant-doctor-anchor" style="display: inline-flex; align-items: center; gap: 8px; background: #c5f939; color: #042114; font-weight: 800; font-size: 0.95rem; padding: 12px 26px; border-radius: 40px; text-decoration: none; box-shadow: 0 6px 24px rgba(197, 249, 57, 0.45);">
 <span>🍃 Start Foliar Diagnosis</span> <span style="font-size: 1.15rem;">↗</span>
