@@ -1341,110 +1341,93 @@ with st.sidebar:
     }
     iso_lang, lang_name, bcp_lang = lang_code_map.get(app_lang_choice, ("en", "English", "en-IN"))
 
-    # 2. Location & Agro-Climatic Intelligence Section (Highlighted & Minimal)
-    st.markdown("""
-    <div style="
-        background: linear-gradient(145deg, rgba(8, 33, 23, 0.95) 0%, rgba(4, 23, 16, 0.98) 100%);
-        border: 1.5px solid #10b981;
-        border-radius: 14px;
-        padding: 12px 14px 8px 14px;
-        box-shadow: 0 0 18px rgba(16, 185, 129, 0.22);
-        margin-top: 10px;
-        margin-bottom: 10px;
-    ">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-            <div style="display: flex; align-items: center; gap: 6px;">
-                <span style="font-size: 1.1rem;">📍</span>
-                <b style="color: #ffffff; font-size: 0.9rem; letter-spacing: 0.4px;">FIELD LOCATION</b>
-            </div>
-            <span style="background: rgba(16, 185, 129, 0.25); border: 1px solid #10b981; color: #a7f3d0; font-size: 9.5px; font-weight: 800; padding: 2px 8px; border-radius: 12px;">STEP 1</span>
-        </div>
-        <div style="font-size: 10.5px; color: #6ee7b7; line-height: 1.35;">
-            Select your State & District below to calibrate AI diagnosis & live weather.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    state_keys = list(STATE_DISTRICTS.keys())
-    state_list = ["-- 🏛️ Select State --"] + state_keys
-
-    # Default to Tamil Nadu if available
-    default_state_idx = 0
-    for idx, s in enumerate(state_keys):
-        if "Tamil Nadu" in s:
-            default_state_idx = idx + 1
-            break
-
-    curr_state_idx = default_state_idx
-    if "selected_state" in st.session_state and st.session_state["selected_state"] in state_list:
-        curr_state_idx = state_list.index(st.session_state["selected_state"])
-
-    selected_state = st.selectbox(
-        "🏛️ State / Union Territory",
-        state_list,
-        index=curr_state_idx,
-        key="state_selector_sidebar"
-    )
-    st.session_state["selected_state"] = selected_state
+    # 2. Location & Agro-Climatic Intelligence Section (Clickable Dropdown Mechanism)
+    saved_dist = st.session_state.get("selected_district_choice", None)
+    if saved_dist and not str(saved_dist).startswith("--"):
+        clean_header_name = str(saved_dist).split("(")[0].strip()
+        loc_header_label = f"📍 LOCATION: {clean_header_name} (Synced ✅)"
+        expand_by_default = False
+    else:
+        loc_header_label = "📍 FIELD LOCATION • Tap to Select ▾"
+        expand_by_default = True
 
     location_confirmed = False
     selected_district = None
     active_location = None
 
-    if selected_state != "-- 🏛️ Select State --":
-        districts_in_state = STATE_DISTRICTS[selected_state]
-        dist_keys = list(districts_in_state.keys())
-        district_list = ["-- 🌾 Select District --"] + dist_keys
-        
-        curr_dist_idx = 0
-        if "selected_district_choice" in st.session_state and st.session_state["selected_district_choice"] in district_list:
-            curr_dist_idx = district_list.index(st.session_state["selected_district_choice"])
+    with st.expander(loc_header_label, expanded=expand_by_default):
+        st.caption("Select State & District below to calibrate AI diagnosis & live weather:")
 
-        selected_district_choice = st.selectbox(
-            "🌾 District / Agro-Climatic Zone",
-            district_list,
-            index=curr_dist_idx,
-            key="district_selector_sidebar"
+        state_keys = list(STATE_DISTRICTS.keys())
+        state_list = ["-- 🏛️ Select State --"] + state_keys
+
+        default_state_idx = 0
+        for idx, s in enumerate(state_keys):
+            if "Tamil Nadu" in s:
+                default_state_idx = idx + 1
+                break
+
+        curr_state_idx = default_state_idx
+        if "selected_state" in st.session_state and st.session_state["selected_state"] in state_list:
+            curr_state_idx = state_list.index(st.session_state["selected_state"])
+
+        selected_state = st.selectbox(
+            "🏛️ State / Union Territory",
+            state_list,
+            index=curr_state_idx,
+            key="state_selector_sidebar"
         )
-        st.session_state["selected_district_choice"] = selected_district_choice
+        st.session_state["selected_state"] = selected_state
 
-        if selected_district_choice != "-- 🌾 Select District --":
-            selected_district = selected_district_choice
-            active_location = districts_in_state[selected_district]
-            active_location["state"] = selected_state
-            location_confirmed = True
+        if selected_state != "-- 🏛️ Select State --":
+            districts_in_state = STATE_DISTRICTS[selected_state]
+            dist_keys = list(districts_in_state.keys())
+            district_list = ["-- 🌾 Select District --"] + dist_keys
             
-            clean_name = selected_district.split("(")[0].strip()
-            st.markdown(f"""
-            <div style="
-                background: rgba(16, 185, 129, 0.22);
-                border: 1.5px solid #10b981;
-                border-radius: 10px;
-                padding: 8px 12px;
-                margin-top: 8px;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
-            ">
-                <span style="font-size: 16px;">✅</span>
-                <div>
-                    <div style="font-weight: 800; font-size: 12.5px; color: #ffffff;">{clean_name}</div>
-                    <div style="font-size: 10px; color: #a7f3d0; font-family: 'JetBrains Mono', monospace;">● Live Weather & Telemetry Synced</div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            curr_dist_idx = 0
+            if "selected_district_choice" in st.session_state and st.session_state["selected_district_choice"] in district_list:
+                curr_dist_idx = district_list.index(st.session_state["selected_district_choice"])
+
+            selected_district_choice = st.selectbox(
+                "🌾 District / Agro-Climatic Zone",
+                district_list,
+                index=curr_dist_idx,
+                key="district_selector_sidebar"
+            )
+            st.session_state["selected_district_choice"] = selected_district_choice
+
+            if selected_district_choice != "-- 🌾 Select District --":
+                selected_district = selected_district_choice
+                active_location = districts_in_state[selected_district]
+                active_location["state"] = selected_state
+                location_confirmed = True
+            else:
+                st.caption("👈 Choose your district.")
         else:
-            st.markdown("""
-            <div style="font-size: 11px; color: #fde68a; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 8px; padding: 6px 10px; margin-top: 6px;">
-                👆 Please select your District above to activate.
+            st.selectbox("🌾 District / Agro-Climatic Zone", ["-- Select State First --"], disabled=True)
+            st.caption("👈 Choose your State first.")
+
+    # Clean Verified Status Badge when Location is Active
+    if location_confirmed and selected_district:
+        clean_name = selected_district.split("(")[0].strip()
+        st.markdown(f"""
+        <div style="
+            background: rgba(16, 185, 129, 0.22);
+            border: 1.5px solid #10b981;
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+        ">
+            <span style="font-size: 16px;">✅</span>
+            <div>
+                <div style="font-weight: 800; font-size: 12.5px; color: #ffffff;">{clean_name}</div>
+                <div style="font-size: 10px; color: #a7f3d0; font-family: 'JetBrains Mono', monospace;">● Live Weather & Telemetry Synced</div>
             </div>
-            """, unsafe_allow_html=True)
-    else:
-        st.selectbox("🌾 District / Agro-Climatic Zone", ["-- Select State First --"], disabled=True)
-        st.markdown("""
-        <div style="font-size: 11px; color: #fde68a; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 8px; padding: 6px 10px; margin-top: 6px;">
-            👆 Please select your State above to begin.
         </div>
         """, unsafe_allow_html=True)
 
