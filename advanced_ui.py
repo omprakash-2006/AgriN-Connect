@@ -637,7 +637,7 @@ def render_split_studio_leaf_inspection(img_data_uri, specimen_name="Field Speci
             ">🌱</div>
             <b style="color: #a7f3d0; font-size: 16px; letter-spacing: 0.5px;">AWAITING FOLIAR SPECIMEN</b>
             <p style="color: #6ee7b7; font-size: 13px; max-width: 320px; margin-top: 6px; line-height: 1.5;">
-                Upload a leaf photo, take a camera snap, or select an ICAR benchmark sample to activate the <b>Multimodal Split-Studio</b>.
+                Upload a crop leaf photo or take a live camera snap to activate the <b>Multimodal Split-Studio</b>.
             </p>
             <span style="
                 font-family: 'JetBrains Mono', monospace;

@@ -1810,34 +1810,14 @@ with tab1:
         uploaded_file = None
         camera_file = None
 
-        if "sample_leaf_loaded" not in st.session_state:
-            st.session_state["sample_leaf_loaded"] = None
-
         if input_method == t("upload_mode"):
             uploaded_file = st.file_uploader(t("upload_prompt"), type=["jpg", "jpeg", "png"])
             if uploaded_file:
                 uploaded_image = Image.open(uploaded_file)
-                st.session_state["sample_leaf_loaded"] = None
         else:
             camera_file = st.camera_input(t("camera_prompt"))
             if camera_file:
                 uploaded_image = Image.open(camera_file)
-                st.session_state["sample_leaf_loaded"] = None
-
-        st.markdown("<div style='margin-top: 8px;'></div>", unsafe_allow_html=True)
-        st.caption("⚡ Or Instant 1-Click Evaluation (ICAR Real Crop Samples):")
-        sample_c1, sample_c2 = st.columns(2)
-        if sample_c1.button("🌾 Paddy Blast (Delta)", use_container_width=True):
-            paddy_path = os.path.join(os.path.dirname(__file__), "sample_paddy_blast.jpg")
-            if os.path.exists(paddy_path):
-                st.session_state["sample_leaf_loaded"] = paddy_path
-        if sample_c2.button("🍅 Tomato Blight (Kongu)", use_container_width=True):
-            tomato_path = os.path.join(os.path.dirname(__file__), "sample_tomato_blight.jpg")
-            if os.path.exists(tomato_path):
-                st.session_state["sample_leaf_loaded"] = tomato_path
-
-        if not uploaded_image and st.session_state.get("sample_leaf_loaded"):
-            uploaded_image = Image.open(st.session_state["sample_leaf_loaded"])
 
     with col_disp:
         # Convert image to Base64 URI for tactile Split-Studio & Canopy Scanner
