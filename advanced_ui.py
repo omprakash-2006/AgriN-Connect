@@ -1099,104 +1099,131 @@ def render_dual_biometric_gauges(certainty_pct=96.4, loss_pct=28.5, is_gemini=Tr
     engine_tag = "Gemini 2.5 Flash Orbit Synced" if is_gemini else "ICAR Clinical Pathology Engine"
 
     gauges_html = f"""
-    <div style="
-        background: linear-gradient(145deg, #082117 0%, #041710 100%);
-        border: 1px solid rgba(52, 211, 153, 0.3);
-        border-radius: 16px;
-        padding: 16px 18px;
-        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
-        margin-top: 10px;
-        margin-bottom: 12px;
-    ">
-        <!-- Dual SVG Radial HUD -->
-        <div style="display: flex; align-items: center; justify-content: space-around; gap: 14px; flex-wrap: wrap;">
-            
-            <!-- Gauge 1: Model Certainty % -->
-            <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div style="position: relative; width: 110px; height: 110px;">
-                    <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; transform: rotate(-90deg);">
-                        <!-- Background Circle -->
-                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(16, 185, 129, 0.15)" stroke-width="8" />
-                        <!-- Animated Emerald Stroke -->
-                        <circle cx="50" cy="50" r="38" fill="none" stroke="#10b981" stroke-width="8"
-                            stroke-dasharray="{circ}"
-                            stroke-dashoffset="{offset_c:.2f}"
-                            stroke-linecap="round"
-                            style="transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1);" />
-                    </svg>
-                    <!-- Center Readout -->
-                    <div style="
-                        position: absolute;
-                        top: 0; left: 0; width: 100%; height: 100%;
-                        display: flex; flex-direction: column; align-items: center; justify-content: center;
-                    ">
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 19px; font-weight: 800; color: #ffffff;">
-                            {c_val:.1f}%
-                        </span>
-                        <span style="font-size: 9px; font-weight: 700; color: #34d399; letter-spacing: 0.5px;">CONFIDENCE</span>
-                    </div>
-                </div>
-                <span style="font-size: 11.5px; font-weight: 700; color: #a7f3d0; margin-top: 6px;">
-                    MODEL CERTAINTY
-                </span>
-            </div>
-
-            <!-- Gauge 2: Foliar Infection Loss % -->
-            <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                <div style="position: relative; width: 110px; height: 110px;">
-                    <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; transform: rotate(-90deg);">
-                        <!-- Background Circle -->
-                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(239, 68, 68, 0.15)" stroke-width="8" />
-                        <!-- Animated Crimson/Amber Stroke -->
-                        <circle cx="50" cy="50" r="38" fill="none" stroke="#ef4444" stroke-width="8"
-                            stroke-dasharray="{circ}"
-                            stroke-dashoffset="{offset_l:.2f}"
-                            stroke-linecap="round"
-                            style="transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1);" />
-                    </svg>
-                    <!-- Center Readout -->
-                    <div style="
-                        position: absolute;
-                        top: 0; left: 0; width: 100%; height: 100%;
-                        display: flex; flex-direction: column; align-items: center; justify-content: center;
-                    ">
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 19px; font-weight: 800; color: #ffffff;">
-                            {l_val:.1f}%
-                        </span>
-                        <span style="font-size: 9px; font-weight: 700; color: #fca5a5; letter-spacing: 0.5px;">DAMAGE</span>
-                    </div>
-                </div>
-                <span style="font-size: 11.5px; font-weight: 700; color: #fca5a5; margin-top: 6px;">
-                    FOLIAR INFECTION LOSS
-                </span>
-            </div>
-
-        </div>
-
-        <!-- Orbit Verification Pill -->
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+            * {{
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }}
+            body {{
+                background: transparent;
+                font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+                overflow: hidden;
+            }}
+            .pulse-dot {{
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #10b981;
+                box-shadow: 0 0 10px #10b981;
+                animation: blip 1.5s infinite;
+                display: inline-block;
+            }}
+            @keyframes blip {{
+                0% {{ opacity: 0.4; transform: scale(0.9); }}
+                50% {{ opacity: 1; transform: scale(1.15); }}
+                100% {{ opacity: 0.4; transform: scale(0.9); }}
+            }}
+        </style>
+    </head>
+    <body style="margin: 0; padding: 0; background: transparent;">
         <div style="
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 14px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(52, 211, 153, 0.2);
+            background: linear-gradient(145deg, #082117 0%, #041710 100%);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            border-radius: 16px;
+            padding: 14px 18px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
         ">
-            <span class="pulse-dot"></span>
-            <span style="
-                font-family: 'JetBrains Mono', monospace;
-                font-size: 11px;
-                font-weight: 700;
-                color: #6ee7b7;
-                letter-spacing: 0.05em;
+            <!-- Dual SVG Radial HUD -->
+            <div style="display: flex; align-items: center; justify-content: space-around; gap: 14px;">
+                
+                <!-- Gauge 1: Model Certainty % -->
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <div style="position: relative; width: 100px; height: 100px;">
+                        <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+                            <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(16, 185, 129, 0.15)" stroke-width="8" />
+                            <circle cx="50" cy="50" r="38" fill="none" stroke="#10b981" stroke-width="8"
+                                stroke-dasharray="{circ}"
+                                stroke-dashoffset="{offset_c:.2f}"
+                                stroke-linecap="round"
+                                style="transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1);" />
+                        </svg>
+                        <div style="
+                            position: absolute;
+                            top: 0; left: 0; width: 100%; height: 100%;
+                            display: flex; flex-direction: column; align-items: center; justify-content: center;
+                        ">
+                            <span style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 800; color: #ffffff;">
+                                {c_val:.1f}%
+                            </span>
+                            <span style="font-size: 8.5px; font-weight: 700; color: #34d399; letter-spacing: 0.5px;">CONFIDENCE</span>
+                        </div>
+                    </div>
+                    <span style="font-size: 11px; font-weight: 700; color: #a7f3d0; margin-top: 4px;">
+                        MODEL CERTAINTY
+                    </span>
+                </div>
+
+                <!-- Gauge 2: Foliar Infection Loss % -->
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <div style="position: relative; width: 100px; height: 100px;">
+                        <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+                            <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(239, 68, 68, 0.15)" stroke-width="8" />
+                            <circle cx="50" cy="50" r="38" fill="none" stroke="#ef4444" stroke-width="8"
+                                stroke-dasharray="{circ}"
+                                stroke-dashoffset="{offset_l:.2f}"
+                                stroke-linecap="round"
+                                style="transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1);" />
+                        </svg>
+                        <div style="
+                            position: absolute;
+                            top: 0; left: 0; width: 100%; height: 100%;
+                            display: flex; flex-direction: column; align-items: center; justify-content: center;
+                        ">
+                            <span style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 800; color: #ffffff;">
+                                {l_val:.1f}%
+                            </span>
+                            <span style="font-size: 8.5px; font-weight: 700; color: #fca5a5; letter-spacing: 0.5px;">DAMAGE</span>
+                        </div>
+                    </div>
+                    <span style="font-size: 11px; font-weight: 700; color: #fca5a5; margin-top: 4px;">
+                        FOLIAR INFECTION LOSS
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Orbit Verification Pill -->
+            <div style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 10px;
+                padding-top: 8px;
+                border-top: 1px solid rgba(52, 211, 153, 0.2);
             ">
-                ⚡ {engine_tag} • TNAU/ICAR Calibrated
-            </span>
+                <span class="pulse-dot"></span>
+                <span style="
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 11px;
+                    font-weight: 700;
+                    color: #6ee7b7;
+                    letter-spacing: 0.05em;
+                ">
+                    ⚡ {engine_tag} • TNAU/ICAR Calibrated
+                </span>
+            </div>
         </div>
-    </div>
+    </body>
+    </html>
     """
-    st.markdown(gauges_html, unsafe_allow_html=True)
+    components.html(gauges_html, height=195)
 
 # ==============================================================================
 # 4. MULTI-LEAF CANOPY OBJECT DETECTION SIMULATION (SPEC 4)
