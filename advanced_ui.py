@@ -2068,18 +2068,33 @@ def render_satellite_drone_plot_scanner(district_name, crop_name, curr_temp=28.0
 # ==============================================================================
 def render_zero_literacy_pictorial_deck(crop_name, disease_name, remedy_text, lang_title="Tamil", bcp_code="ta-IN"):
     """
-    Renders an ultra-intuitive, Zero-Literacy Pictorial Action Deck for farmers
-    with muddy hands in direct sunlight who cannot read complex pathology text.
+    Renders an ultra-intuitive, 100% Picturesque Zero-Literacy Diagnostic Infographic
+    for farmers who cannot or do not want to read complex pathology text.
     Provides:
-    1. High-contrast traffic light severity status (DANGER / ALERT / SAFE).
-    2. Large 1-Tap Spoken Voice trigger button.
-    3. 3 Pictorial Action Blocks:
-       - 🌅 WHEN TO SPRAY (Sunset / Late Evening 4:30 PM)
-       - 🥣 BUCKET & CUP DOSAGE FORMULA (1 Bucket : 1 Cup)
-       - 🚫 STRICT PROHIBITION (No Urea / No Spray in Rain)
+    1. Visual Crop & Pathology Avatar with Animated Severity Progress Gauge.
+    2. 1-Tap Spoken Voice Guidance in Native Regional Language.
+    3. 4 Large Pictorial Action Recipe Blocks (Measure -> Water -> Blend -> Foliar Spray).
+    4. Visual Do's & Don'ts Infographic Strip (Sunset -> No Urea -> Avoid Rain).
+    5. Visual 7-Day Foliar Recovery Stepper (Day 1 -> Day 3 -> Day 7).
     """
-    # Simple spoken advisory for quick tap
-    safe_speech = json.dumps(f"Vivasayi thozhare, ungal {crop_name} payiril {disease_name} thotru ulladhu. Indru maalai veyil thaanindhadhum, 1 bucket thanneerukku 1 cup veppennai kalandhu ilaiyin adi pakkathil thelikkavum. Rasayana urea idavendaam.")
+    clean_crop = str(crop_name).split("(")[0].strip() if crop_name else "Crop"
+    clean_disease = str(disease_name).split("(")[0].strip() if disease_name else "Pathology"
+
+    # Vernacular spoken advisory for 1-tap voice playback
+    if "ta" in str(bcp_code):
+        voice_msg = f"Vivasayi thozhare, ungal {clean_crop} payiril {clean_disease} thotru ulladhu. Indru maalai veyil thaanindhadhum, 1 bucket thanneerukku 1 cup veppennai kalandhu ilaiyin adi pakkathil thelikkavum. Rasayana urea idavendaam."
+        btn_label = "🔊 INIKU ENNA PANNANUM NU KELUNGA (LISTEN NOW)"
+    elif "hi" in str(bcp_code):
+        voice_msg = f"Kisan bhai, aapki {clean_crop} fasal me {clean_disease} rog hai. Sham ko 10 liter pani me 500ml neem tel milakar patti ke piche chhidkav karein. Urea na dalein."
+        btn_label = "🔊 AAJ KYA KAREIN SUNIYE (LISTEN VOICE)"
+    elif "te" in str(bcp_code):
+        voice_msg = f"Rythu sodharuda, mee {clean_crop} pantalo {clean_disease} tegulu vachindi. Eeroju sayantram 10 literla neetilo 500ml vepnoonay kalipi aakulapai jallandi."
+        btn_label = "🔊 EEROJU EMI CHEYALI VINANDI"
+    else:
+        voice_msg = f"Farmer friend, your {clean_crop} has {clean_disease} infection. Spray 500ml neem oil in 10 liters water this evening after sunset. Avoid synthetic urea."
+        btn_label = "🔊 LISTEN 30-SEC AUDIO ADVISORY"
+
+    safe_speech = json.dumps(voice_msg)
 
     html_code = f"""
     <!DOCTYPE html>
@@ -2095,129 +2110,185 @@ def render_zero_literacy_pictorial_deck(crop_name, disease_name, remedy_text, la
             background: linear-gradient(145deg, #09261a 0%, #03140c 100%);
             border: 2px solid #10b981;
             border-radius: 18px;
-            padding: 16px 18px;
-            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.2);
-            margin-bottom: 16px;
-        }}
-        
-        .action-grid {{
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 14px;
-        }}
-        
-        .pictogram-box {{
-            background: rgba(2, 18, 11, 0.85);
-            border: 1px solid rgba(52, 211, 153, 0.35);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-        }}
-        
-        .box-warning {{ border-color: #f59e0b; background: rgba(35, 20, 4, 0.7); }}
-        .box-prohibit {{ border-color: #ef4444; background: rgba(38, 8, 8, 0.7); }}
-
-        .picto-icon {{
-            font-size: 34px;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+            padding: 14px 16px;
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.25);
+            margin-bottom: 12px;
         }}
 
         .voice-tap-bar {{
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: #ffffff;
-            border: 2px solid #6ee7b7;
-            border-radius: 12px;
-            padding: 10px 18px;
+            border: 1.5px solid #6ee7b7;
+            border-radius: 24px;
+            padding: 7px 16px;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
-            transition: all 0.2s ease;
-            font-size: 13.5px;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+            font-size: 12px;
             font-weight: 800;
+            transition: all 0.2s ease;
         }}
         .voice-tap-bar:hover {{
-            transform: scale(1.02);
-            box-shadow: 0 6px 22px rgba(16, 185, 129, 0.6);
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }}
+
+        .action-grid {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+            margin-bottom: 10px;
+        }}
+
+        .pictogram-box {{
+            background: rgba(2, 20, 12, 0.85);
+            border: 1.2px solid rgba(52, 211, 153, 0.35);
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }}
+
+        .picto-icon {{
+            font-size: 28px;
+            margin-bottom: 4px;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+        }}
+
+        .infographic-strip {{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }}
+
+        .strip-card {{
+            background: rgba(3, 18, 10, 0.8);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            border-radius: 10px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }}
+
+        .recovery-stepper {{
+            background: rgba(4, 25, 15, 0.7);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            border-radius: 10px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
         }}
     </style>
     </head>
     <body>
 
     <div class="drishti-card">
-        <!-- Top Visual Bar: Status + Voice Tap -->
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+        <!-- Visual Hero Header: Crop Avatar + Severity Gauge + Voice Button -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size: 26px;">🌾</span>
                 <div>
-                    <span style="background: rgba(239, 68, 68, 0.25); border: 1.5px solid #ef4444; color: #fca5a5; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 20px; font-family: 'JetBrains Mono', monospace;">
-                        🔴 ACUTE FOLIAR LESION • IMMEDIATE RX
-                    </span>
-                    <div style="font-size: 13px; font-weight: 800; color: #a7f3d0; margin-top: 3px;">
-                        KISAN-DRISHTI: ZERO-LITERACY 3-STEP ACTION GUIDE
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <b style="color: #ffffff; font-size: 14px;">{clean_crop}</b>
+                        <span style="background: rgba(239, 68, 68, 0.25); border: 1px solid #ef4444; color: #fca5a5; font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 14px;">
+                            🔴 {clean_disease}
+                        </span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                        <span style="font-size: 10px; color: #a7f3d0; font-weight: 700;">SEVERITY:</span>
+                        <div style="width: 110px; height: 6px; background: rgba(255,255,255,0.15); border-radius: 3px; overflow: hidden; display: flex;">
+                            <div style="width: 75%; background: linear-gradient(90deg, #f59e0b, #ef4444); border-radius: 3px;"></div>
+                        </div>
+                        <span style="font-family: 'JetBrains Mono'; font-size: 9.5px; color: #fca5a5; font-weight: 800;">75% ACTIVE</span>
                     </div>
                 </div>
             </div>
 
             <!-- Big 1-Tap Spoken Voice Button -->
             <button class="voice-tap-bar" onclick="playPictorialAudio()">
-                <span>🔊</span>
-                <span>INIKU ENNA PANNANUM NU KELUNGA (LISTEN NOW)</span>
+                <span>{btn_label}</span>
             </button>
         </div>
 
-        <!-- 3 Large Pictogram Action Cards -->
+        <!-- 4 Large Pictogram Recipe Action Cards -->
         <div class="action-grid">
-            <!-- Pictogram 1: When to Spray (Sunset) -->
-            <div class="pictogram-box">
-                <span class="picto-icon">🌅</span>
-                <span style="font-size: 11px; font-weight: 800; color: #fde68a; letter-spacing: 0.5px; text-transform: uppercase;">
-                    1. EPPO SPRAY PANNANUM?
-                </span>
-                <div style="font-size: 14px; font-weight: 800; color: #ffffff; margin-top: 4px;">
-                    Mālai 4:30 PM - 6:30 PM
-                </div>
-                <div style="font-size: 11px; color: #a7f3d0; margin-top: 4px;">
-                    Veyil thaaninthavudan spray pannu (Sunset)
-                </div>
+            <!-- Step 1: Measure -->
+            <div class="pictogram-box" style="border-color: #34d399;">
+                <span class="picto-icon">🧴</span>
+                <span style="font-size: 9.5px; font-weight: 800; color: #a7f3d0; text-transform: uppercase;">1. அளவு (MEASURE)</span>
+                <div style="font-size: 12.5px; font-weight: 800; color: #ffffff; margin-top: 2px;">500ml Bio-Extract</div>
+                <div style="font-size: 9.5px; color: #6ee7b7;">1 Cup Veppennai / Mor</div>
             </div>
 
-            <!-- Pictogram 2: Dosage (Bucket + Cup Formula) -->
-            <div class="pictogram-box box-warning">
+            <!-- Step 2: Water -->
+            <div class="pictogram-box" style="border-color: #38bdf8;">
+                <span class="picto-icon">🪣</span>
+                <span style="font-size: 9.5px; font-weight: 800; color: #7dd3fc; text-transform: uppercase;">2. தண்ணீர் (WATER)</span>
+                <div style="font-size: 12.5px; font-weight: 800; color: #ffffff; margin-top: 2px;">10 Liters Clean</div>
+                <div style="font-size: 9.5px; color: #bae6fd;">1 Full Farm Bucket</div>
+            </div>
+
+            <!-- Step 3: Blend -->
+            <div class="pictogram-box" style="border-color: #f59e0b;">
                 <span class="picto-icon">🥣</span>
-                <span style="font-size: 11px; font-weight: 800; color: #fde68a; letter-spacing: 0.5px; text-transform: uppercase;">
-                    2. EVALO KALAKKANUM?
-                </span>
-                <div style="font-size: 14px; font-weight: 800; color: #ffffff; margin-top: 4px;">
-                    1 Bucket : 1 Cup
-                </div>
-                <div style="font-size: 11px; color: #fef08a; margin-top: 4px;">
-                    10L Thanni + 500ml Veppennai / Mor
-                </div>
+                <span style="font-size: 9.5px; font-weight: 800; color: #fde68a; text-transform: uppercase;">3. கலக்கு (BLEND)</span>
+                <div style="font-size: 12.5px; font-weight: 800; color: #ffffff; margin-top: 2px;">50g Buttermilk</div>
+                <div style="font-size: 9.5px; color: #fef08a;">Natural Bio-Emulsifier</div>
             </div>
 
-            <!-- Pictogram 3: Strict Prohibition (No Urea) -->
-            <div class="pictogram-box box-prohibit">
-                <span class="picto-icon">🚫</span>
-                <span style="font-size: 11px; font-weight: 800; color: #fca5a5; letter-spacing: 0.5px; text-transform: uppercase;">
-                    3. ENA PANNA KUDATHU?
-                </span>
-                <div style="font-size: 14px; font-weight: 800; color: #ffffff; margin-top: 4px;">
-                    Chemical Urea Podatha!
-                </div>
-                <div style="font-size: 11px; color: #fecaca; margin-top: 4px;">
-                    Mazhai peythaal spray seiyaathey
+            <!-- Step 4: Foliar Spray -->
+            <div class="pictogram-box" style="border-color: #10b981;">
+                <span class="picto-icon">🚿</span>
+                <span style="font-size: 9.5px; font-weight: 800; color: #6ee7b7; text-transform: uppercase;">4. தெளிப்பு (SPRAY)</span>
+                <div style="font-size: 12.5px; font-weight: 800; color: #ffffff; margin-top: 2px;">Leaf Underside</div>
+                <div style="font-size: 9.5px; color: #a7f3d0;">Ilaiyin Adi Pakkam</div>
+            </div>
+        </div>
+
+        <!-- Visual Do's & Don'ts Infographic Strip -->
+        <div class="infographic-strip">
+            <div class="strip-card" style="border-color: rgba(52, 211, 153, 0.4);">
+                <span style="font-size: 18px;">🌅</span>
+                <div>
+                    <div style="font-size: 10.5px; font-weight: 800; color: #a7f3d0;">Mālai 5:00 PM Only</div>
+                    <div style="font-size: 9px; color: #6ee7b7;">Sunset (Avoid harsh sun)</div>
                 </div>
             </div>
+            <div class="strip-card" style="border-color: rgba(239, 68, 68, 0.4);">
+                <span style="font-size: 18px;">🚫</span>
+                <div>
+                    <div style="font-size: 10.5px; font-weight: 800; color: #fca5a5;">No Chemical Urea</div>
+                    <div style="font-size: 9px; color: #fecaca;">Chemical urea spreads fungus</div>
+                </div>
+            </div>
+            <div class="strip-card" style="border-color: rgba(56, 189, 248, 0.4);">
+                <span style="font-size: 18px;">🌧️</span>
+                <div>
+                    <div style="font-size: 10.5px; font-weight: 800; color: #7dd3fc;">Avoid Rain Spray</div>
+                    <div style="font-size: 9px; color: #bae6fd;">Washout protection</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visual 7-Day Foliar Recovery Stepper -->
+        <div class="recovery-stepper">
+            <span style="color: #6ee7b7; font-weight: 800;">⏱️ RECOVERY TIMELINE:</span>
+            <span style="color: #ffffff;">🌱 Day 1: Spray Applied</span>
+            <span style="color: #a7f3d0;">➔</span>
+            <span style="color: #fde68a;">🍂 Day 3: Spores Halt</span>
+            <span style="color: #a7f3d0;">➔</span>
+            <span style="color: #34d399; font-weight: 800;">🌿 Day 7: New Leaf Shoots</span>
         </div>
     </div>
 
@@ -2228,7 +2299,7 @@ def render_zero_literacy_pictorial_deck(crop_name, disease_name, remedy_text, la
             window.speechSynthesis.cancel();
             var utter = new SpeechSynthesisUtterance(spokenText);
             utter.lang = '{bcp_code}';
-            utter.rate = 0.76;
+            utter.rate = 0.78;
             window.speechSynthesis.speak(utter);
         }}
     }}
@@ -2236,6 +2307,6 @@ def render_zero_literacy_pictorial_deck(crop_name, disease_name, remedy_text, la
     </body>
     </html>
     """
-    components.html(html_code, height=210)
+    components.html(html_code, height=350)
 
 

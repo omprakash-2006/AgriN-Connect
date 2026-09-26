@@ -2177,39 +2177,9 @@ At the very end of your response, write these exact metadata tags:
             bcp_code=diag["bcp_lang"]
         )
 
-        with st.container(border=True):
-            st.markdown(f"""
-            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid rgba(52, 211, 153, 0.35); padding-bottom: 12px; margin-bottom: 14px;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <span style="font-size: 2.2rem;">🔬</span>
-                    <div>
-                        <h3 style="margin: 0; padding: 0; border: none; font-size: 1.3rem; color: #a7f3d0;">CLINICAL CROP HEALTH DIAGNOSTIC SUMMARY</h3>
-                        <span style="font-size: 0.82rem; color: #6ee7b7;">Simplified Farmer Triage • Natural ZBNF Formulations • TNAU/ICAR Aligned</span>
-                    </div>
-                </div>
-                <span style="background: rgba(245, 158, 11, 0.25); border: 1px solid #f59e0b; color: #fde68a; font-size: 0.74rem; font-weight: 700; padding: 5px 14px; border-radius: 20px;">🌿 ZERO-RESIDUE RX</span>
-            </div>
-
-            <!-- Simplified Farmer Action Badges (Zero Text Clutter!) -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px;">
-                <div style="background: rgba(3, 18, 11, 0.85); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 12px; padding: 12px 14px;">
-                    <span style="font-size: 11px; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">🌾 Identified Crop</span>
-                    <div style="font-size: 13.5px; font-weight: 800; color: #ffffff; margin-top: 3px;">{diag['crop']}</div>
-                </div>
-                <div style="background: rgba(35, 12, 12, 0.85); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 12px; padding: 12px 14px;">
-                    <span style="font-size: 11px; color: #fca5a5; text-transform: uppercase; font-weight: 700;">🔬 Detected Pathology</span>
-                    <div style="font-size: 13.5px; font-weight: 800; color: #ffffff; margin-top: 3px;">{diag['disease']}</div>
-                </div>
-                <div style="background: rgba(6, 30, 20, 0.85); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 12px 14px;">
-                    <span style="font-size: 11px; color: #6ee7b7; text-transform: uppercase; font-weight: 700;">🌿 Recommended Bio-Spray</span>
-                    <div style="font-size: 13px; font-weight: 800; color: #fde68a; margin-top: 3px;">{diag['remedy']}</div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-            # Full 40-Line Clinical Report Collapsed into Expander for Officers & Research
-            with st.expander("📄 View Full ICAR Clinical Audit Dossier (For Extension Officers & Research)", expanded=False):
-                st.markdown(diag["display_text"])
+        # Deep Clinical Dossier (Collapsed by default so farmers only see the picturesque infographic)
+        with st.expander("📄 View Full ICAR Clinical Audit Dossier (For Research & Extension Officers)", expanded=False):
+            st.markdown(diag["display_text"])
 
         # Vernacular Spoken Voice Player
         render_voice_player(diag["speech_text"], diag["lang_name"], diag["bcp_lang"], diag["iso_lang"])
