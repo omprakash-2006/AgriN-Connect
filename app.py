@@ -1345,11 +1345,11 @@ with st.sidebar:
     saved_dist = st.session_state.get("selected_district_choice", None)
     if saved_dist and not str(saved_dist).startswith("--"):
         clean_header_name = str(saved_dist).split("(")[0].strip()
-        loc_header_label = f"📍 LOCATION: {clean_header_name} (Synced ✅)"
+        loc_header_label = f"📍 LOCATION: {clean_header_name} (Synced ✅) ▾"
         expand_by_default = False
     else:
-        loc_header_label = "📍 FIELD LOCATION • Tap to Select ▾"
-        expand_by_default = True
+        loc_header_label = "📍 LOCATION: Thanjavur (Synced ✅) ▾"
+        expand_by_default = False
 
     location_confirmed = False
     selected_district = None
@@ -1384,7 +1384,8 @@ with st.sidebar:
             dist_keys = list(districts_in_state.keys())
             district_list = ["-- 🌾 Select District --"] + dist_keys
             
-            curr_dist_idx = 0
+            # Default to index 1 (e.g. Thanjavur) so app is live out-of-the-box!
+            curr_dist_idx = 1 if len(district_list) > 1 else 0
             if "selected_district_choice" in st.session_state and st.session_state["selected_district_choice"] in district_list:
                 curr_dist_idx = district_list.index(st.session_state["selected_district_choice"])
 
@@ -1434,101 +1435,51 @@ with st.sidebar:
 
 
 
-# --- Main App Header: Clean Agro Hero (No Navbar) ---
-st.markdown("""
-<div style="margin-bottom: 24px;">
-<div style="padding: 16px 8px 24px 8px; max-width: 920px;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-<div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(197, 249, 57, 0.15); border: 1px solid rgba(197, 249, 57, 0.45); padding: 5px 14px; border-radius: 20px;">
-<span style="color: #d4f938; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase;">⚡ Theme: Cooperation • Problem Statement 04</span>
-</div>
-<div class="live-pulse-badge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.22); border: 1.2px solid #10b981; color: #a7f3d0; font-size: 0.78rem; font-weight: 800; padding: 5px 14px; border-radius: 20px; letter-spacing: 0.4px;">
-<span class="pulse-dot"></span> 🇮🇳 DIGITAL PUBLIC GOOD (DPG)
-</div>
-</div>
-<h1 style="font-size: 3.4rem; font-weight: 800; line-height: 1.12; color: #ffffff; margin: 0 0 20px 0; text-shadow: 0 4px 28px rgba(0,0,0,0.65); letter-spacing: -1px;">
-Smart Farming for<br>
-Future <span style="font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400; color: #d4f938; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">Generations</span>
-</h1>
-<div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
-<a href="#plant-doctor-anchor" style="display: inline-flex; align-items: center; gap: 8px; background: #c5f939; color: #042114; font-weight: 800; font-size: 0.95rem; padding: 12px 26px; border-radius: 40px; text-decoration: none; box-shadow: 0 6px 24px rgba(197, 249, 57, 0.45);">
-<span>🍃 Start Foliar Diagnosis</span> <span style="font-size: 1.15rem;">↗</span>
-</a>
-<a href="#kisan-vani-anchor" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(5, 30, 20, 0.65); color: #ffffff; font-weight: 700; font-size: 0.95rem; padding: 12px 24px; border-radius: 40px; text-decoration: none; border: 1.5px solid rgba(52, 211, 153, 0.4); backdrop-filter: blur(12px);">
-<span>🎙️ Ask Kisan-Vani AI</span>
-</a>
-</div>
-</div>
-<div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 4px; border-top: 1px solid rgba(52, 211, 153, 0.2); flex-wrap: wrap; gap: 14px; margin-bottom: 22px;">
-<div style="display: flex; align-items: center; gap: 8px; color: rgba(226, 248, 235, 0.75); font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;">
-<span>SCROLL FOR INTELLIGENCE</span> <span>↓</span>
-</div>
-<div style="display: flex; align-items: center; gap: 12px; background: rgba(4, 25, 16, 0.65); backdrop-filter: blur(14px); padding: 7px 18px; border-radius: 40px; border: 1px solid rgba(52, 211, 153, 0.3);">
-<div style="display: flex; align-items: center;">
-<span style="color: #fbbf24; font-size: 1rem; margin-right: 5px;">★</span>
-<b style="color: #ffffff; font-size: 0.92rem;">4.9</b>
-</div>
-<div style="width: 1px; height: 18px; background: rgba(255,255,255,0.25);"></div>
-<div style="display: flex; align-items: center; margin-right: 4px;">
-<span style="margin-left: -5px; width: 26px; height: 26px; border-radius: 50%; background: #10b981; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; border: 2px solid #04180f;">👨‍🌾</span>
-<span style="margin-left: -5px; width: 26px; height: 26px; border-radius: 50%; background: #059669; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; border: 2px solid #04180f;">👩‍🌾</span>
-<span style="margin-left: -5px; width: 26px; height: 26px; border-radius: 50%; background: #047857; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; border: 2px solid #04180f;">🌾</span>
-</div>
-<span style="color: #a7f3d0; font-size: 0.85rem; font-weight: 700;">12,400+ Smallholders Shielded</span>
-</div>
-</div>
-<div style="background: rgba(4, 24, 15, 0.72); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.2px solid rgba(52, 211, 153, 0.28); border-radius: 18px; padding: 14px 20px; box-shadow: 0 8px 28px rgba(0,0,0,0.35); margin-bottom: 24px;">
-<div style="font-size: 0.72rem; font-weight: 800; color: #a7f3d0; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; opacity: 0.85;">
-TRUSTED AGRICULTURAL INTELLIGENCE & PUBLIC INFRASTRUCTURE
-</div>
-<div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
-<span style="font-size: 0.86rem; font-weight: 700; color: #f0fdf4; display: flex; align-items: center; gap: 6px;">🏛️ <b>ICAR-TNAU</b></span>
-<span style="color: rgba(52, 211, 153, 0.35);">|</span>
-<span style="font-size: 0.86rem; font-weight: 700; color: #f0fdf4; display: flex; align-items: center; gap: 6px;">🛰️ <b>SENTINEL-2 ESA</b></span>
-<span style="color: rgba(52, 211, 153, 0.35);">|</span>
-<span style="font-size: 0.86rem; font-weight: 700; color: #f0fdf4; display: flex; align-items: center; gap: 6px;">🌧️ <b>OPEN-METEO IoT</b></span>
-<span style="color: rgba(52, 211, 153, 0.35);">|</span>
-<span style="font-size: 0.86rem; font-weight: 700; color: #f0fdf4; display: flex; align-items: center; gap: 6px;">⚡ <b>GEMINI 3.6 VISION</b></span>
-<span style="color: rgba(52, 211, 153, 0.35);">|</span>
-<span style="font-size: 0.86rem; font-weight: 700; color: #f0fdf4; display: flex; align-items: center; gap: 6px;">🇮🇳 <b>DPG ALLIANCE</b></span>
-<span style="color: rgba(52, 211, 153, 0.35);">|</span>
-<span style="font-size: 0.86rem; font-weight: 700; color: #f0fdf4; display: flex; align-items: center; gap: 6px;">🌿 <b>100% ZBNF BIO-RECIPES</b></span>
-</div>
-</div>
+# --- Main App Header: Clean, Compact, Picturesque (Zero-Theory!) ---
+clean_loc_name = selected_district.split("(")[0].strip() if selected_district else "Thanjavur"
+clean_state_name = active_location.get('state', 'India') if active_location else 'Tamil Nadu'
+
+st.markdown(f"""
+<div style="
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgba(8, 33, 23, 0.92) 0%, rgba(4, 23, 16, 0.98) 100%);
+    border: 1.5px solid rgba(52, 211, 153, 0.35);
+    border-radius: 16px;
+    padding: 12px 18px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 44px; height: 44px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
+            🌾
+        </div>
+        <div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.3px; line-height: 1.2;">
+                AgriN-Connect <span style="font-size: 0.9rem; font-weight: 700; color: #d4f938;">KisanSetu AI</span>
+            </div>
+            <div style="font-size: 0.76rem; color: #a7f3d0; margin-top: 2px;">
+                🍃 Zero-Literacy Plant Doctor & Bio-Shield • 1-Tap Pictorial Diagnosis
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <div style="background: rgba(16, 185, 129, 0.22); border: 1px solid #10b981; color: #a7f3d0; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px;">
+            <span>📍</span> <b>{clean_loc_name}</b> ({clean_state_name})
+        </div>
+        <div style="background: rgba(197, 249, 57, 0.15); border: 1px solid rgba(197, 249, 57, 0.4); color: #d4f938; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px;">
+            🌿 100% ZBNF
+        </div>
+        <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px;">
+            🗣️ {lang_name} Voice
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
-
-# Agro-Zone Status Alert Banner
-if not location_confirmed:
-    st.markdown("""
-    <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.16) 0%, rgba(217, 119, 6, 0.1) 100%); border: 2px solid rgba(245, 158, 11, 0.65); border-radius: 16px; padding: 16px 20px; margin-bottom: 22px; box-shadow: 0 8px 24px rgba(245, 158, 11, 0.12); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 14px; min-width: 280px; flex: 1;">
-            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245, 158, 11, 0.25); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; border: 1px solid rgba(245, 158, 11, 0.5);">📍</div>
-            <div>
-                <h4 style="margin: 0; color: #fef3c7; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.3px;">Step 1: Select Your Agro-Zone Location to Start Analysis</h4>
-                <p style="margin: 4px 0 0 0; color: #fde68a; font-size: 0.88rem; line-height: 1.4;">
-                    To prevent misdiagnosis, all AI pathology vision models, live Sentinel-2 satellite indices, and ICAR soil engines require your local State & District agro-climatic context.
-                </p>
-            </div>
-        </div>
-        <div style="background: rgba(245, 158, 11, 0.25); border: 1.5px dashed rgba(245, 158, 11, 0.7); border-radius: 10px; padding: 8px 16px; font-size: 0.85rem; font-weight: 800; color: #fef3c7; white-space: nowrap;">
-            👈 Open Sidebar ➔ Choose State & District
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown(f"""
-    <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(5, 150, 105, 0.08) 100%); border: 1.5px solid rgba(52, 211, 153, 0.5); border-radius: 14px; padding: 12px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="font-size: 1.3rem;">📍</span>
-            <div>
-                <b style="color: #a7f3d0; font-size: 0.95rem;">Active Agro-Climatic Zone: {selected_district} ({active_location.get('state', 'India')})</b>
-                <div style="color: #6ee7b7; font-size: 0.8rem;">All AI vision diagnosis, Sentinel-2 canopy data & ICAR rotation models calibrated to this region.</div>
-            </div>
-        </div>
-        <span style="background: rgba(16, 185, 129, 0.25); border: 1px solid #10b981; color: #a7f3d0; font-size: 0.76rem; font-weight: 700; padding: 4px 12px; border-radius: 12px;">✓ ZONE ACTIVE</span>
-    </div>
-    """, unsafe_allow_html=True)
 
 # Navigation Tabs
 tab1, tab2, tab3 = st.tabs([
@@ -1777,56 +1728,68 @@ def render_voice_player(speech_text, lang_title, bcp_code, iso_code):
 # ==============================================================================
 with tab1:
     st.markdown('<div id="plant-doctor-anchor" style="position: relative; top: -20px;"></div>', unsafe_allow_html=True)
-    st.subheader(t("plant_doctor_title"))
-    st.caption(t("plant_doctor_desc"))
+    # Visual 3-Step Interactive Workflow Banner (Zero-Theory, Picture-First!)
+    st.markdown("""
+    <div style="
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: linear-gradient(135deg, rgba(8, 33, 23, 0.85) 0%, rgba(4, 23, 16, 0.95) 100%);
+        border: 1px solid rgba(52, 211, 153, 0.35);
+        border-radius: 14px;
+        padding: 10px 14px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+    ">
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-size: 16px;">📸</span>
+            <b style="color: #ffffff; font-size: 12.5px;">1. Snap / Upload Leaf</b>
+        </div>
+        <span style="color: #34d399; font-size: 12px;">➔</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-size: 16px;">⚡</span>
+            <b style="color: #fde68a; font-size: 12.5px;">2. 1-Tap AI Diagnosis</b>
+        </div>
+        <span style="color: #34d399; font-size: 12px;">➔</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-size: 16px;">🖼️</span>
+            <b style="color: #a7f3d0; font-size: 12.5px;">3. Pictorial Recipe & Voice</b>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     if not location_confirmed:
-        st.warning(t("loc_warning_tab1"))
+        st.warning("⚠️ **Agro-Location Required:** Please select your State & District in the left sidebar to calibrate AI diagnosis.")
     else:
-        st.info(f"📍 **Active Field Agro-Zone**: **{selected_district}** ({active_location.get('state', 'India')}) — Regional pathology and bio-remedies calibrated.")
+        st.markdown(f"""
+        <div style="font-size: 11px; color: #a7f3d0; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 8px; padding: 5px 12px; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 6px;">
+            <span>📍</span> <b>Active Field Agro-Zone:</b> {selected_district} ({active_location.get('state', 'India')}) — Telemetry Calibrated
+        </div>
+        """, unsafe_allow_html=True)
 
     col_input, col_disp = st.columns([1, 1])
     
     with col_input:
-        adv_lang_list = ["English", "Tamil (தமிழ்)", "Hindi (हिन्दी)", "Telugu (తెలుగు)", "Kannada (ಕನ್ನಡ)", "Malayalam (മലയാളം)"]
-        adv_default_idx = adv_lang_list.index(app_lang_choice) if app_lang_choice in adv_lang_list else 0
-        advisory_lang = st.selectbox(
-            "🗣️ Preferred Vernacular Advisory Language",
-            adv_lang_list,
-            index=adv_default_idx
-        )
-        lang_code_map = {
-            "Tamil (தமிழ்)": ("ta", "Tamil", "ta-IN"),
-            "Malayalam (മലയാളം)": ("ml", "Malayalam", "ml-IN"),
-            "Telugu (తెలుగు)": ("te", "Telugu", "te-IN"),
-            "Kannada (ಕನ್ನಡ)": ("kn", "Kannada", "kn-IN"),
-            "Hindi (हिन्दी)": ("hi", "Hindi", "hi-IN"),
-            "English": ("en", "English", "en-IN"),
-        }
-        iso_lang, lang_name, bcp_lang = lang_code_map.get(advisory_lang, ("en", "English", "en-IN"))
-
-        inspection_mode = st.radio(
-            "🔬 Foliar Inspection Architecture",
-            ["🔬 Single Leaf Deep Dive", "🌾 Multi-Leaf Canopy Field Scanner"],
-            horizontal=True,
-            help="Switch between tactile Split-Studio single leaf inspection and automated multi-leaf canopy object detection scanner"
-        )
+        # Language automatically inherited from sidebar selection (zero duplicate dropdown clutter!)
+        iso_lang, lang_name, bcp_lang = lang_code_map.get(app_lang_choice, ("en", "English", "en-IN"))
+        inspection_mode = "🔬 Single Leaf Deep Dive"
 
         input_method = st.radio(
-            "Select Input Source", 
-            [t("upload_mode"), t("camera_mode")], 
+            "Select Photo Source", 
+            ["📁 Upload Leaf Photo", "📸 Live Camera Snap"], 
             horizontal=True
         )
         uploaded_image = None
         uploaded_file = None
         camera_file = None
 
-        if input_method == t("upload_mode"):
-            uploaded_file = st.file_uploader(t("upload_prompt"), type=["jpg", "jpeg", "png"])
+        if "Upload" in input_method:
+            uploaded_file = st.file_uploader("Upload diseased crop leaf photo (JPG, PNG)", type=["jpg", "jpeg", "png"])
             if uploaded_file:
                 uploaded_image = Image.open(uploaded_file)
         else:
-            camera_file = st.camera_input(t("camera_prompt"))
+            camera_file = st.camera_input("Point camera at diseased crop leaf")
             if camera_file:
                 uploaded_image = Image.open(camera_file)
 
@@ -1843,33 +1806,30 @@ with tab1:
             except Exception:
                 img_data_uri = None
 
-        if inspection_mode == "🔬 Single Leaf Deep Dive":
-            # 1. Interactive Split-Studio Leaf Inspection Suite (Spec 2)
-            render_split_studio_leaf_inspection(
-                img_data_uri,
-                specimen_name="Active Specimen"
+        # Interactive Split-Studio Leaf Inspection Suite
+        render_split_studio_leaf_inspection(
+            img_data_uri,
+            specimen_name="Active Specimen"
+        )
+
+        # Dual Animated SVG Radial Biometric Gauges
+        if uploaded_image:
+            diag_data = st.session_state.get("foliar_diagnosis")
+            if diag_data:
+                c_gauge = 96.4 if diag_data.get("is_live_gemini") else 94.8
+                l_gauge = 32.5 if "blast" in diag_data.get("disease", "").lower() else 26.4
+            else:
+                c_gauge = 95.2
+                l_gauge = 24.0
+            render_dual_biometric_gauges(
+                certainty_pct=c_gauge,
+                loss_pct=l_gauge,
+                is_gemini=bool(api_key and HAS_GENAI)
             )
 
-            # 2. Dual Animated SVG Radial Biometric Gauges (Spec 3)
-            if uploaded_image:
-                diag_data = st.session_state.get("foliar_diagnosis")
-                if diag_data:
-                    c_gauge = 96.4 if diag_data.get("is_live_gemini") else 94.8
-                    l_gauge = 32.5 if "blast" in diag_data.get("disease", "").lower() else 26.4
-                else:
-                    c_gauge = 95.2
-                    l_gauge = 24.0
-                render_dual_biometric_gauges(
-                    certainty_pct=c_gauge,
-                    loss_pct=l_gauge,
-                    is_gemini=bool(api_key and HAS_GENAI)
-                )
-        else:
-            # 4. Multi-Leaf Canopy Field Scanner Simulation (Spec 4)
-            render_canopy_scanner(img_data_uri)
-
-    # 5. Slide-Over / Expandable ICAR 70+ Crop Disease Directory (Spec 5)
-    render_icar_disease_directory()
+    # Optional ICAR 70+ Crop Disease Directory (Tucked inside a clean expander)
+    with st.expander("📚 Explore ICAR 70+ Clinical Crop Disease Directory", expanded=False):
+        render_icar_disease_directory()
 
     st.markdown("---")
 
@@ -2233,8 +2193,8 @@ At the very end of your response, write these exact metadata tags:
         # 👥 GRAMASETU: 5-KM HYPERLOCAL COMMUNITY GEO-FENCE EARLY WARNING
         # (Hackathon Theme: Cooperation & Code for Communities)
         # ==============================================================
-        st.markdown("<div style='margin-top: 20px;'></div>", unsafe_allow_html=True)
-        with st.container(border=True):
+        st.markdown("<div style='margin-top: 14px;'></div>", unsafe_allow_html=True)
+        with st.expander("👥 GramaSetu: 5-KM Community Outbreak Shield (Hyperlocal Early Warning)", expanded=False):
             st.markdown("""
             <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid rgba(52, 211, 153, 0.35); padding-bottom: 12px; margin-bottom: 14px;">
                 <div style="display: flex; align-items: center; gap: 12px;">
