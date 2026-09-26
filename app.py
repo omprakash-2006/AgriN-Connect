@@ -16,7 +16,10 @@ from advanced_ui import (
     render_split_studio_leaf_inspection,
     render_dual_biometric_gauges,
     render_canopy_scanner,
-    render_icar_disease_directory
+    render_icar_disease_directory,
+    render_vernacular_voice_query_mic,
+    render_agristack_bio_passport,
+    render_satellite_drone_plot_scanner
 )
 
 # Try importing Google GenAI SDK
@@ -2149,15 +2152,27 @@ At the very end of your response, write these exact metadata tags:
         # Vernacular Spoken Voice Player
         render_voice_player(diag["speech_text"], diag["lang_name"], diag["bcp_lang"], diag["iso_lang"])
 
+        # 6. Two-Way Vernacular Voice Query Assistant (Speech-to-Text / Rank 1)
+        render_vernacular_voice_query_mic(bcp_code=diag["bcp_lang"], lang_title=diag["lang_name"])
+
+        loc_diag_name = active_location.get('name', selected_district) if active_location else 'Local Agro-Zone'
+        state_diag_name = active_location.get('state', 'India') if active_location else 'India'
+
+        # 7. AgriStack Verifiable Digital Bio-Passport (DPI / Export Grade / Rank 1)
+        render_agristack_bio_passport(
+            crop_name=diag["crop"],
+            disease_name=diag["disease"],
+            remedy=diag["remedy"],
+            district_name=loc_diag_name,
+            state_name=state_diag_name
+        )
+
         # Last-Mile Community Dispatch & WhatsApp Action Deck
         st.markdown("""
         <div style="margin-top: 16px; margin-bottom: 8px;">
             <b style="color: #a7f3d0; font-size: 0.9rem;">📲 Last-Mile Community Dispatch Deck (Code for Communities):</b>
         </div>
         """, unsafe_allow_html=True)
-
-        loc_diag_name = active_location.get('name', selected_district) if active_location else 'Local Agro-Zone'
-        state_diag_name = active_location.get('state', 'India') if active_location else 'India'
 
         import urllib.parse
         wa_text = (
@@ -2993,6 +3008,14 @@ Detail:
             display_n_fix = r_i18n["card2_text"].format(n=sd['n'])
             display_moisture = r_i18n["card3_text"].format(ndvi=simulated_ndvi, ndvi_status=ndvi_status, temp=curr_temp)
             display_ph = r_i18n["card4_text"].format(ph=sd['ph'])
+
+            # 8. Leaf-to-Orbit Spatial Drone & Sentinel-2 Plot Scanner (Rank 1)
+            render_satellite_drone_plot_scanner(
+                district_name=sd['district'],
+                crop_name=active_location['crop'],
+                curr_temp=curr_temp,
+                ndvi_val=simulated_ndvi
+            )
 
             with st.container(border=True):
                 st.markdown(f"""
