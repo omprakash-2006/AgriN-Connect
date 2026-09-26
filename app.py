@@ -1471,14 +1471,17 @@ render_clean_html(f"""
         </div>
         <div>
             <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.3px; line-height: 1.2;">
-                AgriN-Connect <span style="font-size: 0.9rem; font-weight: 700; color: #d4f938;">KisanSetu AI</span>
+                AgriN-Connect <span style="font-size: 0.92rem; font-weight: 700; color: #d4f938;">Smart Agriculture Intelligence</span>
             </div>
-            <div style="font-size: 0.76rem; color: #a7f3d0; margin-top: 2px;">
-                🍃 Zero-Literacy Plant Doctor & Bio-Shield • 1-Tap Pictorial Diagnosis
+            <div style="font-size: 0.78rem; color: #a7f3d0; margin-top: 2px;">
+                🍃 Smart Agriculture Intelligence & Zero-Residue Bio-Shield (KisanSetu AI)
             </div>
         </div>
     </div>
     <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <div style="background: rgba(197, 249, 57, 0.18); border: 1px solid rgba(197, 249, 57, 0.45); color: #d4f938; font-size: 0.74rem; font-weight: 800; padding: 5px 12px; border-radius: 20px;">
+            ⚡ Smart Agriculture Intelligence
+        </div>
         <div style="background: rgba(16, 185, 129, 0.22); border: 1px solid #10b981; color: #a7f3d0; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px;">
             <span>📍</span> <b>{clean_loc_name}</b> ({clean_state_name})
         </div>
