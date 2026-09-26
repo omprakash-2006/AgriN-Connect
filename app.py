@@ -11,17 +11,42 @@ import time
 from PIL import Image
 from dotenv import load_dotenv
 
-# Import World-Class UI & Bento-Grid Architectural Suite
-from advanced_ui import (
-    render_split_studio_leaf_inspection,
-    render_dual_biometric_gauges,
-    render_canopy_scanner,
-    render_icar_disease_directory,
-    render_vernacular_voice_query_mic,
-    render_agristack_bio_passport,
-    render_satellite_drone_plot_scanner,
-    render_zero_literacy_pictorial_deck
-)
+import os
+import sys
+
+# Ensure repository root is on sys.path for Streamlit Cloud container mounts (/mount/src/agrin-connect)
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+if CURRENT_DIR not in sys.path:
+    sys.path.insert(0, CURRENT_DIR)
+
+# Import World-Class UI & Bento-Grid Architectural Suite (with bulletproof direct file loader fallback)
+try:
+    from advanced_ui import (
+        render_split_studio_leaf_inspection,
+        render_dual_biometric_gauges,
+        render_canopy_scanner,
+        render_icar_disease_directory,
+        render_vernacular_voice_query_mic,
+        render_agristack_bio_passport,
+        render_satellite_drone_plot_scanner,
+        render_zero_literacy_pictorial_deck
+    )
+except Exception:
+    import importlib.util
+    _ui_path = os.path.join(CURRENT_DIR, "advanced_ui.py")
+    _spec = importlib.util.spec_from_file_location("advanced_ui", _ui_path)
+    _advanced_ui = importlib.util.module_from_spec(_spec)
+    sys.modules["advanced_ui"] = _advanced_ui
+    _spec.loader.exec_module(_advanced_ui)
+
+    render_split_studio_leaf_inspection = _advanced_ui.render_split_studio_leaf_inspection
+    render_dual_biometric_gauges = _advanced_ui.render_dual_biometric_gauges
+    render_canopy_scanner = _advanced_ui.render_canopy_scanner
+    render_icar_disease_directory = _advanced_ui.render_icar_disease_directory
+    render_vernacular_voice_query_mic = _advanced_ui.render_vernacular_voice_query_mic
+    render_agristack_bio_passport = _advanced_ui.render_agristack_bio_passport
+    render_satellite_drone_plot_scanner = _advanced_ui.render_satellite_drone_plot_scanner
+    render_zero_literacy_pictorial_deck = _advanced_ui.render_zero_literacy_pictorial_deck
 
 # Try importing Google GenAI SDK
 try:
