@@ -674,6 +674,12 @@ KV_FALLBACKS = {
 }
 
 
+def render_clean_html(html_str):
+    """Renders HTML with zero leading indentation to guarantee CommonMark never parses it as a code block."""
+    clean = "\n".join(line.strip() for line in html_str.split("\n"))
+    st.markdown(clean, unsafe_allow_html=True)
+
+
 # --- Page Configuration ---
 st.set_page_config(
     page_title="AgriN-Connect | KisanSetu AI",
@@ -1411,7 +1417,7 @@ with st.sidebar:
     # Clean Verified Status Badge when Location is Active
     if location_confirmed and selected_district:
         clean_name = selected_district.split("(")[0].strip()
-        st.markdown(f"""
+        render_clean_html(f"""
         <div style="
             background: rgba(16, 185, 129, 0.22);
             border: 1.5px solid #10b981;
@@ -1430,7 +1436,7 @@ with st.sidebar:
                 <div style="font-size: 10px; color: #a7f3d0; font-family: 'JetBrains Mono', monospace;">● Live Weather & Telemetry Synced</div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
 
 
@@ -1439,7 +1445,7 @@ with st.sidebar:
 clean_loc_name = selected_district.split("(")[0].strip() if selected_district else "Thanjavur"
 clean_state_name = active_location.get('state', 'India') if active_location else 'Tamil Nadu'
 
-st.markdown(f"""
+render_clean_html(f"""
 <div style="
     display: flex;
     align-items: center;
@@ -1466,7 +1472,6 @@ st.markdown(f"""
             </div>
         </div>
     </div>
-
     <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
         <div style="background: rgba(16, 185, 129, 0.22); border: 1px solid #10b981; color: #a7f3d0; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px;">
             <span>📍</span> <b>{clean_loc_name}</b> ({clean_state_name})
@@ -1479,7 +1484,7 @@ st.markdown(f"""
         </div>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 # Navigation Tabs
 tab1, tab2, tab3 = st.tabs([
@@ -1729,7 +1734,7 @@ def render_voice_player(speech_text, lang_title, bcp_code, iso_code):
 with tab1:
     st.markdown('<div id="plant-doctor-anchor" style="position: relative; top: -20px;"></div>', unsafe_allow_html=True)
     # Visual 3-Step Interactive Workflow Banner (Zero-Theory, Picture-First!)
-    st.markdown("""
+    render_clean_html("""
     <div style="
         display: flex;
         align-items: center;
@@ -1757,16 +1762,16 @@ with tab1:
             <b style="color: #a7f3d0; font-size: 12.5px;">3. Pictorial Recipe & Voice</b>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """)
     
     if not location_confirmed:
         st.warning("⚠️ **Agro-Location Required:** Please select your State & District in the left sidebar to calibrate AI diagnosis.")
     else:
-        st.markdown(f"""
+        render_clean_html(f"""
         <div style="font-size: 11px; color: #a7f3d0; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 8px; padding: 5px 12px; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 6px;">
             <span>📍</span> <b>Active Field Agro-Zone:</b> {selected_district} ({active_location.get('state', 'India')}) — Telemetry Calibrated
         </div>
-        """, unsafe_allow_html=True)
+        """)
 
     col_input, col_disp = st.columns([1, 1])
     
