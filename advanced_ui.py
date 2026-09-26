@@ -2036,3 +2036,179 @@ def render_satellite_drone_plot_scanner(district_name, crop_name, curr_temp=28.0
     """
     components.html(html_code, height=230)
 
+# ==============================================================================
+# 9. KISAN-DRISHTI: ZERO-LITERACY 1-TAP PICTORIAL ACTION DECK
+# ==============================================================================
+def render_zero_literacy_pictorial_deck(crop_name, disease_name, remedy_text, lang_title="Tamil", bcp_code="ta-IN"):
+    """
+    Renders an ultra-intuitive, Zero-Literacy Pictorial Action Deck for farmers
+    with muddy hands in direct sunlight who cannot read complex pathology text.
+    Provides:
+    1. High-contrast traffic light severity status (DANGER / ALERT / SAFE).
+    2. Large 1-Tap Spoken Voice trigger button.
+    3. 3 Pictorial Action Blocks:
+       - 🌅 WHEN TO SPRAY (Sunset / Late Evening 4:30 PM)
+       - 🥣 BUCKET & CUP DOSAGE FORMULA (1 Bucket : 1 Cup)
+       - 🚫 STRICT PROHIBITION (No Urea / No Spray in Rain)
+    """
+    # Simple spoken advisory for quick tap
+    safe_speech = json.dumps(f"Vivasayi thozhare, ungal {crop_name} payiril {disease_name} thotru ulladhu. Indru maalai veyil thaanindhadhum, 1 bucket thanneerukku 1 cup veppennai kalandhu ilaiyin adi pakkathil thelikkavum. Rasayana urea idavendaam.")
+
+    html_code = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap');
+        * {{ box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }}
+        body {{ background: transparent; color: #ffffff; overflow: hidden; }}
+
+        .drishti-card {{
+            background: linear-gradient(145deg, #09261a 0%, #03140c 100%);
+            border: 2px solid #10b981;
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.2);
+            margin-bottom: 16px;
+        }}
+        
+        .action-grid {{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 14px;
+        }}
+        
+        .pictogram-box {{
+            background: rgba(2, 18, 11, 0.85);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }}
+        
+        .box-warning {{ border-color: #f59e0b; background: rgba(35, 20, 4, 0.7); }}
+        .box-prohibit {{ border-color: #ef4444; background: rgba(38, 8, 8, 0.7); }}
+
+        .picto-icon {{
+            font-size: 34px;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+        }}
+
+        .voice-tap-bar {{
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            border: 2px solid #6ee7b7;
+            border-radius: 12px;
+            padding: 10px 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+            transition: all 0.2s ease;
+            font-size: 13.5px;
+            font-weight: 800;
+        }}
+        .voice-tap-bar:hover {{
+            transform: scale(1.02);
+            box-shadow: 0 6px 22px rgba(16, 185, 129, 0.6);
+        }}
+    </style>
+    </head>
+    <body>
+
+    <div class="drishti-card">
+        <!-- Top Visual Bar: Status + Voice Tap -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 26px;">🌾</span>
+                <div>
+                    <span style="background: rgba(239, 68, 68, 0.25); border: 1.5px solid #ef4444; color: #fca5a5; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 20px; font-family: 'JetBrains Mono', monospace;">
+                        🔴 ACUTE FOLIAR LESION • IMMEDIATE RX
+                    </span>
+                    <div style="font-size: 13px; font-weight: 800; color: #a7f3d0; margin-top: 3px;">
+                        KISAN-DRISHTI: ZERO-LITERACY 3-STEP ACTION GUIDE
+                    </div>
+                </div>
+            </div>
+
+            <!-- Big 1-Tap Spoken Voice Button -->
+            <button class="voice-tap-bar" onclick="playPictorialAudio()">
+                <span>🔊</span>
+                <span>INIKU ENNA PANNANUM NU KELUNGA (LISTEN NOW)</span>
+            </button>
+        </div>
+
+        <!-- 3 Large Pictogram Action Cards -->
+        <div class="action-grid">
+            <!-- Pictogram 1: When to Spray (Sunset) -->
+            <div class="pictogram-box">
+                <span class="picto-icon">🌅</span>
+                <span style="font-size: 11px; font-weight: 800; color: #fde68a; letter-spacing: 0.5px; text-transform: uppercase;">
+                    1. EPPO SPRAY PANNANUM?
+                </span>
+                <div style="font-size: 14px; font-weight: 800; color: #ffffff; margin-top: 4px;">
+                    Mālai 4:30 PM - 6:30 PM
+                </div>
+                <div style="font-size: 11px; color: #a7f3d0; margin-top: 4px;">
+                    Veyil thaaninthavudan spray pannu (Sunset)
+                </div>
+            </div>
+
+            <!-- Pictogram 2: Dosage (Bucket + Cup Formula) -->
+            <div class="pictogram-box box-warning">
+                <span class="picto-icon">🥣</span>
+                <span style="font-size: 11px; font-weight: 800; color: #fde68a; letter-spacing: 0.5px; text-transform: uppercase;">
+                    2. EVALO KALAKKANUM?
+                </span>
+                <div style="font-size: 14px; font-weight: 800; color: #ffffff; margin-top: 4px;">
+                    1 Bucket : 1 Cup
+                </div>
+                <div style="font-size: 11px; color: #fef08a; margin-top: 4px;">
+                    10L Thanni + 500ml Veppennai / Mor
+                </div>
+            </div>
+
+            <!-- Pictogram 3: Strict Prohibition (No Urea) -->
+            <div class="pictogram-box box-prohibit">
+                <span class="picto-icon">🚫</span>
+                <span style="font-size: 11px; font-weight: 800; color: #fca5a5; letter-spacing: 0.5px; text-transform: uppercase;">
+                    3. ENA PANNA KUDATHU?
+                </span>
+                <div style="font-size: 14px; font-weight: 800; color: #ffffff; margin-top: 4px;">
+                    Chemical Urea Podatha!
+                </div>
+                <div style="font-size: 11px; color: #fecaca; margin-top: 4px;">
+                    Mazhai peythaal spray seiyaathey
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    var spokenText = {safe_speech};
+    function playPictorialAudio() {{
+        if ('speechSynthesis' in window) {{
+            window.speechSynthesis.cancel();
+            var utter = new SpeechSynthesisUtterance(spokenText);
+            utter.lang = '{bcp_code}';
+            utter.rate = 0.76;
+            window.speechSynthesis.speak(utter);
+        }}
+    }}
+    </script>
+    </body>
+    </html>
+    """
+    components.html(html_code, height=210)
+
+

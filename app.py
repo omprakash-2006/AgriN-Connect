@@ -19,7 +19,8 @@ from advanced_ui import (
     render_icar_disease_directory,
     render_vernacular_voice_query_mic,
     render_agristack_bio_passport,
-    render_satellite_drone_plot_scanner
+    render_satellite_drone_plot_scanner,
+    render_zero_literacy_pictorial_deck
 )
 
 # Try importing Google GenAI SDK
@@ -2133,6 +2134,15 @@ At the very end of your response, write these exact metadata tags:
             st.success("✅ Diagnostic Complete! Powered by Gemini Multimodal Vision AI.")
         else:
             st.info("💡 Diagnostic Complete! Verified by ICAR Clinical Foliar Intelligence Engine.")
+
+        # Kisan-Drishti: Zero-Literacy 1-Tap Pictorial Action Deck (No Reading Needed!)
+        render_zero_literacy_pictorial_deck(
+            crop_name=diag["crop"],
+            disease_name=diag["disease"],
+            remedy_text=diag["remedy"],
+            lang_title=diag["lang_name"],
+            bcp_code=diag["bcp_lang"]
+        )
 
         with st.container(border=True):
             st.markdown("""
