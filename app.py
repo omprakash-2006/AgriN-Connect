@@ -3151,58 +3151,9 @@ Detail:
 # ==============================================================================
 with tab3:
     st.markdown('<div id="grid-anchor" style="position: relative; top: -20px;"></div>', unsafe_allow_html=True)
-    st.subheader(t("grid_title"))
-    st.caption(t("grid_desc"))
 
-    # 1. Simple User-Friendly Explanation Card ("Puriyura Maari")
-    st.markdown("""
-    <div style="background: linear-gradient(135deg, rgba(6, 44, 30, 0.75) 0%, rgba(3, 24, 16, 0.85) 100%); border: 1.5px solid rgba(52, 211, 153, 0.4); border-radius: 16px; padding: 18px 20px; margin-bottom: 20px; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.4);">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.6rem;">💡</span>
-                <div>
-                    <b style="color: #a7f3d0; font-size: 1.05rem;">Why Indian States Cooperate Under AgriStack DPG?</b>
-                    <div style="font-size: 0.8rem; color: #6ee7b7;">Inter-State Bio-Defense Network for Smallholder Border Protection</div>
-                </div>
-            </div>
-            <span style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #a7f3d0; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;">
-                FEDERAL AGRI-DPI
-            </span>
-        </div>
-
-        <!-- 3 Visual Action Points (No Text Overload!) -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
-            <div style="background: rgba(3, 16, 10, 0.75); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 10px; padding: 12px;">
-                <b style="color: #fca5a5; font-size: 11.5px;">💨 PESTS DRIFT CROSS-BORDER</b>
-                <div style="color: #e2f8eb; font-size: 11.5px; margin-top: 4px; line-height: 1.4;">Monsoon wind-borne insect swarms drift 120km across state borders in 3 to 5 days.</div>
-            </div>
-            <div style="background: rgba(3, 16, 10, 0.75); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 10px; padding: 12px;">
-                <b style="color: #6ee7b7; font-size: 11.5px;">📡 4-DAY ADVANCE WARNING</b>
-                <div style="color: #e2f8eb; font-size: 11.5px; margin-top: 4px; line-height: 1.4;">AgriStack DPG radar alerts border farmers 4.3 days before swarms cross state lines.</div>
-            </div>
-            <div style="background: rgba(3, 16, 10, 0.75); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 10px; padding: 12px;">
-                <b style="color: #fde68a; font-size: 11.5px;">💰 ₹42,500/ACRE SAVED</b>
-                <div style="color: #e2f8eb; font-size: 11.5px; margin-top: 4px; line-height: 1.4;">Deploy natural biological shields (AWD + Neem) with zero chemical pesticide cost.</div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # 2. Interactive Cross-Border Pest Drift Simulator (Theme: Cooperation)
+    # 1. Interactive Cross-Border Pest Drift Simulator (Theme: Cooperation)
     with st.container(border=True):
-        st.markdown("""
-<div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid rgba(52, 211, 153, 0.35); padding-bottom: 12px; margin-bottom: 16px;">
-<div style="display: flex; align-items: center; gap: 12px;">
-<span style="font-size: 2.2rem;">🚨</span>
-<div>
-<h3 style="margin: 0; padding: 0; border: none; font-size: 1.35rem; color: #a7f3d0;">LIVE CROSS-BORDER PEST DRIFT SIMULATOR</h3>
-<span style="font-size: 0.84rem; color: #6ee7b7;">Dynamic Mathematical Modeling of Inter-State Bio-Defense (Hackathon Theme: Cooperation)</span>
-</div>
-</div>
-<span style="background: rgba(245, 158, 11, 0.25); border: 1px solid #f59e0b; color: #fde68a; font-size: 0.74rem; font-weight: 700; padding: 5px 14px; border-radius: 20px;">⚡ THEME: COOPERATION</span>
-</div>
-""", unsafe_allow_html=True)
-
         sim_col1, sim_col2 = st.columns([1.2, 1])
         with sim_col1:
             sim_corridor = st.selectbox(
@@ -3257,110 +3208,150 @@ with tab3:
                 shield_action = "Install 12 pheromone lures/acre along river basin; release Trichogramma chilonis egg parasitoids."
                 saved_value = 36500
 
-            # 4-Phase Progression Timeline with Animated Vector Radar (Spec 6)
+            # 4-Phase Progression Timeline with Animated Vector Radar (Rendered in pure HTML)
             sim_time_now = datetime.datetime.now().strftime("%I:%M:%S %p IST")
-            st.markdown(f"""
-<div class="bento-card" style="padding: 20px; margin-top: 14px; margin-bottom: 18px;">
-    <!-- Active Radar Vector Banner -->
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="position: relative; width: 34px; height: 34px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); border: 1.5px solid #ef4444; display: flex; align-items: center; justify-content: center;">
-                <span class="radar-ping-dot" style="position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span>
-                <span style="font-size: 14px;">📡</span>
-            </div>
-            <div>
-                <div style="color: #ffffff; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.3px;">
-                    RADAR VECTOR INTERCEPT • {pest_name}
+            radar_html = f"""
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+                    * {{
+                        box-sizing: border-box;
+                        margin: 0;
+                        padding: 0;
+                    }}
+                    body {{
+                        background: transparent;
+                        font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+                        color: #ffffff;
+                    }}
+                    .bento-card {{
+                        background: linear-gradient(145deg, #082117 0%, #041710 100%);
+                        border: 1px solid rgba(52, 211, 153, 0.3);
+                        border-radius: 16px;
+                        padding: 16px;
+                    }}
+                    .pulse-dot {{
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: #10b981;
+                        box-shadow: 0 0 10px #10b981;
+                        animation: blip 1.5s infinite;
+                        display: inline-block;
+                    }}
+                    @keyframes blip {{
+                        0% {{ opacity: 0.4; transform: scale(0.9); }}
+                        50% {{ opacity: 1; transform: scale(1.15); }}
+                        100% {{ opacity: 0.4; transform: scale(0.9); }}
+                    }}
+                </style>
+            </head>
+            <body style="margin: 0; padding: 0; background: transparent;">
+                <div class="bento-card" style="margin-bottom: 12px;">
+                    <!-- Active Radar Vector Banner -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="position: relative; width: 34px; height: 34px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); border: 1.5px solid #ef4444; display: flex; align-items: center; justify-content: center;">
+                                <span style="position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #ef4444; animation: blip 1.2s infinite;"></span>
+                                <span style="font-size: 14px;">📡</span>
+                            </div>
+                            <div>
+                                <div style="color: #ffffff; font-weight: 800; font-size: 1.05rem;">
+                                    RADAR VECTOR INTERCEPT • {pest_name}
+                                </div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a7f3d0; margin-top: 2px;">
+                                    📍 Corridor: <b>{origin_zone}</b> ➔ <b>{target_zone}</b>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-family: 'JetBrains Mono', monospace; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px;">
+                                ⏳ ETA TO BORDER: {lead_days} DAYS ({lead_days*24:.0f} HRS)
+                            </span>
+                            <span style="font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #a7f3d0; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 20px;">
+                                🛰️ Ping: {sim_time_now}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Directional Vector Route Telemetry Strip -->
+                    <div style="background: rgba(3, 16, 10, 0.85); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 10px; padding: 8px 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; flex-wrap: wrap; gap: 6px;">
+                        <span style="color: #fca5a5;">🔴 ORIGIN: {origin_zone}</span>
+                        <span style="color: #34d399; font-weight: 800;">━━━━ 💨 {sim_wind} km/day Wind Vector ━━━━►</span>
+                        <span style="color: #6ee7b7;">🟢 DEFENSE SHIELD: {target_zone}</span>
+                        <span style="color: #fde68a;">📏 {distance_km} KM</span>
+                    </div>
+
+                    <!-- 4-Phase Progression Timeline Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 10px; padding: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-family: 'JetBrains Mono', monospace; color: #fca5a5; font-size: 9.5px; font-weight: 800;">PHASE 1 • T+0D</span>
+                                <span style="width: 7px; height: 7px; border-radius: 50%; background: #ef4444;"></span>
+                            </div>
+                            <div style="color: #ffffff; font-weight: 800; font-size: 0.88rem; margin-bottom: 2px;">Genesis</div>
+                            <div style="color: #fecaca; font-size: 0.76rem; line-height: 1.35;">Trigger multiplies pest density in <b>{origin_zone}</b>.</div>
+                        </div>
+
+                        <div style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px; padding: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-family: 'JetBrains Mono', monospace; color: #fde68a; font-size: 9.5px; font-weight: 800;">PHASE 2 • T+1.5D</span>
+                                <span style="width: 7px; height: 7px; border-radius: 50%; background: #f59e0b;"></span>
+                            </div>
+                            <div style="color: #ffffff; font-weight: 800; font-size: 0.88rem; margin-bottom: 2px;">Wind Drift</div>
+                            <div style="color: #fef08a; font-size: 0.76rem; line-height: 1.35;">Swarm drifts along border at <b>{sim_wind} km/day</b>.</div>
+                        </div>
+
+                        <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.4); border-radius: 10px; padding: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-family: 'JetBrains Mono', monospace; color: #6ee7b7; font-size: 9.5px; font-weight: 800;">PHASE 3 • T+{lead_days-1:.1f}D</span>
+                                <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981;"></span>
+                            </div>
+                            <div style="color: #ffffff; font-weight: 800; font-size: 0.88rem; margin-bottom: 2px;">DPG Alert</div>
+                            <div style="color: #a7f3d0; font-size: 0.76rem; line-height: 1.35;"><b>{target_zone}</b> alerted <b>{lead_days} days early</b>!</div>
+                        </div>
+
+                        <div style="background: rgba(16, 185, 129, 0.22); border: 1.5px solid #10b981; border-radius: 10px; padding: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-family: 'JetBrains Mono', monospace; color: #a7f3d0; font-size: 9.5px; font-weight: 800;">PHASE 4 • T+{lead_days:.1f}D</span>
+                                <span class="pulse-dot"></span>
+                            </div>
+                            <div style="color: #ffffff; font-weight: 800; font-size: 0.88rem; margin-bottom: 2px;">Bio-Shield</div>
+                            <div style="color: #ecfdf5; font-size: 0.76rem; line-height: 1.35;">Preemptive barrier active; <b>zero crop damage</b>!</div>
+                        </div>
+                    </div>
                 </div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a7f3d0; margin-top: 2px;">
-                    📍 Corridor: <b>{origin_zone}</b> ➔ <b>{target_zone}</b>
+
+                <!-- Cooperation Dividend Scorecard (Bento-Grid Architecture) -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                    <div class="bento-card" style="padding: 12px; text-align: center;">
+                        <span style="color: #a7f3d0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Harvest Protected</span>
+                        <div style="color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 800; margin-top: 2px;">85% Saved</div>
+                        <span style="color: #6ee7b7; font-size: 0.7rem;">Zero Swarm Loss</span>
+                    </div>
+                    <div class="bento-card" style="padding: 12px; text-align: center;">
+                        <span style="color: #a7f3d0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Cooperation ROI</span>
+                        <div style="color: #fde68a; font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 800; margin-top: 2px;">₹ {saved_value:,.0f} / Ac</div>
+                        <span style="color: #fde68a; font-size: 0.7rem;">Saved Input Cost</span>
+                    </div>
+                    <div class="bento-card" style="padding: 12px; text-align: center;">
+                        <span style="color: #a7f3d0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Early Warning</span>
+                        <div style="color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 800; margin-top: 2px;">{lead_days} Days</div>
+                        <span style="color: #6ee7b7; font-size: 0.7rem;">Advance Notice</span>
+                    </div>
+                    <div class="bento-card" style="padding: 12px; text-align: center;">
+                        <span style="color: #a7f3d0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">DPG Protocol Node</span>
+                        <div style="color: #10b981; font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 800; margin-top: 2px;">Ack 200 OK</div>
+                        <span style="color: #6ee7b7; font-size: 0.7rem;">Federated Telemetry</span>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="font-family: 'JetBrains Mono', monospace; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; font-size: 11.5px; font-weight: 800; padding: 4px 12px; border-radius: 20px;">
-                ⏳ ETA TO BORDER: {lead_days} DAYS ({lead_days*24:.0f} HRS)
-            </span>
-            <span style="font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #a7f3d0; font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 20px;">
-                🛰️ Radar Ping: {sim_time_now}
-            </span>
-        </div>
-    </div>
-
-    <!-- Directional Vector Route Telemetry Strip -->
-    <div style="background: rgba(3, 16, 10, 0.85); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 10px; padding: 8px 14px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; flex-wrap: wrap; gap: 8px;">
-        <span style="color: #fca5a5;">🔴 ORIGIN: {origin_zone}</span>
-        <span style="color: #34d399; font-weight: 800;">━━━━ 💨 {sim_wind} km/day Wind Vector ━━━━►</span>
-        <span style="color: #6ee7b7;">🟢 DEFENSE SHIELD: {target_zone}</span>
-        <span style="color: #fde68a;">📏 {distance_km} KM</span>
-    </div>
-
-    <!-- 4-Phase Progression Timeline Grid -->
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 12px; padding: 14px; box-shadow: 2px 2px 0px rgba(0,0,0,0.5);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-family: 'JetBrains Mono', monospace; color: #fca5a5; font-size: 10.5px; font-weight: 800;">PHASE 1 • T+0 DAYS</span>
-                <span style="width: 8px; height: 8px; border-radius: 50%; background: #ef4444;"></span>
-            </div>
-            <div style="color: #ffffff; font-weight: 800; font-size: 0.95rem; margin-bottom: 4px;">Outbreak Genesis</div>
-            <div style="color: #fecaca; font-size: 0.82rem; line-height: 1.45;">Microclimate trigger multiplies pest density in <b>{origin_zone}</b>.</div>
-        </div>
-
-        <div style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; padding: 14px; box-shadow: 2px 2px 0px rgba(0,0,0,0.5);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-family: 'JetBrains Mono', monospace; color: #fde68a; font-size: 10.5px; font-weight: 800;">PHASE 2 • T+1.5 DAYS</span>
-                <span style="width: 8px; height: 8px; border-radius: 50%; background: #f59e0b;"></span>
-            </div>
-            <div style="color: #ffffff; font-weight: 800; font-size: 0.95rem; margin-bottom: 4px;">Wind-Borne Drift</div>
-            <div style="color: #fef08a; font-size: 0.82rem; line-height: 1.45;">Swarm drifts along border corridor at <b>{sim_wind} km/day</b>.</div>
-        </div>
-
-        <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.4); border-radius: 12px; padding: 14px; box-shadow: 2px 2px 0px rgba(0,0,0,0.5);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-family: 'JetBrains Mono', monospace; color: #6ee7b7; font-size: 10.5px; font-weight: 800;">PHASE 3 • T+{lead_days-1:.1f} DAYS</span>
-                <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
-            </div>
-            <div style="color: #ffffff; font-weight: 800; font-size: 0.95rem; margin-bottom: 4px;">DPG Federated Alert</div>
-            <div style="color: #a7f3d0; font-size: 0.82rem; line-height: 1.45;"><b>{target_zone}</b> receives automated alert <b>{lead_days} days early</b>!</div>
-        </div>
-
-        <div style="background: rgba(16, 185, 129, 0.22); border: 1.5px solid #10b981; border-radius: 12px; padding: 14px; box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-family: 'JetBrains Mono', monospace; color: #a7f3d0; font-size: 10.5px; font-weight: 800;">PHASE 4 • T+{lead_days:.1f} DAYS</span>
-                <span class="pulse-dot"></span>
-            </div>
-            <div style="color: #ffffff; font-weight: 800; font-size: 0.95rem; margin-bottom: 4px;">Preemptive Bio-Shield</div>
-            <div style="color: #ecfdf5; font-size: 0.82rem; line-height: 1.45;">Biological barrier in place before pest arrival; <b>zero crop damage sustained</b>!</div>
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-            # Cooperation Dividend Scorecard (Bento-Grid Architecture)
-            st.markdown(f"""
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px;">
-    <div class="bento-card" style="padding: 16px; text-align: center;">
-        <span style="color: #a7f3d0; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Harvest Protected</span>
-        <div style="color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 1.55rem; font-weight: 800; margin-top: 4px;">85% Saved</div>
-        <span style="color: #6ee7b7; font-size: 0.74rem;">Zero Swarm Failure</span>
-    </div>
-    <div class="bento-card" style="padding: 16px; text-align: center;">
-        <span style="color: #a7f3d0; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Cooperation ROI</span>
-        <div style="color: #fde68a; font-family: 'JetBrains Mono', monospace; font-size: 1.55rem; font-weight: 800; margin-top: 4px;">₹ {saved_value:,.0f} / Ac</div>
-        <span style="color: #fde68a; font-size: 0.74rem;">Avoided Chemical Spray</span>
-    </div>
-    <div class="bento-card" style="padding: 16px; text-align: center;">
-        <span style="color: #a7f3d0; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Early Warning Lead</span>
-        <div style="color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 1.55rem; font-weight: 800; margin-top: 4px;">{lead_days} Days</div>
-        <span style="color: #6ee7b7; font-size: 0.74rem;">Advance Shield Notice</span>
-    </div>
-    <div class="bento-card" style="padding: 16px; text-align: center;">
-        <span style="color: #a7f3d0; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">DPG Protocol Node</span>
-        <div style="color: #10b981; font-family: 'JetBrains Mono', monospace; font-size: 1.55rem; font-weight: 800; margin-top: 4px;">Ack 200 OK</div>
-        <span style="color: #6ee7b7; font-size: 0.74rem;">Beckn Federated Telemetry</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+            </body>
+            </html>
+            """
+            components.html(radar_html, height=420)
 
             st.info(f"🌿 **Prescribed Mutual Defense Protocol:** {shield_action}")
 
