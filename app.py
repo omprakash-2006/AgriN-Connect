@@ -2145,19 +2145,38 @@ At the very end of your response, write these exact metadata tags:
         )
 
         with st.container(border=True):
-            st.markdown("""
-            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid rgba(52, 211, 153, 0.35); padding-bottom: 12px; margin-bottom: 16px;">
+            st.markdown(f"""
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid rgba(52, 211, 153, 0.35); padding-bottom: 12px; margin-bottom: 14px;">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <span style="font-size: 2.2rem;">🔬</span>
                     <div>
-                        <h3 style="margin: 0; padding: 0; border: none; font-size: 1.35rem; color: #a7f3d0;">CLINICAL CROP HEALTH DIAGNOSTIC REPORT</h3>
-                        <span style="font-size: 0.84rem; color: #6ee7b7;">Multimodal Foliar Vision • Natural ZBNF Formulations • TNAU/ICAR Aligned</span>
+                        <h3 style="margin: 0; padding: 0; border: none; font-size: 1.3rem; color: #a7f3d0;">CLINICAL CROP HEALTH DIAGNOSTIC SUMMARY</h3>
+                        <span style="font-size: 0.82rem; color: #6ee7b7;">Simplified Farmer Triage • Natural ZBNF Formulations • TNAU/ICAR Aligned</span>
                     </div>
                 </div>
                 <span style="background: rgba(245, 158, 11, 0.25); border: 1px solid #f59e0b; color: #fde68a; font-size: 0.74rem; font-weight: 700; padding: 5px 14px; border-radius: 20px;">🌿 ZERO-RESIDUE RX</span>
             </div>
+
+            <!-- Simplified Farmer Action Badges (Zero Text Clutter!) -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px;">
+                <div style="background: rgba(3, 18, 11, 0.85); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 12px; padding: 12px 14px;">
+                    <span style="font-size: 11px; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">🌾 Identified Crop</span>
+                    <div style="font-size: 13.5px; font-weight: 800; color: #ffffff; margin-top: 3px;">{diag['crop']}</div>
+                </div>
+                <div style="background: rgba(35, 12, 12, 0.85); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 12px; padding: 12px 14px;">
+                    <span style="font-size: 11px; color: #fca5a5; text-transform: uppercase; font-weight: 700;">🔬 Detected Pathology</span>
+                    <div style="font-size: 13.5px; font-weight: 800; color: #ffffff; margin-top: 3px;">{diag['disease']}</div>
+                </div>
+                <div style="background: rgba(6, 30, 20, 0.85); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 12px 14px;">
+                    <span style="font-size: 11px; color: #6ee7b7; text-transform: uppercase; font-weight: 700;">🌿 Recommended Bio-Spray</span>
+                    <div style="font-size: 13px; font-weight: 800; color: #fde68a; margin-top: 3px;">{diag['remedy']}</div>
+                </div>
+            </div>
             """, unsafe_allow_html=True)
-            st.markdown(diag["display_text"])
+
+            # Full 40-Line Clinical Report Collapsed into Expander for Officers & Research
+            with st.expander("📄 View Full ICAR Clinical Audit Dossier (For Extension Officers & Research)", expanded=False):
+                st.markdown(diag["display_text"])
 
         # Vernacular Spoken Voice Player
         render_voice_player(diag["speech_text"], diag["lang_name"], diag["bcp_lang"], diag["iso_lang"])
@@ -3132,19 +3151,35 @@ with tab3:
 
     # 1. Simple User-Friendly Explanation Card ("Puriyura Maari")
     st.markdown("""
-    <div style="background: linear-gradient(135deg, rgba(6, 44, 30, 0.75) 0%, rgba(3, 24, 16, 0.85) 100%); border: 1.5px solid rgba(52, 211, 153, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.4);">
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-            <span style="font-size: 1.8rem;">💡</span>
-            <div>
-                <b style="color: #a7f3d0; font-size: 1.1rem; letter-spacing: 0.3px;">Intha Inter-State DPG Network Ena Pannum? (Why Indian States Cooperate)</b>
-                <div style="font-size: 0.84rem; color: #6ee7b7;">How India's Digital Public Infrastructure protects smallholder farmers across borders</div>
+    <div style="background: linear-gradient(135deg, rgba(6, 44, 30, 0.75) 0%, rgba(3, 24, 16, 0.85) 100%); border: 1.5px solid rgba(52, 211, 153, 0.4); border-radius: 16px; padding: 18px 20px; margin-bottom: 20px; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.4);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.6rem;">💡</span>
+                <div>
+                    <b style="color: #a7f3d0; font-size: 1.05rem;">Why Indian States Cooperate Under AgriStack DPG?</b>
+                    <div style="font-size: 0.8rem; color: #6ee7b7;">Inter-State Bio-Defense Network for Smallholder Border Protection</div>
+                </div>
+            </div>
+            <span style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #a7f3d0; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;">
+                FEDERAL AGRI-DPI
+            </span>
+        </div>
+
+        <!-- 3 Visual Action Points (No Text Overload!) -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+            <div style="background: rgba(3, 16, 10, 0.75); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 10px; padding: 12px;">
+                <b style="color: #fca5a5; font-size: 11.5px;">💨 PESTS DRIFT CROSS-BORDER</b>
+                <div style="color: #e2f8eb; font-size: 11.5px; margin-top: 4px; line-height: 1.4;">Monsoon wind-borne insect swarms drift 120km across state borders in 3 to 5 days.</div>
+            </div>
+            <div style="background: rgba(3, 16, 10, 0.75); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 10px; padding: 12px;">
+                <b style="color: #6ee7b7; font-size: 11.5px;">📡 4-DAY ADVANCE WARNING</b>
+                <div style="color: #e2f8eb; font-size: 11.5px; margin-top: 4px; line-height: 1.4;">AgriStack DPG radar alerts border farmers 4.3 days before swarms cross state lines.</div>
+            </div>
+            <div style="background: rgba(3, 16, 10, 0.75); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 10px; padding: 12px;">
+                <b style="color: #fde68a; font-size: 11.5px;">💰 ₹42,500/ACRE SAVED</b>
+                <div style="color: #e2f8eb; font-size: 11.5px; margin-top: 4px; line-height: 1.4;">Deploy natural biological shields (AWD + Neem) with zero chemical pesticide cost.</div>
             </div>
         </div>
-        <p style="color: #e2f8eb; font-size: 0.96rem; line-height: 1.65; margin: 0;">
-            Insect pests, locust swarms, and airborne fungal spore clouds <b>do not stop at state borders!</b> When disease pressure spikes in Kerala, Andhra Pradesh, or Punjab, seasonal monsoon winds carry them into Tamil Nadu or Haryana in just <b>3 to 5 days</b>. 
-            Under India's <b>AgriStack & Open Agriculture Network (DPG)</b>, state agricultural universities share live radar data. 
-            This gives border farmers a <b>4-to-7 day advance early warning</b> to deploy low-cost biological shields (pheromone traps, neem extracts) <i>before</i> pests cross state lines!
-        </p>
     </div>
     """, unsafe_allow_html=True)
 
