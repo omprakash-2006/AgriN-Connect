@@ -2133,14 +2133,6 @@ At the very end of your response, write these exact metadata tags:
         loc_diag_name = active_location.get('name', selected_district) if active_location else 'Local Agro-Zone'
         state_diag_name = active_location.get('state', 'India') if active_location else 'India'
 
-        # 7. AgriStack Verifiable Digital Bio-Passport (DPI / Export Grade / Rank 1)
-        render_agristack_bio_passport(
-            crop_name=diag["crop"],
-            disease_name=diag["disease"],
-            remedy=diag["remedy"],
-            district_name=loc_diag_name,
-            state_name=state_diag_name
-        )
 
         # Last-Mile Community Dispatch & WhatsApp Action Deck
         st.markdown("""
