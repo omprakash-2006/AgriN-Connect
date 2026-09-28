@@ -1447,53 +1447,41 @@ with st.sidebar:
 
 
 
-# --- Main App Header: Clean, Compact, Picturesque (Zero-Theory!) ---
+# --- Main App Header: Clean Agro Hero with Signature Font (Zero-Theory!) ---
 clean_loc_name = selected_district.split("(")[0].strip() if selected_district else "Thanjavur"
 clean_state_name = (active_location.get('state', 'India') if active_location else 'Tamil Nadu').split('(')[0].strip()
 
 render_clean_html(f"""
-<div style="
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(135deg, rgba(8, 33, 23, 0.92) 0%, rgba(4, 23, 16, 0.98) 100%);
-    border: 1.5px solid rgba(52, 211, 153, 0.35);
-    border-radius: 16px;
-    padding: 12px 18px;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-    gap: 10px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-">
-    <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="width: 44px; height: 44px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
-            🌾
+<div style="margin-bottom: 22px; padding: 6px 2px 10px 2px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(197, 249, 57, 0.15); border: 1px solid rgba(197, 249, 57, 0.45); padding: 5px 14px; border-radius: 20px;">
+            <span style="color: #d4f938; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase;">⚡ AgriN-Connect • KisanSetu AI</span>
         </div>
-        <div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.3px; line-height: 1.2;">
-                AgriN-Connect <span style="font-size: 0.92rem; font-weight: 700; color: #d4f938;">Smart Agriculture Intelligence</span>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <div style="background: rgba(16, 185, 129, 0.22); border: 1px solid #10b981; color: #a7f3d0; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px;">
+                <span>📍</span> <b>{clean_loc_name}</b>, {clean_state_name}
             </div>
-            <div style="font-size: 0.78rem; color: #a7f3d0; margin-top: 2px;">
-                🍃 Smart Agriculture Intelligence & Zero-Residue Bio-Shield (KisanSetu AI)
+            <div style="background: rgba(197, 249, 57, 0.15); border: 1px solid rgba(197, 249, 57, 0.4); color: #d4f938; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px;">
+                🌿 100% ZBNF
+            </div>
+            <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px;">
+                🗣️ {lang_name} Voice
             </div>
         </div>
     </div>
-    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <div style="background: rgba(197, 249, 57, 0.18); border: 1px solid rgba(197, 249, 57, 0.45); color: #d4f938; font-size: 0.74rem; font-weight: 800; padding: 5px 12px; border-radius: 20px;">
-            ⚡ Smart Agriculture Intelligence
-        </div>
-        <div style="background: rgba(16, 185, 129, 0.22); border: 1px solid #10b981; color: #a7f3d0; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px;">
-            <span>📍</span> <b>{clean_loc_name}</b>, {clean_state_name}
-        </div>
-        <div style="background: rgba(197, 249, 57, 0.15); border: 1px solid rgba(197, 249, 57, 0.4); color: #d4f938; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px;">
-            🌿 100% ZBNF
-        </div>
-        <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px;">
-            🗣️ {lang_name} Voice
-        </div>
+    <h1 style="font-size: clamp(2.3rem, 4.8vw, 3.4rem); font-weight: 800; line-height: 1.15; color: #ffffff; margin: 0 0 10px 0; text-shadow: 0 4px 28px rgba(0,0,0,0.65); letter-spacing: -0.8px;">
+        <span style="font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400; color: #d4f938; text-shadow: 0 4px 24px rgba(197, 249, 57, 0.55);">Smart Agriculture</span> Intelligence
+    </h1>
+    <div style="font-size: 0.92rem; color: #e2f8eb; line-height: 1.5; margin-bottom: 4px; font-weight: 500; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <span style="color: #a7f3d0; font-weight: 700;">🍃 Zero-Literacy Plant Doctor</span>
+        <span style="opacity: 0.35;">•</span>
+        <span style="color: #d4f938; font-weight: 700;">Zero-Residue Bio-Shield</span>
+        <span style="opacity: 0.35;">•</span>
+        <span style="color: #67e8f9; font-weight: 700;">1-Tap Pictorial Diagnosis</span>
     </div>
 </div>
 """)
+
 
 # Navigation Tabs
 tab1, tab2, tab3 = st.tabs([
