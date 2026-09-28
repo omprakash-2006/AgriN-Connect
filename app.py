@@ -1483,12 +1483,44 @@ render_clean_html(f"""
 """)
 
 
-# Navigation Tabs
-tab1, tab2, tab3 = st.tabs([
-    t("tab1"), 
-    t("tab2"), 
-    t("tab3")
-])
+# --- Unified 3-Feature Stack Navigation Deck ---
+render_clean_html(f"""
+<div style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 10px 0 20px 0;
+">
+    <a href="#stack-plant-doctor" style="text-decoration: none;">
+        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(4, 38, 24, 0.75) 100%); border: 1.5px solid rgba(52, 211, 153, 0.45); border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
+            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(16, 185, 129, 0.3); display: flex; align-items: center; justify-content: center; font-size: 20px;">🍃</div>
+            <div>
+                <div style="font-size: 0.7rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">STACK 1 ↓</div>
+                <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff;">Agri-Vani Plant Doctor</div>
+            </div>
+        </div>
+    </a>
+    <a href="#stack-climate-radar" style="text-decoration: none;">
+        <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(15, 23, 42, 0.75) 100%); border: 1.5px solid rgba(56, 189, 248, 0.45); border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
+            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(56, 189, 248, 0.3); display: flex; align-items: center; justify-content: center; font-size: 20px;">🛰️</div>
+            <div>
+                <div style="font-size: 0.7rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">STACK 2 ↓</div>
+                <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff;">Geo-Satellite Climate Radar</div>
+            </div>
+        </div>
+    </a>
+    <a href="#stack-agrigrid" style="text-decoration: none;">
+        <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(30, 20, 10, 0.75) 100%); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
+            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(245, 158, 11, 0.3); display: flex; align-items: center; justify-content: center; font-size: 20px;">🇮🇳</div>
+            <div>
+                <div style="font-size: 0.7rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">STACK 3 ↓</div>
+                <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff;">Inter-State AgriGrid (DPG)</div>
+            </div>
+        </div>
+    </a>
+</div>
+""")
+
 
 # Helper function: Audio synthesis with gTTS and Web Speech
 def generate_audio(text, lang_code='ta'):
@@ -1726,9 +1758,23 @@ def render_voice_player(speech_text, lang_title, bcp_code, iso_code):
     components.html(html_code, height=95)
 
 # ==============================================================================
-# TAB 1: Agri-Vani Plant Doctor & ZBNF Bio-Recipe Hub
+# STACK FEATURE 01: Agri-Vani Plant Doctor & ZBNF Bio-Recipe Hub
 # ==============================================================================
-with tab1:
+render_clean_html(f"""
+<div id="stack-plant-doctor" style="scroll-margin-top: 15px; margin: 24px 0 16px 0; background: linear-gradient(135deg, rgba(8, 33, 23, 0.92) 0%, rgba(4, 23, 16, 0.98) 100%); border: 1px solid rgba(52, 211, 153, 0.35); border-left: 5px solid #10b981; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.35);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🍃</div>
+        <div>
+            <div style="font-size: 0.72rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">STACK FEATURE 01</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Agri-Vani Plant Doctor & Bio-Shield</div>
+        </div>
+    </div>
+    <div style="background: rgba(16, 185, 129, 0.22); color: #a7f3d0; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #10b981;">
+        ⚡ 1-Tap Pictorial Diagnosis
+    </div>
+</div>
+""")
+with st.container():
     st.markdown('<div id="plant-doctor-anchor" style="position: relative; top: -20px;"></div>', unsafe_allow_html=True)
     # Visual 3-Step Interactive Workflow Banner (Zero-Theory, Picture-First!)
     render_clean_html("""
@@ -2773,9 +2819,23 @@ Provide actionable step-by-step numbered instructions.
                     st.rerun()
 
 # ==============================================================================
-# TAB 2: Geo-Satellite & Climate Radar
+# STACK FEATURE 02: Geo-Satellite & Climate Radar
 # ==============================================================================
-with tab2:
+render_clean_html(f"""
+<div id="stack-climate-radar" style="scroll-margin-top: 15px; margin: 38px 0 16px 0; background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(8, 15, 30, 0.98) 100%); border: 1px solid rgba(56, 189, 248, 0.35); border-left: 5px solid #38bdf8; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.35);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(56, 189, 248, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🛰️</div>
+        <div>
+            <div style="font-size: 0.72rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">STACK FEATURE 02</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Geo-Satellite & Climate Radar</div>
+        </div>
+    </div>
+    <div style="background: rgba(56, 189, 248, 0.2); color: #bae6fd; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #38bdf8;">
+        📡 Sentinel-2 & Live Telemetry
+    </div>
+</div>
+""")
+with st.container():
     st.markdown('<div id="radar-anchor" style="position: relative; top: -20px;"></div>', unsafe_allow_html=True)
     if not location_confirmed:
         st.subheader(t("radar_title"))
@@ -3189,9 +3249,23 @@ Detail:
             """, unsafe_allow_html=True)
 
 # ==============================================================================
-# TAB 3: KisanSetu Inter-State AgriGrid (Digital Public Good)
+# STACK FEATURE 03: KisanSetu Inter-State AgriGrid (Digital Public Good)
 # ==============================================================================
-with tab3:
+render_clean_html(f"""
+<div id="stack-agrigrid" style="scroll-margin-top: 15px; margin: 38px 0 16px 0; background: linear-gradient(135deg, rgba(30, 20, 10, 0.92) 0%, rgba(20, 12, 5, 0.98) 100%); border: 1px solid rgba(245, 158, 11, 0.35); border-left: 5px solid #f59e0b; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.35);">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(245, 158, 11, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🇮🇳</div>
+        <div>
+            <div style="font-size: 0.72rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">STACK FEATURE 03</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">KisanSetu Inter-State AgriGrid (DPG)</div>
+        </div>
+    </div>
+    <div style="background: rgba(245, 158, 11, 0.2); color: #fde68a; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #f59e0b;">
+        🛡️ Cross-Border Vector Corridor
+    </div>
+</div>
+""")
+with st.container():
     st.markdown('<div id="grid-anchor" style="position: relative; top: -20px;"></div>', unsafe_allow_html=True)
 
     # 1. Interactive Cross-Border Pest Drift Simulator (Theme: Cooperation)
