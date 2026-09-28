@@ -79,9 +79,9 @@ TRANSLATIONS = {
         "nav_radar": "🛰️ Climate Radar",
         "nav_grid": "🇮🇳 Inter-State Grid",
         "nav_zbnf": "🌾 ZBNF Hub",
-        "tab1": "🍃 Agri-Vani Plant Doctor",
-        "tab2": "🛰️ Geo-Satellite & Climate Radar",
-        "tab3": "🇮🇳 KisanSetu Inter-State AgriGrid (DPG)",
+        "tab1": "🍃 Plant Doctor (Crop Disease & Cure)",
+        "tab2": "🌦️ Live Weather & Farm Satellite",
+        "tab3": "🚨 Regional Pest Attack Alerts",
         "active_zone": "Active Agro-Zone",
         "select_district": "📋 Select District",
         "search_town": "🔍 Search ANY Town",
@@ -1473,11 +1473,11 @@ render_clean_html(f"""
         <span style="font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400; color: #d4f938; text-shadow: 0 4px 24px rgba(197, 249, 57, 0.55);">Smart Agriculture</span> Intelligence
     </h1>
     <div style="font-size: 0.92rem; color: #e2f8eb; line-height: 1.5; margin-bottom: 4px; font-weight: 500; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-        <span style="color: #a7f3d0; font-weight: 700;">🍃 Zero-Literacy Plant Doctor</span>
+        <span style="color: #a7f3d0; font-weight: 700;">🍃 Plant Doctor</span>
         <span style="opacity: 0.35;">•</span>
-        <span style="color: #d4f938; font-weight: 700;">Zero-Residue Bio-Shield</span>
+        <span style="color: #67e8f9; font-weight: 700;">🌦️ Live Weather & Satellite</span>
         <span style="opacity: 0.35;">•</span>
-        <span style="color: #67e8f9; font-weight: 700;">1-Tap Pictorial Diagnosis</span>
+        <span style="color: #fde68a; font-weight: 700;">🚨 Regional Pest Alerts</span>
     </div>
 </div>
 """)
@@ -1495,26 +1495,26 @@ render_clean_html(f"""
         <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(4, 38, 24, 0.75) 100%); border: 1.5px solid rgba(52, 211, 153, 0.45); border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
             <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(16, 185, 129, 0.3); display: flex; align-items: center; justify-content: center; font-size: 20px;">🍃</div>
             <div>
-                <div style="font-size: 0.7rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">STACK 1 ↓</div>
-                <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff;">Agri-Vani Plant Doctor</div>
+                <div style="font-size: 0.7rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">FEATURE 1 ↓</div>
+                <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff;">Plant Doctor (Disease & Cure)</div>
             </div>
         </div>
     </a>
     <a href="#stack-climate-radar" style="text-decoration: none;">
         <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(15, 23, 42, 0.75) 100%); border: 1.5px solid rgba(56, 189, 248, 0.45); border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
-            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(56, 189, 248, 0.3); display: flex; align-items: center; justify-content: center; font-size: 20px;">🛰️</div>
+            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(56, 189, 248, 0.3); display: flex; align-items: center; justify-content: center; font-size: 20px;">🌦️</div>
             <div>
-                <div style="font-size: 0.7rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">STACK 2 ↓</div>
-                <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff;">Geo-Satellite Climate Radar</div>
+                <div style="font-size: 0.7rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">FEATURE 2 ↓</div>
+                <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff;">Live Weather & Farm Satellite</div>
             </div>
         </div>
     </a>
     <a href="#stack-agrigrid" style="text-decoration: none;">
         <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(30, 20, 10, 0.75) 100%); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
-            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(245, 158, 11, 0.3); display: flex; align-items: center; justify-content: center; font-size: 20px;">🇮🇳</div>
+            <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(245, 158, 11, 0.3); display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div>
             <div>
-                <div style="font-size: 0.7rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">STACK 3 ↓</div>
-                <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff;">Inter-State AgriGrid (DPG)</div>
+                <div style="font-size: 0.7rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">FEATURE 3 ↓</div>
+                <div style="font-size: 0.92rem; font-weight: 800; color: #ffffff;">Regional Pest Attack Alerts</div>
             </div>
         </div>
     </a>
@@ -1758,19 +1758,19 @@ def render_voice_player(speech_text, lang_title, bcp_code, iso_code):
     components.html(html_code, height=95)
 
 # ==============================================================================
-# STACK FEATURE 01: Agri-Vani Plant Doctor & ZBNF Bio-Recipe Hub
+# STACK FEATURE 01: Plant Doctor (Crop Disease & Cure)
 # ==============================================================================
 render_clean_html(f"""
 <div id="stack-plant-doctor" style="scroll-margin-top: 15px; margin: 24px 0 16px 0; background: linear-gradient(135deg, rgba(8, 33, 23, 0.92) 0%, rgba(4, 23, 16, 0.98) 100%); border: 1px solid rgba(52, 211, 153, 0.35); border-left: 5px solid #10b981; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.35);">
     <div style="display: flex; align-items: center; gap: 12px;">
         <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🍃</div>
         <div>
-            <div style="font-size: 0.72rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">STACK FEATURE 01</div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Agri-Vani Plant Doctor & Bio-Shield</div>
+            <div style="font-size: 0.72rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">FEATURE 01</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Plant Doctor (Crop Disease & Cure)</div>
         </div>
     </div>
     <div style="background: rgba(16, 185, 129, 0.22); color: #a7f3d0; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #10b981;">
-        ⚡ 1-Tap Pictorial Diagnosis
+        ⚡ 1-Tap Photo Check
     </div>
 </div>
 """)
@@ -2819,19 +2819,19 @@ Provide actionable step-by-step numbered instructions.
                     st.rerun()
 
 # ==============================================================================
-# STACK FEATURE 02: Geo-Satellite & Climate Radar
+# STACK FEATURE 02: Live Weather & Farm Satellite
 # ==============================================================================
 render_clean_html(f"""
 <div id="stack-climate-radar" style="scroll-margin-top: 15px; margin: 38px 0 16px 0; background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(8, 15, 30, 0.98) 100%); border: 1px solid rgba(56, 189, 248, 0.35); border-left: 5px solid #38bdf8; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.35);">
     <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(56, 189, 248, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🛰️</div>
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(56, 189, 248, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🌦️</div>
         <div>
-            <div style="font-size: 0.72rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">STACK FEATURE 02</div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Geo-Satellite & Climate Radar</div>
+            <div style="font-size: 0.72rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">FEATURE 02</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Live Weather & Farm Satellite</div>
         </div>
     </div>
     <div style="background: rgba(56, 189, 248, 0.2); color: #bae6fd; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #38bdf8;">
-        📡 Sentinel-2 & Live Telemetry
+        📡 Live Sensors & Satellite View
     </div>
 </div>
 """)
@@ -3249,19 +3249,19 @@ Detail:
             """, unsafe_allow_html=True)
 
 # ==============================================================================
-# STACK FEATURE 03: KisanSetu Inter-State AgriGrid (Digital Public Good)
+# STACK FEATURE 03: Regional Pest Attack Alerts
 # ==============================================================================
 render_clean_html(f"""
 <div id="stack-agrigrid" style="scroll-margin-top: 15px; margin: 38px 0 16px 0; background: linear-gradient(135deg, rgba(30, 20, 10, 0.92) 0%, rgba(20, 12, 5, 0.98) 100%); border: 1px solid rgba(245, 158, 11, 0.35); border-left: 5px solid #f59e0b; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.35);">
     <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(245, 158, 11, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🇮🇳</div>
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(245, 158, 11, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🚨</div>
         <div>
-            <div style="font-size: 0.72rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">STACK FEATURE 03</div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">KisanSetu Inter-State AgriGrid (DPG)</div>
+            <div style="font-size: 0.72rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">FEATURE 03</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Regional Pest Attack Alerts</div>
         </div>
     </div>
     <div style="background: rgba(245, 158, 11, 0.2); color: #fde68a; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #f59e0b;">
-        🛡️ Cross-Border Vector Corridor
+        🛡️ Nearby Area Warnings
     </div>
 </div>
 """)
