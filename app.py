@@ -707,7 +707,7 @@ if os.path.exists(agri_bg_path):
 # Custom CSS for living animated agriculture & agro-tech UI
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
     :root {
         --botanical-dark-0: #041710;
@@ -1449,7 +1449,7 @@ with st.sidebar:
 
 # --- Main App Header: Clean, Compact, Picturesque (Zero-Theory!) ---
 clean_loc_name = selected_district.split("(")[0].strip() if selected_district else "Thanjavur"
-clean_state_name = active_location.get('state', 'India') if active_location else 'Tamil Nadu'
+clean_state_name = (active_location.get('state', 'India') if active_location else 'Tamil Nadu').split('(')[0].strip()
 
 render_clean_html(f"""
 <div style="
@@ -1483,7 +1483,7 @@ render_clean_html(f"""
             ⚡ Smart Agriculture Intelligence
         </div>
         <div style="background: rgba(16, 185, 129, 0.22); border: 1px solid #10b981; color: #a7f3d0; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px;">
-            <span>📍</span> <b>{clean_loc_name}</b> ({clean_state_name})
+            <span>📍</span> <b>{clean_loc_name}</b>, {clean_state_name}
         </div>
         <div style="background: rgba(197, 249, 57, 0.15); border: 1px solid rgba(197, 249, 57, 0.4); color: #d4f938; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px;">
             🌿 100% ZBNF
