@@ -3495,253 +3495,168 @@ render_clean_html(f"""
 with st.container():
     st.markdown('<div id="grid-anchor" style="position: relative; top: -20px;"></div>', unsafe_allow_html=True)
 
-    # 1. Interactive Cross-Border Pest Drift Simulator (Theme: Cooperation)
-    with st.container(border=True):
-        sim_col1, sim_col2 = st.columns([1.2, 1])
-        with sim_col1:
-            sim_corridor = st.selectbox(
-                "Select Inter-State Outbreak Corridor to Simulate:",
-                [
-                    "Kerala (Palakkad Gap) ➔ Tamil Nadu (Cauvery Delta) • Brown Plant Hopper",
-                    "Punjab (Malwa Cotton Belt) ➔ Haryana (Sirsa) • Whitefly Thermal Plume",
-                    "Gujarat (Saurashtra) ➔ Rajasthan (Thar Margin) • Tikka Fungal Spores",
-                    "Andhra Pradesh (Rayalaseema) ➔ Tamil Nadu (North Arcot) • Fall Armyworm"
-                ],
-                key="sim_corridor_select"
-            )
-        with sim_col2:
-            sim_wind = st.slider("Monsoon Wind Drift Velocity (km/day)", 15, 65, 28, key="sim_wind_slider")
+    # 1. Quick & Intuitive Regional Threat Switcher
+    st.markdown("""
+    <div style="display: flex; align-items: center; justify-content: space-between; margin: 12px 0 8px 0;">
+        <span style="font-size: 0.88rem; font-weight: 700; color: #fde68a;">🎯 Quick Threat Corridor Selector:</span>
+        <span style="font-size: 0.74rem; color: #34d399; font-weight: 700;">📡 Live Radar Intercept</span>
+    </div>
+    """, unsafe_allow_html=True)
 
-        run_sim = st.button(t("sim_btn"), type="primary", use_container_width=True)
+    corridor_options = [
+        "🌾 Kerala ➔ TN (Brown Plant Hopper)",
+        "🌽 AP ➔ TN (Fall Armyworm)",
+        "☁️ Punjab ➔ Haryana (Whitefly)",
+        "🥜 Gujarat ➔ Rajasthan (Tikka Spores)"
+    ]
+    sim_corridor = st.radio(
+        "Select Regional Threat Corridor:",
+        corridor_options,
+        horizontal=True,
+        label_visibility="collapsed",
+        key="quick_corridor_radio"
+    )
 
-        if True:
-            st.session_state["sim_ran"] = True
-            
-            # Scenario Data
-            if "Kerala" in sim_corridor:
-                pest_name = "Nilaparvata lugens (Brown Plant Hopper)"
-                origin_zone = "Palakkad & Wayanad Wetlands, Kerala"
-                target_zone = "Coimbatore & Cauvery Delta, Tamil Nadu"
-                distance_km = 120
-                lead_days = round(distance_km / sim_wind, 1)
-                shield_action = "Deploy Alternate Wetting & Drying (AWD) + Sour buttermilk-hing foliar bio-spray."
-                saved_value = 42500
-            elif "Punjab" in sim_corridor:
-                pest_name = "Bemisia tabaci (Whitefly Vector Plume)"
-                origin_zone = "Bathinda & Mansa, Punjab"
-                target_zone = "Sirsa & Fatehabad, Haryana"
-                distance_km = 95
-                lead_days = round(distance_km / sim_wind, 1)
-                shield_action = "Erect 40 yellow sticky traps/acre; spray 5% Neem Seed Kernel Extract (NSKE) at sunrise."
-                saved_value = 38000
-            elif "Gujarat" in sim_corridor:
-                pest_name = "Cercospora personata (Tikka Spore Cloud)"
-                origin_zone = "Rajkot & Junagadh, Gujarat"
-                target_zone = "Jalore & Barmer, Rajasthan"
-                distance_km = 160
-                lead_days = round(distance_km / sim_wind, 1)
-                shield_action = "Prophylactic Trichoderma viride application + fermented buttermilk foliar barrier."
-                saved_value = 31000
-            else:
-                pest_name = "Spodoptera frugiperda (Fall Armyworm)"
-                origin_zone = "Anantapur & Chittoor, Andhra Pradesh"
-                target_zone = "Vellore & Tiruvannamalai, Tamil Nadu"
-                distance_km = 110
-                lead_days = round(distance_km / sim_wind, 1)
-                shield_action = "Install 12 pheromone lures/acre along river basin; release Trichogramma chilonis egg parasitoids."
-                saved_value = 36500
+    # Scenario parameters
+    if "Kerala" in sim_corridor:
+        pest_name = "Nilaparvata lugens (Brown Plant Hopper)"
+        pest_short = "Brown Plant Hopper"
+        pest_crop = "Paddy / Rice"
+        origin_zone = "Palakkad Wetlands, Kerala"
+        target_zone = "Coimbatore & Cauvery Delta, Tamil Nadu"
+        distance_km = 120
+        sim_wind = 28
+        threat_level = "🚨 CRITICAL TIER-1"
+        threat_badge_bg = "rgba(239, 68, 68, 0.25)"
+        threat_border = "#ef4444"
+        threat_color = "#fca5a5"
+        shield_action = "Drain standing water for 48 hrs (AWD) to break nymph lifecycle; spray fermented sour buttermilk + hing solution."
+        saved_value = 42500
+    elif "Punjab" in sim_corridor:
+        pest_name = "Bemisia tabaci (Whitefly Vector Plume)"
+        pest_short = "Whitefly Vector"
+        pest_crop = "Cotton & Vegetables"
+        origin_zone = "Bathinda & Mansa, Punjab"
+        target_zone = "Sirsa & Fatehabad, Haryana"
+        distance_km = 95
+        sim_wind = 32
+        threat_level = "🚨 CRITICAL TIER-1"
+        threat_badge_bg = "rgba(239, 68, 68, 0.25)"
+        threat_border = "#ef4444"
+        threat_color = "#fca5a5"
+        shield_action = "Erect 40 yellow sticky traps/acre; spray 5% Neem Seed Kernel Extract (NSKE) at early morning dawn."
+        saved_value = 38000
+    elif "Gujarat" in sim_corridor:
+        pest_name = "Cercospora personata (Tikka Spore Cloud)"
+        pest_short = "Tikka Fungal Spores"
+        pest_crop = "Groundnut & Pulses"
+        origin_zone = "Rajkot & Junagadh, Gujarat"
+        target_zone = "Jalore & Barmer, Rajasthan"
+        distance_km = 160
+        sim_wind = 30
+        threat_level = "⚠️ ELEVATED TIER-2"
+        threat_badge_bg = "rgba(245, 158, 11, 0.25)"
+        threat_border = "#f59e0b"
+        threat_color = "#fde68a"
+        shield_action = "Prophylactic Trichoderma viride root application + fermented sour buttermilk foliar barrier."
+        saved_value = 31000
+    else:
+        pest_name = "Spodoptera frugiperda (Fall Armyworm)"
+        pest_short = "Fall Armyworm"
+        pest_crop = "Maize & Millets"
+        origin_zone = "Chittoor & Anantapur, Andhra Pradesh"
+        target_zone = "Vellore & North Arcot, Tamil Nadu"
+        distance_km = 110
+        sim_wind = 26
+        threat_level = "🚨 CRITICAL TIER-1"
+        threat_badge_bg = "rgba(239, 68, 68, 0.25)"
+        threat_border = "#ef4444"
+        threat_color = "#fca5a5"
+        shield_action = "Install 12 pheromone lures/acre along river basin; release Trichogramma chilonis egg parasitoids."
+        saved_value = 36500
 
-            # 4-Phase Progression Timeline with Animated Vector Radar (Rendered in pure HTML)
-            sim_time_now = datetime.datetime.now().strftime("%I:%M:%S %p IST")
-            radar_html = f"""
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="utf-8">
-                <style>
-                    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
-                    * {{
-                        box-sizing: border-box;
-                        margin: 0;
-                        padding: 0;
-                    }}
-                    body {{
-                        background: transparent;
-                        font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-                        color: #ffffff;
-                    }}
-                    .bento-card {{
-                        background: linear-gradient(145deg, #082117 0%, #041710 100%);
-                        border: 1px solid rgba(52, 211, 153, 0.3);
-                        border-radius: 16px;
-                        padding: 16px;
-                    }}
-                    .pulse-dot {{
-                        width: 8px;
-                        height: 8px;
-                        border-radius: 50%;
-                        background: #10b981;
-                        box-shadow: 0 0 10px #10b981;
-                        animation: blip 1.5s infinite;
-                        display: inline-block;
-                    }}
-                    @keyframes blip {{
-                        0% {{ opacity: 0.4; transform: scale(0.9); }}
-                        50% {{ opacity: 1; transform: scale(1.15); }}
-                        100% {{ opacity: 0.4; transform: scale(0.9); }}
-                    }}
-                </style>
-            </head>
-            <body style="margin: 0; padding: 0; background: transparent;">
-                <div class="bento-card" style="margin-bottom: 12px;">
-                    <!-- Active Radar Vector Banner -->
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="position: relative; width: 34px; height: 34px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); border: 1.5px solid #ef4444; display: flex; align-items: center; justify-content: center;">
-                                <span style="position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #ef4444; animation: blip 1.2s infinite;"></span>
-                                <span style="font-size: 14px;">📡</span>
-                            </div>
-                            <div>
-                                <div style="color: #ffffff; font-weight: 800; font-size: 1.05rem;">
-                                    RADAR VECTOR INTERCEPT • {pest_name}
-                                </div>
-                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a7f3d0; margin-top: 2px;">
-                                    📍 Corridor: <b>{origin_zone}</b> ➔ <b>{target_zone}</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span style="font-family: 'JetBrains Mono', monospace; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px;">
-                                ⏳ ETA TO BORDER: {lead_days} DAYS ({lead_days*24:.0f} HRS)
-                            </span>
-                            <span style="font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #a7f3d0; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 20px;">
-                                🛰️ Ping: {sim_time_now}
-                            </span>
-                        </div>
-                    </div>
+    lead_days = round(distance_km / sim_wind, 1)
 
-                    <!-- Directional Vector Route Telemetry Strip -->
-                    <div style="background: rgba(3, 16, 10, 0.85); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 10px; padding: 8px 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; flex-wrap: wrap; gap: 6px;">
-                        <span style="color: #fca5a5;">🔴 ORIGIN: {origin_zone}</span>
-                        <span style="color: #34d399; font-weight: 800;">━━━━ 💨 {sim_wind} km/day Wind Vector ━━━━►</span>
-                        <span style="color: #6ee7b7;">🟢 DEFENSE SHIELD: {target_zone}</span>
-                        <span style="color: #fde68a;">📏 {distance_km} KM</span>
-                    </div>
-
-                    <!-- 4-Phase Progression Timeline Grid -->
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
-                        <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 10px; padding: 10px;">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                                <span style="font-family: 'JetBrains Mono', monospace; color: #fca5a5; font-size: 9.5px; font-weight: 800;">PHASE 1 • T+0D</span>
-                                <span style="width: 7px; height: 7px; border-radius: 50%; background: #ef4444;"></span>
-                            </div>
-                            <div style="color: #ffffff; font-weight: 800; font-size: 0.88rem; margin-bottom: 2px;">Genesis</div>
-                            <div style="color: #fecaca; font-size: 0.76rem; line-height: 1.35;">Trigger multiplies pest density in <b>{origin_zone}</b>.</div>
-                        </div>
-
-                        <div style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px; padding: 10px;">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                                <span style="font-family: 'JetBrains Mono', monospace; color: #fde68a; font-size: 9.5px; font-weight: 800;">PHASE 2 • T+1.5D</span>
-                                <span style="width: 7px; height: 7px; border-radius: 50%; background: #f59e0b;"></span>
-                            </div>
-                            <div style="color: #ffffff; font-weight: 800; font-size: 0.88rem; margin-bottom: 2px;">Wind Drift</div>
-                            <div style="color: #fef08a; font-size: 0.76rem; line-height: 1.35;">Swarm drifts along border at <b>{sim_wind} km/day</b>.</div>
-                        </div>
-
-                        <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.4); border-radius: 10px; padding: 10px;">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                                <span style="font-family: 'JetBrains Mono', monospace; color: #6ee7b7; font-size: 9.5px; font-weight: 800;">PHASE 3 • T+{lead_days-1:.1f}D</span>
-                                <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981;"></span>
-                            </div>
-                            <div style="color: #ffffff; font-weight: 800; font-size: 0.88rem; margin-bottom: 2px;">DPG Alert</div>
-                            <div style="color: #a7f3d0; font-size: 0.76rem; line-height: 1.35;"><b>{target_zone}</b> alerted <b>{lead_days} days early</b>!</div>
-                        </div>
-
-                        <div style="background: rgba(16, 185, 129, 0.22); border: 1.5px solid #10b981; border-radius: 10px; padding: 10px;">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                                <span style="font-family: 'JetBrains Mono', monospace; color: #a7f3d0; font-size: 9.5px; font-weight: 800;">PHASE 4 • T+{lead_days:.1f}D</span>
-                                <span class="pulse-dot"></span>
-                            </div>
-                            <div style="color: #ffffff; font-weight: 800; font-size: 0.88rem; margin-bottom: 2px;">Bio-Shield</div>
-                            <div style="color: #ecfdf5; font-size: 0.76rem; line-height: 1.35;">Preemptive barrier active; <b>zero crop damage</b>!</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cooperation Dividend Scorecard (Bento-Grid Architecture) -->
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
-                    <div class="bento-card" style="padding: 12px; text-align: center;">
-                        <span style="color: #a7f3d0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Harvest Protected</span>
-                        <div style="color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 800; margin-top: 2px;">85% Saved</div>
-                        <span style="color: #6ee7b7; font-size: 0.7rem;">Zero Swarm Loss</span>
-                    </div>
-                    <div class="bento-card" style="padding: 12px; text-align: center;">
-                        <span style="color: #a7f3d0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Cooperation ROI</span>
-                        <div style="color: #fde68a; font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 800; margin-top: 2px;">₹ {saved_value:,.0f} / Ac</div>
-                        <span style="color: #fde68a; font-size: 0.7rem;">Saved Input Cost</span>
-                    </div>
-                    <div class="bento-card" style="padding: 12px; text-align: center;">
-                        <span style="color: #a7f3d0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">Early Warning</span>
-                        <div style="color: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 800; margin-top: 2px;">{lead_days} Days</div>
-                        <span style="color: #6ee7b7; font-size: 0.7rem;">Advance Notice</span>
-                    </div>
-                    <div class="bento-card" style="padding: 12px; text-align: center;">
-                        <span style="color: #a7f3d0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">DPG Protocol Node</span>
-                        <div style="color: #10b981; font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 800; margin-top: 2px;">Ack 200 OK</div>
-                        <span style="color: #6ee7b7; font-size: 0.7rem;">Federated Telemetry</span>
-                    </div>
-                </div>
-            </body>
-            </html>
-            """
-            components.html(radar_html, height=420)
-
-            st.info(f"🌿 **Prescribed Mutual Defense Protocol:** {shield_action}")
-
-            import urllib.parse
-            sim_wa_text = (
-                f"🚨 *KisanSetu Inter-State Pest Drift Early Warning*\n"
-                f"⚠️ *Pest Threat:* {pest_name}\n"
-                f"📍 *Vector Corridor:* {origin_zone} ➔ {target_zone}\n"
-                f"⏳ *Early Warning Lead:* {lead_days} Days Advance Notice ({sim_wind} km/day wind vector)\n"
-                f"💰 *Cooperation Dividend:* Saves ₹{saved_value:,.0f}/acre in avoided chemical spray!\n"
-                f"🛡️ *Preemptive Action:* {shield_action}\n"
-                f"✅ *Inter-State Bio-Defense Network (AgriStack & Beckn Protocol)*"
-            )
-            sim_wa_url = f"https://api.whatsapp.com/send?text={urllib.parse.quote(sim_wa_text)}"
-            st.markdown(f"""
-            <div style="margin-top: 10px; margin-bottom: 8px;">
-                <a href="{sim_wa_url}" target="_blank" style="text-decoration: none;">
-                    <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 10px 16px; border-radius: 12px; font-weight: 800; font-size: 0.84rem; text-align: center; max-width: 460px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35); display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                        <span>💬</span> Share Inter-State Warning Alert to WhatsApp
-                    </div>
-                </a>
+    # 2. Sleek Visual Bento Threat Card (Short, Crisp, Actionable)
+    render_clean_html(f"""
+    <div style="background: linear-gradient(145deg, #091a13 0%, #04120c 100%); border: 1.5px solid rgba(52, 211, 153, 0.35); border-radius: 16px; padding: 18px 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.4); margin-bottom: 12px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; border-bottom: 1px solid rgba(52, 211, 153, 0.15); padding-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="background: {threat_badge_bg}; border: 1.5px solid {threat_border}; color: {threat_color}; font-size: 0.74rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px;">
+                    {threat_level}
+                </span>
+                <span style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">🐛 {pest_name}</span>
             </div>
-            """, unsafe_allow_html=True)
+            <div style="background: rgba(239, 68, 68, 0.18); border: 1px solid #ef4444; border-radius: 20px; padding: 4px 12px; font-family: monospace; font-size: 0.8rem; font-weight: 800; color: #fca5a5;">
+                ⏳ ETA TO BORDER: {lead_days} DAYS ({lead_days*24:.0f} HRS)
+            </div>
+        </div>
 
-    # 3. Live Pan-India Agro-News & Breaking Bulletins (Dynamic Real-Time Surveillance Engine)
+        <div style="background: rgba(3, 16, 10, 0.9); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 10px; padding: 10px 14px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; font-size: 0.84rem; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="color: #fca5a5; font-weight: 700;">🔴 Origin:</span>
+                <span style="color: #ffffff;">{origin_zone}</span>
+            </div>
+            <div style="color: #34d399; font-weight: 800; font-family: monospace;">
+                ━━━━ 💨 {sim_wind} km/day Wind ({distance_km} km) ━━━━►
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="color: #6ee7b7; font-weight: 700;">🟢 Target:</span>
+                <span style="color: #ffffff; font-weight: 700;">{target_zone}</span>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 12px;">
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 10px; padding: 10px 12px;">
+                <div style="font-size: 0.7rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">Target Crop</div>
+                <div style="font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-top: 2px;">🌱 {pest_crop}</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 10px; padding: 10px 12px;">
+                <div style="font-size: 0.7rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">Defense Window</div>
+                <div style="font-size: 0.95rem; font-weight: 800; color: #34d399; margin-top: 2px;">🛡️ {lead_days} Days Advance Notice</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 10px; padding: 10px 12px;">
+                <div style="font-size: 0.7rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">Farmer Benefit / Acre</div>
+                <div style="font-size: 0.95rem; font-weight: 800; color: #fde68a; margin-top: 2px;">💰 ₹{saved_value:,.0f} Protected</div>
+            </div>
+        </div>
+
+        <div style="background: rgba(16, 185, 129, 0.15); border: 1.5px solid #10b981; border-radius: 10px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px;">
+            <span style="font-size: 1.25rem; line-height: 1;">🛡️</span>
+            <div>
+                <div style="font-size: 0.75rem; color: #6ee7b7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Immediate Farmer Action Mandate:</div>
+                <div style="font-size: 0.88rem; color: #ecfdf5; font-weight: 700; margin-top: 2px; line-height: 1.4;">{shield_action}</div>
+            </div>
+        </div>
+    </div>
+    """)
+
+    # 1-Tap WhatsApp Alert Dispatcher
+    import urllib.parse
+    sim_wa_text = (
+        f"🚨 *KisanSetu Inter-State Pest Drift Early Warning*\n"
+        f"⚠️ *Pest Threat:* {pest_name}\n"
+        f"📍 *Vector Corridor:* {origin_zone} ➔ {target_zone}\n"
+        f"⏳ *Early Warning Lead:* {lead_days} Days Advance Notice ({sim_wind} km/day wind vector)\n"
+        f"💰 *Cooperation Dividend:* Saves ₹{saved_value:,.0f}/acre in avoided chemical spray!\n"
+        f"🛡️ *Preemptive Action:* {shield_action}\n"
+        f"✅ *Inter-State Bio-Defense Network (AgriStack & Beckn Protocol)*"
+    )
+    sim_wa_url = f"https://api.whatsapp.com/send?text={urllib.parse.quote(sim_wa_text)}"
+    st.markdown(f"""
+    <div style="margin: 4px 0 16px 0;">
+        <a href="{sim_wa_url}" target="_blank" style="text-decoration: none;">
+            <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 10px 18px; border-radius: 12px; font-weight: 800; font-size: 0.86rem; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
+                <span>💬</span> Share Regional Warning to Village WhatsApp Group
+            </div>
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # 3. Live Pan-India Agro-News & Breaking Bulletins (Inside clean expander)
     now_dt = datetime.datetime.now()
     now_time_str = now_dt.strftime("%I:%M:%S %p IST")
     is_ta = "Tamil" in app_lang_choice
-
-    col_news_head, col_news_refresh = st.columns([3.2, 1.4])
-    with col_news_head:
-        news_header_title = "📢 நேரடி வேளாண் உளவு & மாநிலங்களுக்கிடையேயான அவசர அறிவிப்புகள்" if is_ta else "📢 LIVE AGRO-NEWS & INTER-STATE BREAKING BULLETINS"
-        st.markdown(f"""
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
-            <span style="display: inline-block; width: 12px; height: 12px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 12px #ef4444;"></span>
-            <b style="color: #ffffff; font-size: 1.15rem; letter-spacing: 0.3px;">{news_header_title}</b>
-        </div>
-        <div style="font-size: 0.78rem; color: #a7f3d0; margin-left: 22px;">
-            ● 24/7 SURVEILLANCE FEED • <span style="color: #34d399; font-weight: 700;">📡 Live Telemetry Synced: {now_time_str}</span>
-        </div>
-        """, unsafe_allow_html=True)
-    with col_news_refresh:
-        refresh_btn_text = "🔄 ரேடார் தகவலை புதுப்பிக்கவும்" if is_ta else "🔄 Pulse Live Radar Telemetry"
-        if st.button(refresh_btn_text, key="pulse_news_radar_btn", use_container_width=True):
-            st.rerun()
-
-    st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
 
     # Dynamic Telemetry Parameters (Recalculated on every refresh)
     w_kerala = random.randint(24, 38)
@@ -3822,70 +3737,54 @@ with st.container():
             "title": f"காவிரி ஆற்றுப்படுகை குருத்துப்பூச்சி மற்றும் தண்டு அழுகல் கூட்டு கண்காணிப்பு ({w_karnataka} km/நாள்)" if is_ta else f"Cauvery Riverine Vector Watch: Yellow Stem Borer Larval Drift ({w_karnataka} km/day)",
             "desc": f"மண்டியா-சாம்ராஜ்நகர் வாய்க்கால் பாசனப் பகுதிகளில் குருத்துப்பூச்சி பெருக்கம் கண்காணிக்கப்பட்டு பவானிசாகர் படுகை விவசாயிகளுக்கு முன்னெச்சரிக்கை வழங்கப்பட்டுள்ளது." if is_ta else f"Canal flow and wind drafts along Mandya-Chamarajanagar vector corridor drifting toward Bhavanisagar & Erode at {w_karnataka} km/day. Coordinated field monitoring active.",
             "action": "நாற்று நடும் முன் நுனிகளைக் கிள்ளி நடவும்; மண்புழு உரம் மற்றும் பொட்டாஷ் சத்தை இயற்கை முறையில் வழங்கவும்." if is_ta else "Maintain balanced organic potassium; clip seedling tips before transplanting."
-        },
-        {
-            "id": "maha_telangana",
-            "state_key": "maharashtra",
-            "urgency": "warning",
-            "badge": "⚠️ பூச்சி எச்சரிக்கை" if is_ta else "⚠️ VECTOR SURVEILLANCE",
-            "badge_class": "news-badge-amber",
-            "time": "2 hours ago" if not is_ta else "2 மணி நேரத்திற்கு முன்",
-            "corridor": "மகாராஷ்டிரா (வித்தர்பா) ➔ தெலுங்கானா (ஆதிலாபாத்)" if is_ta else "Maharashtra (Vidarbha) ➔ Telangana (Adilabad)",
-            "title": f"பருத்தி காய்ப்புழு & கருப்பு இலைப்பேன் எல்லைப்புற பரவல் எச்சரிக்கை ({w_maha} km/நாள்)" if is_ta else f"Pink Bollworm & Black Thrips Cloud across Adilabad & Nizamabad Border ({w_maha} km/day)",
-            "desc": f"வித்தர்பா பருத்தி காடுகளிலிருந்து காற்று மூலம் இலைப்பேன்கள் {w_maha} km/நாள் வேகத்தில் தெலுங்கானா எல்லை மாவட்டங்களுக்குள் பரவுகின்றன." if is_ta else f"Nocturnal winds carrying invasive Thrips parvispinus swarms at {w_maha} km/day across border cotton and chilli acreage.",
-            "action": "ஏக்கருக்கு 25 நீல ஒட்டும் பொறிகளை கட்டவும்; அக்னியாஸ்திரம் தெளிக்கவும்." if is_ta else "Install blue sticky traps at 25/acre; spray Agniastram bio-repellent."
-        },
-        {
-            "id": "dpg_seeds",
-            "state_key": "madhya pradesh",
-            "urgency": "normal",
-            "badge": "🌱 தேசிய DPG ஒப்பந்தம்" if is_ta else "🌱 GENETICS ACCORD",
-            "badge_class": "news-badge-green",
-            "time": "3.5 hours ago" if not is_ta else "3.5 மணி நேரத்திற்கு முன்",
-            "corridor": "மத்திய பிரதேசம் ➔ உத்திர பிரதேசம் & பீகார்" if is_ta else "Madhya Pradesh ➔ Uttar Pradesh & Bihar",
-            "title": f"தேசிய டிஜிட்டல் பொது உள்கட்டமைப்பு: வறட்சி தாங்கும் விதை மரபணு பகிர்வு" if is_ta else f"National DPG Seed Accord: Climate-Resilient Chickpea & Mustard Lines Shared",
-            "desc": f"குவாலியர் வேளாண் பல்கலைக்கழகம் Beckn DPG நெறிமுறை மூலம் வறட்சி தாங்கும் உளுந்து மற்றும் கடுகு விதைகளை பூர்வாஞ்சல் ஆராய்ச்சி நிலையங்களுக்கு பகிர்ந்தது." if is_ta else f"RVSKVV Gwalior transfers drought-hardy, bio-fortified parent seed genetics via Beckn DPG protocol to Purvanchal and Mithila research stations for Rabi season planning.",
-            "action": "விவசாய உற்பத்தியாளர் அமைப்புகள் (FPO) அருகிலுள்ள KVK மையங்களில் முன்பதிவு செய்யலாம்." if is_ta else "Farmer FPOs can pre-book open-source foundation seeds at local KVK centres."
         }
     ]
 
-    # Select dynamic order, prioritizing active user state if selected
     active_st = (active_location.get("state", "") if active_location else "").lower()
     matching_items = [it for it in pool_items if it.get("state_key") in active_st] if active_st else []
     non_matching = [it for it in pool_items if it not in matching_items]
     random.shuffle(non_matching)
-    
-    final_news_items = (matching_items + non_matching)[:5]
+    final_news_items = (matching_items + non_matching)[:4]
 
-    action_label = "🌾 உடனடி விவசாயி நடவடிக்கை:" if is_ta else "🌾 Immediate Farmer Action:"
-    for item in final_news_items:
-        urgent_class = "news-card-urgent" if item["urgency"] == "urgent" else ("news-card-warning" if item["urgency"] == "warning" else "")
-        st.markdown(f"""
-        <div class="news-card {urgent_class}">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span class="{item['badge_class']}">{item['badge']}</span>
-                    <span style="color: #6ee7b7; font-size: 0.8rem; font-weight: 700;">📍 {item['corridor']}</span>
+    news_expander_title = "📢 நேரடி வேளாண் உளவு & மாநில எச்சரிக்கை அறிக்கைகள் (விரிவுபடுத்த சொடுக்கவும்)" if is_ta else "📢 Live Pan-India Agro-News & Regional Breaking Bulletins (Click to Expand)"
+    with st.expander(news_expander_title, expanded=False):
+        col_news_head, col_news_refresh = st.columns([3.2, 1.4])
+        with col_news_head:
+            st.markdown(f"""
+            <div style="font-size: 0.78rem; color: #a7f3d0; margin-bottom: 8px;">
+                ● 24/7 SURVEILLANCE FEED • <span style="color: #34d399; font-weight: 700;">📡 Live Telemetry Synced: {now_time_str}</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with col_news_refresh:
+            refresh_btn_text = "🔄 புதுப்பிக்கவும்" if is_ta else "🔄 Refresh Telemetry"
+            if st.button(refresh_btn_text, key="pulse_news_radar_btn", use_container_width=True):
+                st.rerun()
+
+        action_label = "🌾 உடனடி விவசாயி நடவடிக்கை:" if is_ta else "🌾 Immediate Farmer Action:"
+        for item in final_news_items:
+            urgent_class = "news-card-urgent" if item["urgency"] == "urgent" else ("news-card-warning" if item["urgency"] == "warning" else "")
+            st.markdown(f"""
+            <div class="news-card {urgent_class}" style="margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="{item['badge_class']}">{item['badge']}</span>
+                        <span style="color: #6ee7b7; font-size: 0.8rem; font-weight: 700;">📍 {item['corridor']}</span>
+                    </div>
+                    <span style="color: #a7f3d0; font-size: 0.75rem; opacity: 0.85;">⏱️ {item['time']}</span>
                 </div>
-                <span style="color: #a7f3d0; font-size: 0.75rem; opacity: 0.85;">⏱️ {item['time']}</span>
+                <div style="color: #ffffff; font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; line-height: 1.35;">
+                    {item['title']}
+                </div>
+                <div style="color: #d1fae5; font-size: 0.84rem; line-height: 1.45; margin-bottom: 6px;">
+                    {item['desc']}
+                </div>
+                <div style="background: rgba(0, 0, 0, 0.25); border-radius: 8px; padding: 6px 12px; font-size: 0.8rem; color: #fde68a;">
+                    <b>{action_label}</b> {item['action']}
+                </div>
             </div>
-            <div style="color: #ffffff; font-weight: 700; font-size: 1rem; margin-bottom: 6px; line-height: 1.4;">
-                {item['title']}
-            </div>
-            <div style="color: #d1fae5; font-size: 0.88rem; line-height: 1.55; margin-bottom: 8px;">
-                {item['desc']}
-            </div>
-            <div style="background: rgba(0, 0, 0, 0.25); border-radius: 8px; padding: 6px 12px; font-size: 0.82rem; color: #fde68a;">
-                <b>{action_label}</b> {item['action']}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
-    st.markdown("---")
-    st.subheader("🌐 Pan-India Inter-State Bio-Surveillance Corridors (All 28 States & UTs)")
-    st.caption("Select any agricultural corridor to inspect live radar telemetry, vector drift rates, and mutual defense pacts.")
-
-    # All Pan-India Corridors Covering All States
+    # 4. Pan-India 11 Inter-State Bio-Surveillance Directory (Inside clean expander)
     corridors = {
         "Corridor 1: Andhra Pradesh (Rayalaseema) ➔ Tamil Nadu (North Arcot)": {
             "origin": "Anantapur & Chittoor, Andhra Pradesh",
@@ -3988,55 +3887,39 @@ with st.container():
         }
     }
 
-    selected_corridor_key = st.selectbox("Select Active Inter-State Surveillance Corridor:", list(corridors.keys()))
-    selected_c = corridors[selected_corridor_key]
+    with st.expander("🌐 Pan-India Inter-State Bio-Surveillance Directory (All 28 States & UTs)", expanded=False):
+        st.caption("Select any agricultural corridor to inspect live radar telemetry, vector drift rates, and mutual defense pacts.")
+        selected_corridor_key = st.selectbox("Select Active Inter-State Surveillance Corridor:", list(corridors.keys()), key="full_corridor_dir_select")
+        selected_c = corridors[selected_corridor_key]
 
-    c_col1, c_col2, c_col3 = st.columns(3)
-    with c_col1:
-        st.metric("🚨 Early Warning Threat", selected_c["threat_level"].split()[0] + " " + selected_c["threat_level"].split()[1])
-    with c_col2:
-        st.metric("🐛 Pathogen / Pest Vector", selected_c["pest"].split("(")[0])
-    with c_col3:
-        st.metric("💨 Vector Drift Rate", selected_c["vector_speed"])
+        c_col1, c_col2, c_col3 = st.columns(3)
+        with c_col1:
+            st.metric("🚨 Early Warning Threat", selected_c["threat_level"].split()[0] + " " + selected_c["threat_level"].split()[1])
+        with c_col2:
+            st.metric("🐛 Pathogen / Pest Vector", selected_c["pest"].split("(")[0])
+        with c_col3:
+            st.metric("💨 Vector Drift Rate", selected_c["vector_speed"])
 
-    with st.container(border=True):
         st.markdown(f"""
-        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid rgba(52, 211, 153, 0.35); padding-bottom: 10px; margin-bottom: 14px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.8rem;">🛰️</span>
-                <div>
-                    <h3 style="margin: 0; padding: 0; border: none; font-size: 1.2rem; color: #a7f3d0;">CROSS-STATE SURVEILLANCE & VECTOR PROFILE</h3>
-                    <span style="font-size: 0.8rem; color: #6ee7b7;">Inter-State Bio-Corridor Early Warning Protocol</span>
+        <div style="background: rgba(5, 30, 20, 0.6); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 12px; padding: 12px; margin: 10px 0;">
+            <div style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 8px;">
+                <div style="text-align: center;">
+                    <span style="color: #a7f3d0; font-size: 0.74rem; font-weight: 700; text-transform: uppercase;">📍 Origin</span>
+                    <div style="color: #ffffff; font-weight: 800; font-size: 0.9rem;">{selected_c['origin']}</div>
+                </div>
+                <div style="color: #fde68a; font-size: 1.2rem;">➔ 💨 ➔</div>
+                <div style="text-align: center;">
+                    <span style="color: #fca5a5; font-size: 0.74rem; font-weight: 700; text-transform: uppercase;">🛡️ Target Downstream</span>
+                    <div style="color: #ffffff; font-weight: 800; font-size: 0.9rem;">{selected_c['destination']}</div>
                 </div>
             </div>
-            <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; font-size: 0.74rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;">BIO-SECURITY ALERT</span>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Route visual flow
-        st.markdown(f"""
-        <div style="display: flex; align-items: center; justify-content: space-around; background: rgba(5, 30, 20, 0.6); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
-            <div style="text-align: center;">
-                <span style="color: #a7f3d0; font-size: 0.76rem; font-weight: 700; text-transform: uppercase;">📍 Origin State</span>
-                <div style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">{selected_c['origin']}</div>
-            </div>
-            <div style="color: #fde68a; font-size: 1.4rem;">➔ 💨 ➔</div>
-            <div style="text-align: center;">
-                <span style="color: #fca5a5; font-size: 0.76rem; font-weight: 700; text-transform: uppercase;">🛡️ Target Downstream</span>
-                <div style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">{selected_c['destination']}</div>
+            <div style="margin-top: 10px; font-size: 0.85rem; color: #d1fae5; line-height: 1.5;">
+                • <b>Collaborating Universities:</b> {selected_c['participating_orgs']}<br>
+                • <b>Mandatory Field Action:</b> {selected_c['action']}
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-        st.markdown(f"""
-        * **Originating Region:** `{selected_c['origin']}`
-        * **Downstream Target Region:** `{selected_c['destination']}`
-        * **Target Crop Pest / Pathogen:** **{selected_c['pest']}**
-        * **Collaborating State Research Universities:** `{selected_c['participating_orgs']}`
-        * **Immediate Field Mandate for Target Farmers:** {selected_c['action']}
-        """)
-
-        import urllib.parse
         corridor_wa_text = (
             f"🚨 *KisanSetu Pan-India Bio-Security Alert*\n"
             f"📍 *Corridor:* {selected_c['origin']} ➔ {selected_c['destination']}\n"
@@ -4048,26 +3931,26 @@ with st.container():
         )
         corridor_wa_url = f"https://api.whatsapp.com/send?text={urllib.parse.quote(corridor_wa_text)}"
         st.markdown(f"""
-        <div style="margin-top: 10px; margin-bottom: 8px;">
+        <div style="margin-top: 8px;">
             <a href="{corridor_wa_url}" target="_blank" style="text-decoration: none;">
-                <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 10px 16px; border-radius: 12px; font-weight: 800; font-size: 0.84rem; text-align: center; max-width: 480px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35); display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                    <span>💬</span> Share Corridor Bio-Security Alert to WhatsApp
+                <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 8px 14px; border-radius: 10px; font-weight: 700; font-size: 0.8rem; text-align: center; display: inline-flex; align-items: center; gap: 6px;">
+                    <span>💬</span> Share Corridor Alert to WhatsApp
                 </div>
             </a>
         </div>
         """, unsafe_allow_html=True)
 
-    # Clean DPG Interoperability Trust Card (No raw code clutter)
+    # 5. Clean DPG Interoperability Trust Card
     st.markdown("""
-    <div style="margin-top: 22px; padding: 14px 20px; background: rgba(6, 42, 28, 0.55); border: 1.5px solid rgba(52, 211, 153, 0.35); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="font-size: 1.4rem;">🏛️</span>
+    <div style="margin-top: 16px; padding: 12px 18px; background: rgba(6, 42, 28, 0.55); border: 1.5px solid rgba(52, 211, 153, 0.35); border-radius: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3rem;">🏛️</span>
             <div>
-                <div style="color: #ffffff; font-weight: 800; font-size: 0.92rem;">National Digital Public Good Interoperability</div>
-                <div style="color: #a7f3d0; font-size: 0.78rem;">Fully compliant with India AgriStack, Beckn Protocol & Open Database License (ODbL)</div>
+                <div style="color: #ffffff; font-weight: 800; font-size: 0.88rem;">National Digital Public Good Interoperability</div>
+                <div style="color: #a7f3d0; font-size: 0.76rem;">Compliant with India AgriStack, Beckn Protocol & Open Database License (ODbL)</div>
             </div>
         </div>
-        <span style="background: rgba(16, 185, 129, 0.25); border: 1px solid #10b981; color: #a7f3d0; padding: 5px 14px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.5px;">● CERTIFIED DPG CANDIDATE</span>
+        <span style="background: rgba(16, 185, 129, 0.25); border: 1px solid #10b981; color: #a7f3d0; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 800;">● CERTIFIED DPG</span>
     </div>
     """, unsafe_allow_html=True)
 
