@@ -1,5 +1,5 @@
 """
-AgriN-Connect (KisanSetu AI) — Advanced Architectural UI Suite
+AgriN-Connect — Advanced Architectural UI Suite (Team Nexyra)
 - Bento-Grid & Design Token components
 - Interactive Tactile Split-Studio Leaf Inspection Suite (Split slider, JET thermal heatmap, hotspots, raw)
 - Dual Animated SVG Radial Biometric Gauges (Model Certainty %, Foliar Infection Loss %)
@@ -1661,7 +1661,7 @@ def render_vernacular_voice_query_mic(bcp_code="ta-IN", lang_title="Tamil"):
             <div style="display: flex; align-items: center; gap: 10px;">
                 <button class="mic-btn" id="micBtn" onclick="toggleVoiceInput()">
                     <span id="micIcon">🎙️</span>
-                    <span id="micText">Pesi Kaelungal / Ask KisanSetu ({lang_title})</span>
+                    <span id="micText">Pesi Kaelungal / Ask AgriN-Connect ({lang_title})</span>
                 </button>
             </div>
             <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #34d399; background: rgba(52, 211, 153, 0.15); padding: 3px 8px; border-radius: 6px;">
@@ -1729,7 +1729,7 @@ def render_vernacular_voice_query_mic(bcp_code="ta-IN", lang_title="Tamil"):
     function stopRec() {{
         isRecording = false;
         micBtn.classList.remove('recording');
-        micText.innerText = 'Pesi Kaelungal / Ask KisanSetu ({lang_title})';
+        micText.innerText = 'Pesi Kaelungal / Ask AgriN-Connect ({lang_title})';
     }}
 
     function toggleVoiceInput() {{
