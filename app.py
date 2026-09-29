@@ -128,7 +128,7 @@ TRANSLATIONS = {
         "metric_ndvi": "🛰️ Sentinel NDVI Index",
         "soil_title": "🌾 Soil Health & Climate-Resilient Rotation Engine",
         "soil_calc_btn": "🌱 Calculate Data-Fused Regenerative Rotation Plan",
-        "grid_title": "🇮🇳 KisanSetu: National Inter-State Agro-Intelligence Network",
+        "grid_title": "🇮🇳 AgriN-Connect: National Inter-State Agro-Intelligence Network",
         "grid_desc": "Digital Public Good (DPG) enabling all 28 Indian States & UTs to share real-time pest radar, disease surveillance, and climate-resilient seed models.",
         "sim_btn": "🚀 Run Live Inter-State Drift & Early Warning Simulation"
     },
@@ -706,7 +706,7 @@ def get_live_open_meteo_weather(lat: float, lon: float):
 
 # --- Page Configuration ---
 st.set_page_config(
-    page_title="AgriN-Connect | KisanSetu AI",
+    page_title="AgriN-Connect | Team Nexyra",
     page_icon="🌾",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -1344,7 +1344,7 @@ STATE_DISTRICTS = {
     }
 }
 
-# --- Sidebar: Modern KisanSetu Command Center ---
+# --- Sidebar: Modern AgriN-Connect Command Center ---
 with st.sidebar:
     # 1. Custom Emblem Brand Header with Professional Nexyra Team Logo
     if nexyra_logo_b64:
@@ -1358,8 +1358,8 @@ with st.sidebar:
         <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 20px; padding: 3px 12px; margin-bottom: 8px;">
             <span style="font-size: 0.68rem; font-weight: 800; color: #fde68a; letter-spacing: 1.2px; text-transform: uppercase;">⚡ TEAM NEXYRA</span>
         </div>
-        <div style="font-weight: 800; font-size: 1.35rem; color: #ffffff; letter-spacing: -0.3px;">KisanSetu DPI</div>
-        <div style="font-size: 0.74rem; color: #a7f3d0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;">National Agri-Intelligence Grid</div>
+        <div style="font-weight: 800; font-size: 1.35rem; color: #ffffff; letter-spacing: -0.3px;">AgriN-Connect</div>
+        <div style="font-size: 0.74rem; color: #a7f3d0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;">Smart Agriculture Intelligence</div>
     </div>
     """)
 
@@ -2561,7 +2561,7 @@ At the very end of your response, write these exact metadata tags:
 
         import urllib.parse
         wa_text = (
-            f"🌾 *AgriN-Connect (KisanSetu) Field Diagnostic Advisory*\n"
+            f"🌾 *AgriN-Connect (Team Nexyra) Field Diagnostic Advisory*\n"
             f"📍 *Location:* {loc_diag_name} ({state_diag_name})\n"
             f"🌱 *Crop:* {diag['crop']}\n"
             f"🔬 *Diagnosis:* {diag['disease']}\n"
@@ -2708,7 +2708,7 @@ At the very end of your response, write these exact metadata tags:
                 f"⚠️ *Active Outbreak Confirmed:* {diag['disease']} detected in {diag['crop']} within our {fence_radius} km cluster!\n"
                 f"🛡️ *Immediate Cooperative Action:* Spore risk is elevated for next 48h. Do NOT wait for symptoms! Apply preventive ZBNF Neemastram or 5% Sour Buttermilk foliar barrier today.\n"
                 f"🌿 *Prescribed Bio-Shield:* {diag['remedy']}\n"
-                f"👥 *Protected Cluster:* {farmers_count} neighboring farmers & {acres_covered:.0f} acres united under KisanSetu Community Mesh (DPG)"
+                f"👥 *Protected Cluster:* {farmers_count} neighboring farmers & {acres_covered:.0f} acres united under AgriN-Connect Community Mesh (Team Nexyra)"
             )
             comm_wa_url = f"https://api.whatsapp.com/send?text={urllib.parse.quote(community_wa_text)}"
 
@@ -2786,7 +2786,7 @@ At the very end of your response, write these exact metadata tags:
             loc_zbnf_name = active_location.get('name', selected_district) if active_location else 'Local Agro-Zone'
             import urllib.parse
             zbnf_wa_text = (
-                f"🌿 *KisanSetu ZBNF Natural Bio-Recipe & Cost Savings*\n"
+                f"🌿 *AgriN-Connect (Team Nexyra) ZBNF Natural Bio-Recipe & Cost Savings*\n"
                 f"📍 *Location:* {loc_zbnf_name}\n"
                 f"🧪 *Jeevamrutha (1 Acre):* 10kg Cow Dung + 10L Urine + 2kg Jaggery + 2kg Besan in 200L water (Ferment 48h)\n"
                 f"🍃 *Neemastram Spray:* 5kg crushed Neem leaves/seeds + 5L Urine + 2kg Dung in 100L water\n"
@@ -3040,7 +3040,7 @@ Provide actionable step-by-step numbered instructions.
                 f"📍 *Location:* {kva['location']}\n"
                 f"❓ *Query:* {kva['question']}\n"
                 f"💡 *Advisory:* {clean_ans}...\n"
-                f"✅ *Digital Public Good — KisanSetu AI*"
+                f"✅ *Digital Public Good — AgriN-Connect (Team Nexyra)*"
             )
             helpline_wa_url = f"https://api.whatsapp.com/send?text={urllib.parse.quote(helpline_wa_text)}"
             
@@ -3481,7 +3481,7 @@ Detail:
             # 1-Click WhatsApp Share for Soil Health & Rotation Plan
             import urllib.parse
             soil_wa_text = (
-                f"🌾 *KisanSetu Regenerative Soil & Crop Rotation Plan*\n"
+                f"🌾 *AgriN-Connect Regenerative Soil & Crop Rotation Plan*\n"
                 f"📍 *Location:* {sd['district']} ({sd['state']})\n"
                 f"🧪 *Soil Class:* {sd['soil_type']}\n"
                 f"📊 *Soil Parameters:* N={sd['n']}, P={sd['p']}, K={sd['k']} kg/ha | pH={sd['ph']}\n"
@@ -3677,13 +3677,13 @@ with st.container():
     # 1-Tap WhatsApp Alert Dispatcher
     import urllib.parse
     sim_wa_text = (
-        f"🚨 *KisanSetu Inter-State Pest Drift Early Warning*\n"
+        f"🚨 *AgriN-Connect Inter-State Pest Drift Alert*\n"
         f"⚠️ *Pest Threat:* {pest_name}\n"
         f"📍 *Vector Corridor:* {origin_zone} ➔ {target_zone}\n"
         f"⏳ *Early Warning Lead:* {lead_days} Days Advance Notice ({sim_wind} km/day wind vector)\n"
         f"💰 *Cooperation Dividend:* Saves ₹{saved_value:,.0f}/acre in avoided chemical spray!\n"
         f"🛡️ *Preemptive Action:* {shield_action}\n"
-        f"✅ *Inter-State Bio-Defense Network (AgriStack & Beckn Protocol)*"
+        f"✅ *Team Nexyra — National Agri-Intelligence Grid*"
     )
     sim_wa_url = f"https://api.whatsapp.com/send?text={urllib.parse.quote(sim_wa_text)}"
     st.markdown(f"""
@@ -3696,143 +3696,7 @@ with st.container():
     </div>
     """, unsafe_allow_html=True)
 
-    # 3. Live Pan-India Agro-News & Breaking Bulletins (Inside clean expander)
-    now_dt = datetime.datetime.now()
-    now_time_str = now_dt.strftime("%I:%M:%S %p IST")
-    is_ta = "Tamil" in app_lang_choice
-
-    # Live Regional Telemetry for News Bulletins (Direct from Open-Meteo Stations)
-    tel_kerala = get_live_open_meteo_weather(10.7867, 76.6548)
-    tel_punjab = get_live_open_meteo_weather(30.2110, 74.9455)
-    tel_ap = get_live_open_meteo_weather(13.2172, 79.1003)
-    tel_gujarat = get_live_open_meteo_weather(22.3039, 70.8022)
-
-    w_kerala = round(max(18.0, tel_kerala.get("current", {}).get("wind_speed_10m", 12.0) * 2.4), 1) if tel_kerala else 28.0
-    h_kerala = int(tel_kerala.get("current", {}).get("relative_humidity_2m", 82)) if tel_kerala else 82
-    w_punjab = round(max(20.0, tel_punjab.get("current", {}).get("wind_speed_10m", 14.0) * 2.4), 1) if tel_punjab else 32.0
-    d_punjab = 48
-    w_ap = round(max(18.0, tel_ap.get("current", {}).get("wind_speed_10m", 11.0) * 2.4), 1) if tel_ap else 26.0
-    m_ap = 24
-    s_gujarat = 380
-    w_gujarat = round(max(18.0, tel_gujarat.get("current", {}).get("wind_speed_10m", 13.0) * 2.4), 1) if tel_gujarat else 30.0
-    w_karnataka = 22.0
-    w_maha = 25.0
-    h_odisha = 88
-
-    t_0 = ("இப்போது • " if is_ta else "Just now • ") + now_dt.strftime("%I:%M %p")
-    t_1 = ("15 நிமிடங்களுக்கு முன் • " if is_ta else "15 mins ago • ") + (now_dt - datetime.timedelta(minutes=15)).strftime("%I:%M %p")
-    t_2 = ("42 நிமிடங்களுக்கு முன் • " if is_ta else "42 mins ago • ") + (now_dt - datetime.timedelta(minutes=42)).strftime("%I:%M %p")
-    t_3 = ("1.5 மணி நேரத்திற்கு முன்" if is_ta else "1.5 hours ago")
-    t_4 = ("3 மணி நேரத்திற்கு முன்" if is_ta else "3 hours ago")
-
-    pool_items = [
-        {
-            "id": "kerala_tn",
-            "state_key": "tamil nadu",
-            "urgency": "urgent",
-            "badge": "🚨 அவசர பிரேக்கிங்" if is_ta else "🚨 BREAKING FLASH",
-            "badge_class": "news-badge-red",
-            "time": t_0,
-            "corridor": "கேரளா ➔ தமிழ்நாடு (பாலக்காடு கணவாய் வழித்தடம்)" if is_ta else "Kerala ➔ Tamil Nadu (Palakkad Gap)",
-            "title": f"பழுப்பு புகையான் தீவிரம்: தென்மேற்கு பருவக்காற்றால் கோவை & ஈரோடு நோக்கி {w_kerala} km/நாள் வேகத்தில் நகர்வு" if is_ta else f"Brown Plant Hopper Surge: SW Monsoon Winds pushing hopper vectors toward Coimbatore & Erode at {w_kerala} km/day",
-            "desc": f"பாலக்காடு மற்றும் வயநாடு ஈரநிலங்களில் அதிக ஈரப்பதம் (>{h_kerala}%) காரணமாக புகையான் பூச்சிகள் வேகமாக பெருகி வருகின்றன. காற்று திசைவேகம் {w_kerala} km/நாள். TNAU ஆடுதுறை உடனடியாக பயிரில் நீரை வடித்து உலர வைக்க எச்சரித்துள்ளது." if is_ta else f"Heavy relative humidity (>{h_kerala}%) in Palakkad & Wayanad wetlands triggered rapid BPH multiplier. Vectors drift East at {w_kerala} km/day. TNAU Aduthurai alerts Cauvery Delta farmers to implement Alternate Wetting & Drying immediately.",
-            "action": "அதிகப்படியான இரசாயன யூரியாவை தவிர்க்கவும்; 48 மணி நேரம் வயலில் நீர் தேங்காமல் வடித்து nymph வாழ்க்கை சுழற்சியை உடைக்கவும்." if is_ta else "Avoid excess synthetic urea; drain standing water for 48 hours to break nymph lifecycle."
-        },
-        {
-            "id": "punjab_haryana",
-            "state_key": "punjab",
-            "urgency": "urgent",
-            "badge": "🚨 நிலை-1 தீவிர எச்சரிக்கை" if is_ta else "🚨 TIER-1 WARNING",
-            "badge_class": "news-badge-red",
-            "time": t_1,
-            "corridor": "பஞ்சாப் ➔ ஹரியானா ➔ ராஜஸ்தான் பருத்தி மண்டலம்" if is_ta else "Punjab ➔ Haryana ➔ Rajasthan Cotton Belt",
-            "title": f"வெப்பச்சலன பரவல்: பதிண்டா & மான்சா எல்லையில் வெள்ளை ஈ அடர்த்தி தீவிரம் ({d_punjab}/செடி)" if is_ta else f"Thermal Plume Dispersion: Whitefly density surges ({d_punjab}/plant) across Bathinda & Mansa",
-            "desc": f"மால்வா பகுதியில் வீசும் வெப்ப காற்று வெள்ளை ஈ பெருக்கத்தை தூண்டியுள்ளது. பூச்சிக் கூட்டங்கள் {w_punjab} km/நாள் வேகத்தில் சிர்சா, பதேஹாபாத் மற்றும் ஸ்ரீ கங்காநகர் நோக்கி நகர்கின்றன." if is_ta else f"High thermal plumes over Malwa accelerated Whitefly reproduction. Swarms migrating toward Sirsa, Fatehabad, and Sri Ganganagar at {w_punjab} km/day. PAU Ludhiana and CCS HAU Hisar issue synchronized defense alert.",
-            "action": "ஏக்கருக்கு 40 மஞ்சள் ஒட்டும் பொறிகளை கட்டவும்; அதிகாலையில் 5% வேப்பங்கொட்டை சாறு (NSKE) தெளிக்கவும்." if is_ta else "Erect 40 yellow sticky traps per acre; spray 5% Neem seed kernel extract (NSKE) at sunrise."
-        },
-        {
-            "id": "ap_tn",
-            "state_key": "tamil nadu",
-            "urgency": "warning",
-            "badge": "⚠️ எல்லை ரேடார் கண்காணிப்பு" if is_ta else "⚠️ BIO-RADAR WATCH",
-            "badge_class": "news-badge-amber",
-            "time": t_2,
-            "corridor": "ஆந்திரா (ராயலசீமா) ➔ வட தமிழ்நாடு (வேலூர் & திருவண்ணாமலை)" if is_ta else "Andhra Pradesh (Rayalaseema) ➔ Tamil Nadu (North Arcot)",
-            "title": f"மக்காச்சோள படைப்புழு இரவுநேர இடப்பெயர்வு: பாலாற்றுப் படுகையில் எச்சரிக்கை ({w_ap} km/நாள்)" if is_ta else f"Fall Armyworm Nocturnal Migration: Palar River Basin Alert ({w_ap} km/day)",
-            "desc": f"சித்தூர் எல்லையிலிருந்து வேலூர் மற்றும் திருவண்ணாமலை நோக்கி படைப்புழு அந்துப்பூச்சிகள் {w_ap} km/நாள் வேகத்தில் பறந்து வருகின்றன. இனக்கவர்ச்சி பொறிகளில் {m_ap} தாய் அந்துப்பூச்சிகள் சிக்கியுள்ளன." if is_ta else f"Night flight activity detected from Chittoor border toward Vellore & Tiruvannamalai at {w_ap} km/day. Pheromone trap catches exceeded {m_ap} moths/trap. Preemptive bio-agent release active.",
-            "action": "ஏக்கருக்கு 12 இனக்கவர்ச்சி பொறிகளை வரப்புகளில் வைக்கவும்; பயிரின் குருத்துப் பகுதியில் வேப்பம்பிண்ணாக்கு இடவும்." if is_ta else "Install 12 pheromone traps/acre along river basin borders; apply neem cake in leaf whorls."
-        },
-        {
-            "id": "gujarat_rajasthan",
-            "state_key": "gujarat",
-            "urgency": "warning",
-            "badge": "⚠️ பூஞ்சான வித்து ரேடார்" if is_ta else "⚠️ SPORE RADAR WATCH",
-            "badge_class": "news-badge-amber",
-            "time": t_3,
-            "corridor": "குஜராத் ➔ ராஜஸ்தான் தார் பாலைவன விளிம்பு" if is_ta else "Gujarat ➔ Rajasthan Arid Margin",
-            "title": f"நிலக்கடலை டிக்கா இலைப்புள்ளி பூஞ்சான வித்துக்கள் காற்றின் மூலம் பரவல் ({s_gujarat} spores/m³)" if is_ta else f"Groundnut Tikka Spore Drift across Saurashtra into Thar Margin ({s_gujarat} spores/m³)",
-            "desc": f"ராஜ்கோட் பகுதியில் பெய்த மழையால் காற்றில் டிக்கா பூஞ்சான வித்துக்கள் ({s_gujarat} spores/m³) {w_gujarat} km/நாள் வேகத்தில் ஜாலோர் மற்றும் பார்மர் எல்லையை நோக்கி பரவுகின்றன." if is_ta else f"Coastal rain spell over Rajkot triggered Cercospora leaf spot sporulation ({s_gujarat} spores/m³). Wind vectors carrying spores toward Jalore and Barmer at {w_gujarat} km/day.",
-            "action": "புளித்த மோர் கரைசலுடன் பெருங்காயம் கலந்து இலைகளில் அதிகாலையில் தெளிக்கவும்." if is_ta else "Spray sour buttermilk + fermented asafoetida (hing) solution on foliage."
-        },
-        {
-            "id": "karnataka_tn",
-            "state_key": "karnataka",
-            "urgency": "normal",
-            "badge": "🌱 கூட்டு உயிரியல் பாதுகாப்பு" if is_ta else "🌱 BIO-DEFENSE ACCORD",
-            "badge_class": "news-badge-green",
-            "time": t_4,
-            "corridor": "கர்நாடகா (பழைய மைசூர்) ➔ தமிழ்நாடு (பவானி & காவிரி படுகை)" if is_ta else "Karnataka (Old Mysore) ➔ Tamil Nadu (Cauvery Basin)",
-            "title": f"காவிரி ஆற்றுப்படுகை குருத்துப்பூச்சி மற்றும் தண்டு அழுகல் கூட்டு கண்காணிப்பு ({w_karnataka} km/நாள்)" if is_ta else f"Cauvery Riverine Vector Watch: Yellow Stem Borer Larval Drift ({w_karnataka} km/day)",
-            "desc": f"மண்டியா-சாம்ராஜ்நகர் வாய்க்கால் பாசனப் பகுதிகளில் குருத்துப்பூச்சி பெருக்கம் கண்காணிக்கப்பட்டு பவானிசாகர் படுகை விவசாயிகளுக்கு முன்னெச்சரிக்கை வழங்கப்பட்டுள்ளது." if is_ta else f"Canal flow and wind drafts along Mandya-Chamarajanagar vector corridor drifting toward Bhavanisagar & Erode at {w_karnataka} km/day. Coordinated field monitoring active.",
-            "action": "நாற்று நடும் முன் நுனிகளைக் கிள்ளி நடவும்; மண்புழு உரம் மற்றும் பொட்டாஷ் சத்தை இயற்கை முறையில் வழங்கவும்." if is_ta else "Maintain balanced organic potassium; clip seedling tips before transplanting."
-        }
-    ]
-
-    active_st = (active_location.get("state", "") if active_location else "").lower()
-    matching_items = [it for it in pool_items if it.get("state_key") in active_st] if active_st else []
-    non_matching = [it for it in pool_items if it not in matching_items]
-    random.shuffle(non_matching)
-    final_news_items = (matching_items + non_matching)[:4]
-
-    news_expander_title = "📢 நேரடி வேளாண் உளவு & மாநில எச்சரிக்கை அறிக்கைகள் (விரிவுபடுத்த சொடுக்கவும்)" if is_ta else "📢 Live Pan-India Agro-News & Regional Breaking Bulletins (Click to Expand)"
-    with st.expander(news_expander_title, expanded=False):
-        col_news_head, col_news_refresh = st.columns([3.2, 1.4])
-        with col_news_head:
-            st.markdown(f"""
-            <div style="font-size: 0.78rem; color: #a7f3d0; margin-bottom: 8px;">
-                ● 24/7 SURVEILLANCE FEED • <span style="color: #34d399; font-weight: 700;">📡 Live Telemetry Synced: {now_time_str}</span>
-            </div>
-            """, unsafe_allow_html=True)
-        with col_news_refresh:
-            refresh_btn_text = "🔄 புதுப்பிக்கவும்" if is_ta else "🔄 Refresh Telemetry"
-            if st.button(refresh_btn_text, key="pulse_news_radar_btn", use_container_width=True):
-                st.rerun()
-
-        action_label = "🌾 உடனடி விவசாயி நடவடிக்கை:" if is_ta else "🌾 Immediate Farmer Action:"
-        for item in final_news_items:
-            urgent_class = "news-card-urgent" if item["urgency"] == "urgent" else ("news-card-warning" if item["urgency"] == "warning" else "")
-            st.markdown(f"""
-            <div class="news-card {urgent_class}" style="margin-bottom: 10px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span class="{item['badge_class']}">{item['badge']}</span>
-                        <span style="color: #6ee7b7; font-size: 0.8rem; font-weight: 700;">📍 {item['corridor']}</span>
-                    </div>
-                    <span style="color: #a7f3d0; font-size: 0.75rem; opacity: 0.85;">⏱️ {item['time']}</span>
-                </div>
-                <div style="color: #ffffff; font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; line-height: 1.35;">
-                    {item['title']}
-                </div>
-                <div style="color: #d1fae5; font-size: 0.84rem; line-height: 1.45; margin-bottom: 6px;">
-                    {item['desc']}
-                </div>
-                <div style="background: rgba(0, 0, 0, 0.25); border-radius: 8px; padding: 6px 12px; font-size: 0.8rem; color: #fde68a;">
-                    <b>{action_label}</b> {item['action']}
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-    # 4. Pan-India 11 Inter-State Bio-Surveillance Directory (Inside clean expander)
+    # 3. Pan-India 11 Inter-State Bio-Surveillance Directory (Inside clean expander)
     corridors = {
         "Corridor 1: Andhra Pradesh (Rayalaseema) ➔ Tamil Nadu (North Arcot)": {
             "origin": "Anantapur & Chittoor, Andhra Pradesh",
@@ -3969,7 +3833,7 @@ with st.container():
         """, unsafe_allow_html=True)
 
         corridor_wa_text = (
-            f"🚨 *KisanSetu Pan-India Bio-Security Alert*\n"
+            f"🚨 *AgriN-Connect Pan-India Bio-Security Alert*\n"
             f"📍 *Corridor:* {selected_c['origin']} ➔ {selected_c['destination']}\n"
             f"⚠️ *Pathogen / Pest:* {selected_c['pest']}\n"
             f"💨 *Vector Speed:* {selected_c['vector_speed']} | Threat: {selected_c['threat_level']}\n"
@@ -4005,6 +3869,6 @@ with st.container():
 # --- Footer ---
 st.markdown("---")
 st.markdown(
-    "<center><small>🌾 <b>AgriN-Connect (KisanSetu AI)</b> • Built by <b>Team Nexyra</b> • Build with AI: Code for Communities Hackathon • Digital Public Good for Climate-Resilient Agriculture</small></center>",
+    "<center><small>🌾 <b>AgriN-Connect</b> • Built by <b>Team Nexyra</b> • Build with AI: Code for Communities Hackathon • Digital Public Good for Climate-Resilient Agriculture</small></center>",
     unsafe_allow_html=True
 )
