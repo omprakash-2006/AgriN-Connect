@@ -1348,20 +1348,11 @@ STATE_DISTRICTS = {
 with st.sidebar:
     # 1. Custom Emblem Brand Header with Professional Nexyra Team Logo
     if nexyra_logo_b64:
-        logo_display_html = f'''
-        <div style="width: 78px; height: 78px; margin: 0 auto 12px auto; position: relative;">
-            <img src="data:image/jpeg;base64,{nexyra_logo_b64}" style="width: 78px; height: 78px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 28px rgba(16, 185, 129, 0.45); border: 2px solid rgba(245, 158, 11, 0.55);">
-            <span style="position: absolute; bottom: -2px; right: -2px; width: 14px; height: 14px; background: #10b981; border: 2.5px solid #042618; border-radius: 50%;"></span>
-        </div>
-        '''
+        logo_display_html = f'<div style="width: 78px; height: 78px; margin: 0 auto 12px auto; position: relative;"><img src="data:image/jpeg;base64,{nexyra_logo_b64}" style="width: 78px; height: 78px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 28px rgba(16, 185, 129, 0.45); border: 2px solid rgba(245, 158, 11, 0.55);"><span style="position: absolute; bottom: -2px; right: -2px; width: 14px; height: 14px; background: #10b981; border: 2.5px solid #042618; border-radius: 50%;"></span></div>'
     else:
-        logo_display_html = '''
-        <div style="width: 64px; height: 64px; margin: 0 auto 12px auto; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: 1.5px solid rgba(255, 255, 255, 0.25); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);">
-            🌾
-        </div>
-        '''
+        logo_display_html = '<div style="width: 64px; height: 64px; margin: 0 auto 12px auto; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: 1.5px solid rgba(255, 255, 255, 0.25); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);">🌾</div>'
 
-    st.markdown(f"""
+    render_clean_html(f"""
     <div style="background: linear-gradient(145deg, rgba(16, 185, 129, 0.2) 0%, rgba(3, 24, 15, 0.9) 100%); border: 1.5px solid rgba(52, 211, 153, 0.35); border-radius: 20px; padding: 22px 16px; text-align: center; margin-bottom: 18px; box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.6);">
         {logo_display_html}
         <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 20px; padding: 3px 12px; margin-bottom: 8px;">
@@ -1370,7 +1361,7 @@ with st.sidebar:
         <div style="font-weight: 800; font-size: 1.35rem; color: #ffffff; letter-spacing: -0.3px;">KisanSetu DPI</div>
         <div style="font-size: 0.74rem; color: #a7f3d0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;">National Agri-Intelligence Grid</div>
     </div>
-    """, unsafe_allow_html=True)
+    """)
 
 
     # Language Selector (Global Dashboard Localization)
