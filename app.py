@@ -722,6 +722,16 @@ if os.path.exists(agri_bg_path):
     except Exception:
         pass
 
+# Load Professional Nexyra Team Logo Asset
+nexyra_logo_path = os.path.join(os.path.dirname(__file__), "nexyra_logo.jpg")
+nexyra_logo_b64 = ""
+if os.path.exists(nexyra_logo_path):
+    try:
+        with open(nexyra_logo_path, "rb") as f:
+            nexyra_logo_b64 = base64.b64encode(f.read()).decode("utf-8")
+    except Exception:
+        pass
+
 # Custom CSS for living animated agriculture & agro-tech UI
 st.markdown("""
 <style>
@@ -1336,16 +1346,32 @@ STATE_DISTRICTS = {
 
 # --- Sidebar: Modern KisanSetu Command Center ---
 with st.sidebar:
-    # 1. Custom Emblem Brand Header
-    st.markdown("""
-    <div style="background: linear-gradient(145deg, rgba(16, 185, 129, 0.22) 0%, rgba(4, 38, 24, 0.65) 100%); border: 1.5px solid rgba(52, 211, 153, 0.35); border-radius: 18px; padding: 20px 16px; text-align: center; margin-bottom: 18px; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);">
-        <div style="width: 56px; height: 56px; margin: 0 auto 12px auto; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: 1.5px solid rgba(255, 255, 255, 0.25); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);">
+    # 1. Custom Emblem Brand Header with Professional Nexyra Team Logo
+    if nexyra_logo_b64:
+        logo_display_html = f'''
+        <div style="width: 78px; height: 78px; margin: 0 auto 12px auto; position: relative;">
+            <img src="data:image/jpeg;base64,{nexyra_logo_b64}" style="width: 78px; height: 78px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 28px rgba(16, 185, 129, 0.45); border: 2px solid rgba(245, 158, 11, 0.55);">
+            <span style="position: absolute; bottom: -2px; right: -2px; width: 14px; height: 14px; background: #10b981; border: 2.5px solid #042618; border-radius: 50%;"></span>
+        </div>
+        '''
+    else:
+        logo_display_html = '''
+        <div style="width: 64px; height: 64px; margin: 0 auto 12px auto; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: 1.5px solid rgba(255, 255, 255, 0.25); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);">
             🌾
         </div>
-        <div style="font-weight: 800; font-size: 1.25rem; color: #ffffff; letter-spacing: -0.3px;">KisanSetu DPI</div>
-        <div style="font-size: 0.74rem; color: #a7f3d0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 3px;">National Agri-Intelligence Grid</div>
+        '''
+
+    st.markdown(f"""
+    <div style="background: linear-gradient(145deg, rgba(16, 185, 129, 0.2) 0%, rgba(3, 24, 15, 0.9) 100%); border: 1.5px solid rgba(52, 211, 153, 0.35); border-radius: 20px; padding: 22px 16px; text-align: center; margin-bottom: 18px; box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.6);">
+        {logo_display_html}
+        <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 20px; padding: 3px 12px; margin-bottom: 8px;">
+            <span style="font-size: 0.68rem; font-weight: 800; color: #fde68a; letter-spacing: 1.2px; text-transform: uppercase;">⚡ TEAM NEXYRA</span>
+        </div>
+        <div style="font-weight: 800; font-size: 1.35rem; color: #ffffff; letter-spacing: -0.3px;">KisanSetu DPI</div>
+        <div style="font-size: 0.74rem; color: #a7f3d0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;">National Agri-Intelligence Grid</div>
     </div>
     """, unsafe_allow_html=True)
+
 
     # Language Selector (Global Dashboard Localization)
     app_lang_list = ["English", "Tamil (தமிழ்)", "Hindi (हिन्दी)", "Telugu (తెలుగు)", "Kannada (ಕನ್ನಡ)", "Malayalam (മലയാളം)"]
@@ -1473,7 +1499,8 @@ render_clean_html(f"""
 <div style="margin-bottom: 22px; padding: 6px 2px 10px 2px;">
     <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
         <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(197, 249, 57, 0.15); border: 1px solid rgba(197, 249, 57, 0.45); padding: 5px 14px; border-radius: 20px;">
-            <span style="color: #d4f938; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase;">⚡ AgriN-Connect • KisanSetu AI</span>
+            {f'<img src="data:image/jpeg;base64,{nexyra_logo_b64}" style="width: 22px; height: 22px; border-radius: 6px; object-fit: cover; border: 1px solid rgba(245, 158, 11, 0.6);">' if nexyra_logo_b64 else "⚡"}
+            <span style="color: #d4f938; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase;">TEAM NEXYRA • AgriN-Connect</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
             <div style="background: rgba(16, 185, 129, 0.22); border: 1px solid #10b981; color: #a7f3d0; font-size: 0.74rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px;">
@@ -3987,6 +4014,6 @@ with st.container():
 # --- Footer ---
 st.markdown("---")
 st.markdown(
-    "<center><small>🌾 <b>AgriN-Connect (KisanSetu AI)</b> • Build with AI: Code for Communities Hackathon • Digital Public Good for Climate-Resilient Agriculture</small></center>",
+    "<center><small>🌾 <b>AgriN-Connect (KisanSetu AI)</b> • Built by <b>Team Nexyra</b> • Build with AI: Code for Communities Hackathon • Digital Public Good for Climate-Resilient Agriculture</small></center>",
     unsafe_allow_html=True
 )
