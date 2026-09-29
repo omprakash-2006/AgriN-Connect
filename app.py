@@ -1893,8 +1893,12 @@ def render_picturesque_diagnosis_dossier(diag):
                 </div>
                 <div>
                     <div style="font-size: 0.7rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">VISUAL DIAGNOSIS CARD</div>
-                    <div style="font-size: 1.35rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">{clean_disease}</div>
-                    <div style="font-size: 0.8rem; color: #a7f3d0; margin-top: 2px;">🌱 Crop: <b>{clean_crop}</b></div>
+                    <div style="font-size: 1.5rem; font-weight: 900; color: #ffffff; letter-spacing: -0.2px; margin-top: 3px;">
+                        <span style="background: rgba(239, 68, 68, 0.4); border: 1.5px solid #ef4444; color: #ffffff; padding: 3px 12px; border-radius: 8px; box-shadow: 0 0 16px rgba(239, 68, 68, 0.45); display: inline-block;">
+                            {clean_disease}
+                        </span>
+                    </div>
+                    <div style="font-size: 0.82rem; color: #a7f3d0; margin-top: 4px;">🌱 Crop: <b>{clean_crop}</b></div>
                 </div>
             </div>
             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
@@ -2438,10 +2442,53 @@ At the very end of your response, write these exact metadata tags:
     if st.session_state.get("foliar_diagnosis"):
         diag = st.session_state["foliar_diagnosis"]
         
-        if diag.get("is_live_gemini"):
-            st.success("✅ Diagnostic Complete! Powered by Gemini Multimodal Vision AI.")
-        else:
-            st.info("💡 Diagnostic Complete! Verified by ICAR Clinical Foliar Intelligence Engine.")
+        diag_clean_crop = str(diag.get("crop", "Foliage")).split("(")[0].strip()
+        diag_clean_disease = str(diag.get("disease", "Identified Condition")).split("(")[0].strip()
+        engine_badge = "⚡ Powered by Gemini Multimodal Vision AI" if diag.get("is_live_gemini") else "💡 Verified by ICAR Clinical Foliar Engine"
+
+        # Luminous High-Impact Disease Spotlight Banner (Instantly highlights disease!)
+        render_clean_html(f"""
+        <div style="
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.18) 0%, rgba(185, 28, 28, 0.32) 100%);
+            border: 2px solid #ef4444;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin: 14px 0 18px 0;
+            box-shadow: 0 0 28px rgba(239, 68, 68, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        ">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <div style="width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 16px rgba(239, 68, 68, 0.55);">
+                    🦠
+                </div>
+                <div>
+                    <div style="font-size: 0.72rem; color: #fca5a5; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">
+                        ⚠️ DIAGNOSED CROP DISEASE
+                    </div>
+                    <div style="font-size: 1.65rem; font-weight: 900; color: #ffffff; letter-spacing: -0.4px; line-height: 1.25; margin-top: 3px;">
+                        <span style="background: rgba(239, 68, 68, 0.45); color: #ffffff; padding: 3px 12px; border-radius: 8px; border: 1.5px solid #ef4444; text-shadow: 0 2px 10px rgba(0,0,0,0.5); display: inline-block;">
+                            {diag_clean_disease}
+                        </span>
+                    </div>
+                    <div style="font-size: 0.82rem; color: #fecaca; margin-top: 4px;">
+                        🌾 Crop Foliage: <b>{diag_clean_crop}</b> • {engine_badge}
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <div style="background: #ef4444; color: #ffffff; font-size: 0.78rem; font-weight: 900; padding: 6px 14px; border-radius: 20px; box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);">
+                    🔴 ACTION REQUIRED
+                </div>
+                <div style="background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10b981; color: #a7f3d0; font-size: 0.78rem; font-weight: 800; padding: 6px 14px; border-radius: 20px;">
+                    🌿 100% Organic Cure Below
+                </div>
+            </div>
+        </div>
+        """)
 
         # Kisan-Drishti: Zero-Literacy 1-Tap Pictorial Action Deck (No Reading Needed!)
         render_zero_literacy_pictorial_deck(
