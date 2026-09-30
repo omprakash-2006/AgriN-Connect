@@ -2490,36 +2490,6 @@ render_clean_html(f"""
 """)
 with st.container():
     st.markdown('<div id="plant-doctor-anchor" style="position: relative; top: -20px;"></div>', unsafe_allow_html=True)
-    # Visual 3-Step Interactive Workflow Banner (Zero-Theory, Picture-First!)
-    render_clean_html(f"""
-    <div style="
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        background: linear-gradient(135deg, rgba(8, 33, 23, 0.85) 0%, rgba(4, 23, 16, 0.95) 100%);
-        border: 1px solid rgba(52, 211, 153, 0.35);
-        border-radius: 14px;
-        padding: 10px 14px;
-        margin-bottom: 14px;
-        flex-wrap: wrap;
-        gap: 8px;
-    ">
-        <div style="display: flex; align-items: center; gap: 6px;">
-            <span style="font-size: 16px;">📸</span>
-            <b style="color: #ffffff; font-size: 12.5px;">{ui['f1_step1']}</b>
-        </div>
-        <span style="color: #34d399; font-size: 12px;">➔</span>
-        <div style="display: flex; align-items: center; gap: 6px;">
-            <span style="font-size: 16px;">⚡</span>
-            <b style="color: #fde68a; font-size: 12.5px;">{ui['f1_step2']}</b>
-        </div>
-        <span style="color: #34d399; font-size: 12px;">➔</span>
-        <div style="display: flex; align-items: center; gap: 6px;">
-            <span style="font-size: 16px;">🖼️</span>
-            <b style="color: #a7f3d0; font-size: 12.5px;">{ui['f1_step3']}</b>
-        </div>
-    </div>
-    """)
     
     if not location_confirmed:
         st.warning("⚠️ **Agro-Location Required:** Please select your State & District in the left sidebar to calibrate AI diagnosis.")
