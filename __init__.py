@@ -1,1 +1,0 @@
-# AgriN-Connect package root

@@ -1,28 +1,109 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --botanical-dark-0: #041710;
   --botanical-dark-1: #082117;
+  --emerald-glow: rgba(52, 211, 153, 0.25);
+  --emerald-border: rgba(52, 211, 153, 0.35);
   --emerald-bright: #10b981;
   --emerald-neon: #34d399;
 }
 
 body {
+  background-color: #03120a;
+  background-image: linear-gradient(to bottom, rgba(3, 18, 10, 0.85) 0%, rgba(3, 18, 10, 0.92) 100%), url('/agrovia_hero_bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  color: #e2f8eb;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   margin: 0;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #041710;
-  color: #ecfdf5;
+  padding: 0;
+  min-height: 100vh;
 }
 
-.font-serif-signature {
-  font-family: 'Instrument Serif', Georgia, serif;
+.font-serif-italic {
+  font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif;
+  font-style: italic;
 }
 
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #041710;
+}
+::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #34d399;
+}
+
+/* Bento card styling */
 .bento-card {
-  background: linear-gradient(145deg, #092117 0%, #05140e 100%);
-  border: 1.5px solid rgba(52, 211, 153, 0.28);
+  background: linear-gradient(145deg, #082117 0%, #041710 100%);
+  border: 1px solid rgba(52, 211, 153, 0.25);
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.bento-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(52, 211, 153, 0.55);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(16, 185, 129, 0.12);
+}
+
+/* Sound Waveform Animation */
+@keyframes soundBars {
+  0%, 100% { height: 4px; }
+  50% { height: 22px; }
+}
+
+.eq-bar {
+  width: 3.5px;
+  background: linear-gradient(180deg, #34d399 0%, #059669 100%);
+  border-radius: 2px;
+  display: inline-block;
+  margin: 0 1.5px;
+  height: 6px;
+}
+
+.eq-active .eq-bar {
+  animation: soundBars 1.1s ease-in-out infinite alternate;
+}
+.eq-active .eq-bar:nth-child(1) { animation-delay: 0.1s; }
+.eq-active .eq-bar:nth-child(2) { animation-delay: 0.35s; }
+.eq-active .eq-bar:nth-child(3) { animation-delay: 0.15s; }
+.eq-active .eq-bar:nth-child(4) { animation-delay: 0.45s; }
+.eq-active .eq-bar:nth-child(5) { animation-delay: 0.2s; }
+.eq-active .eq-bar:nth-child(6) { animation-delay: 0.5s; }
+.eq-active .eq-bar:nth-child(7) { animation-delay: 0.28s; }
+.eq-active .eq-bar:nth-child(8) { animation-delay: 0.18s; }
+.eq-active .eq-bar:nth-child(9) { animation-delay: 0.4s; }
+.eq-active .eq-bar:nth-child(10) { animation-delay: 0.25s; }
+
+/* Radar Sweeps & Pulse */
+@keyframes radarPing {
+  0% { transform: scale(0.9); opacity: 0.9; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 0 14px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.9); opacity: 0.9; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+.radar-ping-dot {
+  animation: radarPing 1.8s infinite ease-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.35); opacity: 1; box-shadow: 0 0 10px #34d399; }
+}
+.pulse-dot {
+  animation: pulseDot 2s infinite ease-in-out;
 }

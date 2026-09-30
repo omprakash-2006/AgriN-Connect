@@ -1,13 +1,8 @@
 {
   "name": "AgriN-Connect (KisanSetu AI)",
-  "description": "An Interoperable Digital Agriculture Network & Digital Public Good for Smallholder Farmers featuring Plant Doctor, Climate Radar, Pest Corridors, and Mandi Shield.",
-  "category": "Agriculture & Sustainability",
-  "framework": "react-vite",
+  "description": "An Interoperable Digital Agriculture Network & Digital Public Good for Smallholder Farmers featuring visual crop disease pathology, live weather and satellite NDVI radar, regional pest attack alerts, and mandi fair price protection.",
+  "permissions": [],
   "capabilities": [
-    "gemini-2.5-flash",
-    "gemini-3.8-flash",
-    "multimodal-vision",
-    "vernacular-multilingual-audio"
-  ],
-  "entrypoint": "src/main.tsx"
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
