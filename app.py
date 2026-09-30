@@ -5,15 +5,14 @@ import io
 import json
 import base64
 import re
+import urllib.parse
 import requests
 import datetime
 import random
 import time
+import sys
 from PIL import Image
 from dotenv import load_dotenv
-
-import os
-import sys
 
 # Ensure repository root is on sys.path for Streamlit Cloud container mounts (/mount/src/agrin-connect)
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -2297,8 +2296,6 @@ def render_picturesque_diagnosis_dossier(diag):
     Bento-Grid Infographic, eliminating raw text walls and converting symptoms,
     ZBNF bio-recipes, and soil care into visual cards with ingredient formulas & icons.
     """
-    import re
-    
     crop = diag.get("crop", "Field Crop Foliage")
     disease = diag.get("disease", "Identified Condition")
     display_text = diag.get("display_text", "")
@@ -3768,21 +3765,54 @@ with st.container():
             }
         }
 
-        # User Choice: Auto-Estimate or Exact Card
-        npk_label = "📊 Do you have a Soil Health Card (SHC) Lab Test Report?" if app_lang_choice == "English" else ("📊 உங்களிடம் மண் வள அட்டை (SHC) ஆய்வக சோதனை அறிக்கை உள்ளதா?" if "Tamil" in app_lang_choice else "📊 क्या आपके पास मृदा स्वास्थ्य कार्ड (SHC) लैब रिपोर्ट है?")
-        npk_opt1 = "💡 I don't know my NPK (Auto-Estimate via ICAR Regional Benchmark)" if app_lang_choice == "English" else ("💡 NPK அளவு தெரியாது (ICAR பிராந்திய அளவீடு மூலம் தானாகக் கணக்கிடுக)" if "Tamil" in app_lang_choice else "💡 मुझे NPK नहीं पता (ICAR मानक से स्वतः अनुमान लगाएं)")
-        npk_opt2 = "📋 Yes, I have exact Soil Health Card Lab Numbers" if app_lang_choice == "English" else ("📋 ஆம், என்னிடம் அரசு மண் வள அட்டை எண்கள் உள்ளன" if "Tamil" in app_lang_choice else "📋 हाँ, मेरे पास सटीक लैब नंबर हैं")
+        # User Choice: Auto-Estimate or Exact Card (Full 6-Language Localization)
+        npk_labels = {
+            "English": "📊 Do you have a Soil Health Card (SHC) Lab Test Report?",
+            "Tamil (தமிழ்)": "📊 உங்களிடம் மண் வள அட்டை (SHC) ஆய்வக சோதனை அறிக்கை உள்ளதா?",
+            "Hindi (हिन्दी)": "📊 क्या आपके पास मृदा स्वास्थ्य कार्ड (SHC) लैब रिपोर्ट है?",
+            "Telugu (తెలుగు)": "📊 మీ దగ్గర సాయిల్ హెల్త్ కార్డ్ (SHC) ల్యాబ్ రిపోర్ట్ ఉందా?",
+            "Kannada (ಕನ್ನಡ)": "📊 ನಿಮ್ಮ ಬಳಿ ಮಣ್ಣು ಆರೋಗ್ಯ ಕಾರ್ಡ್ (SHC) ಲ್ಯಾಬ್ ವರದಿ ಇದೆಯೇ?",
+            "Malayalam (മലയാളം)": "📊 നിങ്ങളുടെ പക്കൽ മണ്ണു പരിശോധനാ കാർഡ് (SHC) ലാബ് റിപ്പോർട്ട് ഉണ്ടോ?"
+        }
+        npk_opts1 = {
+            "English": "💡 I don't know my NPK (Auto-Estimate via ICAR Regional Benchmark)",
+            "Tamil (தமிழ்)": "💡 NPK அளவு தெரியாது (ICAR பிராந்திய அளவீடு மூலம் தானாகக் கணக்கிடுக)",
+            "Hindi (हिन्दी)": "💡 मुझे NPK नहीं पता (ICAR मानक से स्वतः अनुमान लगाएं)",
+            "Telugu (తెలుగు)": "💡 నాకు NPK తెలియదు (ICAR ప్రమాణాల ద్వారా ఆటో అంచనా)",
+            "Kannada (ಕನ್ನಡ)": "💡 ನನಗೆ NPK ತಿಳಿದಿಲ್ಲ (ICAR ಮಾನದಂಡದಿಂದ ಸ್ವಯಂ ಅಂದಾಜು)",
+            "Malayalam (മലയാളം)": "💡 എനിക്ക് NPK അറിയില്ല (ICAR മാനദണ്ഡം വഴി ഓട്ടോ കണക്കുകൂട്ടുക)"
+        }
+        npk_opts2 = {
+            "English": "📋 Yes, I have exact Soil Health Card Lab Numbers",
+            "Tamil (தமிழ்)": "📋 ஆம், என்னிடம் அரசு மண் வள அட்டை எண்கள் உள்ளன",
+            "Hindi (हिन्दी)": "📋 हाँ, मेरे पास सटीक लैब नंबर हैं",
+            "Telugu (తెలుగు)": "📋 అవును, నా దగ్గర ఖచ్చితమైన ల్యాబ్ నంబర్లు ఉన్నాయి",
+            "Kannada (ಕನ್ನಡ)": "📋 ಹೌದು, ನನ್ನ ಬಳಿ ನಿಖರವಾದ ಲ್ಯಾಬ್ ಸಂಖ್ಯೆಗಳಿವೆ",
+            "Malayalam (മലയാളം)": "📋 അതെ, എന്റെ പക്കൽ കൃത്യമായ ലാബ് നമ്പറുകൾ ഉണ്ട്"
+        }
+        npk_label = npk_labels.get(app_lang_choice, npk_labels["English"])
+        npk_opt1 = npk_opts1.get(app_lang_choice, npk_opts1["English"])
+        npk_opt2 = npk_opts2.get(app_lang_choice, npk_opts2["English"])
+
         npk_mode = st.radio(
             npk_label,
             [npk_opt1, npk_opt2],
             horizontal=True
         )
 
-        if npk_mode == npk_opt1 or "Auto-Estimate" in npk_mode:
+        if npk_mode == npk_opt1 or "Auto-Estimate" in npk_mode or "ICAR" in npk_mode:
             soil_ids = list(soil_benchmarks.keys())
             default_idx = soil_ids.index(detected_soil_id) if detected_soil_id in soil_ids else 0
 
-            sel_label = "Select Your Soil Appearance / Texture Class (Auto-detected for your district):" if app_lang_choice == "English" else ("உங்கள் மண் அமைப்பைத் தேர்ந்தெடுக்கவும் (மாவட்டம் வாரியாக கண்டறியப்பட்டது):" if "Tamil" in app_lang_choice else "अपनी मिट्टी का प्रकार चुनें:")
+            sel_labels = {
+                "English": "Select Your Soil Appearance / Texture Class (Auto-detected for your district):",
+                "Tamil (தமிழ்)": "உங்கள் மண் அமைப்பைத் தேர்ந்தெடுக்கவும் (மாவட்டம் வாரியாக கண்டறியப்பட்டது):",
+                "Hindi (हिन्दी)": "अपनी मिट्टी का प्रकार चुनें (आपके जिले के लिए स्वतः पहचाना गया):",
+                "Telugu (తెలుగు)": "మీ నేల స్వభావాన్ని ఎంచుకోండి (మీ జిల్లాకు స్వయంచాలకంగా గుర్తించబడింది):",
+                "Kannada (ಕನ್ನಡ)": "ನಿಮ್ಮ ಮಣ್ಣಿನ ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ (ನಿಮ್ಮ ಜಿಲ್ಲೆಗೆ ಸ್ವಯಂ ಪತ್ತೆಯಾಗಿದೆ):",
+                "Malayalam (മലയാളം)": "നിങ്ങളുടെ മണ്ണ് തരം തിരഞ്ഞെടുക്കുക (ജില്ല അടിസ്ഥാനത്തിൽ കണ്ടെത്തിയത്):"
+            }
+            sel_label = sel_labels.get(app_lang_choice, sel_labels["English"])
             soil_id = st.selectbox(
                 sel_label,
                 soil_ids,
@@ -3805,7 +3835,15 @@ with st.container():
             sc3.metric("Est. Potassium (K)", f"{k_val} kg/ha", delta="High Mineral" if k_val > 150 else "Adequate")
             sc4.metric("Est. Soil pH", f"{ph_val}", delta="Acidic" if ph_val < 6.0 else ("Alkaline" if ph_val > 7.5 else "Neutral"))
 
-            expander_title = "🔍 Don't know which soil you have? Quick 1-minute Field Touch & Appearance Guide" if app_lang_choice == "English" else ("🔍 உங்கள் மண் எதுவென்று தெரியவில்லையா? 1 நிமிட கள வழிகாட்டி" if "Tamil" in app_lang_choice else "🔍 मिट्टी का प्रकार नहीं जानते? त्वरित 1-मिनट फील्ड गाइड")
+            expander_titles = {
+                "English": "🔍 Don't know which soil you have? Quick 1-minute Field Touch & Appearance Guide",
+                "Tamil (தமிழ்)": "🔍 உங்கள் மண் எதுவென்று தெரியவில்லையா? 1 நிமிட கள வழிகாட்டி",
+                "Hindi (हिन्दी)": "🔍 मिट्टी का प्रकार नहीं जानते? त्वरित 1-मिनट फील्ड गाइड",
+                "Telugu (తెలుగు)": "🔍 మీ నేల ఏ రకమో తెలియదా? త్వరిత 1-నిమిషం ఫీల్డ్ గైడ్",
+                "Kannada (ಕನ್ನಡ)": "🔍 ನಿಮ್ಮ ಮಣ್ಣು ಯಾವುದು ಎಂದು ತಿಳಿದಿಲ್ಲವೇ? 1-ನಿಮಿಷದ ಫೀಲ್ಡ್ ಗೈಡ್",
+                "Malayalam (മലയാളം)": "🔍 നിങ്ങളുടെ മണ്ണ് ഏതെന്ന് അറിയില്ലേ? 1-മിനിറ്റ് ഫീൽഡ് ഗൈഡ്"
+            }
+            expander_title = expander_titles.get(app_lang_choice, expander_titles["English"])
             with st.expander(expander_title):
                 if app_lang_choice == "English":
                     st.markdown("""
@@ -3824,6 +3862,42 @@ with st.container():
                     * **செம்பொறை மண் (Laterite Soil):** அதிக மழை பெய்யும் மலை மற்றும் கடலோரப் பகுதிகளில் காணப்படும் நுண்துளைகள் கொண்ட சிவப்பு-மஞ்சள் மண்.
                     * **மணல் பாங்கான மண் (Coastal Sandy Soil):** கடலோரப் பகுதிகளில் காணப்படும் அதிக நீர் வடியும் மணல் மண்.
                     * **💡 இலவச மண் பரிசோதனை:** *தேசிய மண் வள இயக்கத்தின்* கீழ், எந்தவொரு விவசாயியும் தங்கள் கிராம **பஞ்சாயத்து வேளாண் விரிவாக்க மையம் (Krishi Bhavan)** அல்லது **வேளாண் அறிவியல் மையத்தில் (KVK)** **100% இலவசமாக மண் பரிசோதனை செய்து டிஜிட்டல் கார்டு பெறலாம்**.
+                    """)
+                elif "Hindi" in app_lang_choice:
+                    st.markdown("""
+                    * **लाल मिट्टी (Red Loam):** ईंट जैसा लाल या भूरा रंग। पानी तेजी से निकलता है, ज्यादा चिपचिपी नहीं होती।
+                    * **काली मिट्टी (Regur / Black Clay):** गहरा भूरा से काला रंग। गीली होने पर बहुत चिपचिपी; गर्मियों में बड़ी दरारें पड़ती हैं।
+                    * **जलोढ़ दोमट (Alluvial Loam):** नदियों और डेल्टा क्षेत्रों में पाई जाने वाली मुलायम और अत्यधिक उपजाऊ मिट्टी।
+                    * **लेटराइट मिट्टी (Laterite Soil):** अधिक वर्षा वाले तटीय और पहाड़ी क्षेत्रों में पाई जाने वाली छिद्रयुक्त लाल-पीली मिट्टी।
+                    * **तटीय रेतीली मिट्टी (Coastal Sandy Soil):** समुद्र तटीय इलाकों में तेजी से पानी सोखने वाली बालू मिट्टी।
+                    * **💡 मुफ्त लैब परीक्षण:** *राष्ट्रीय मृदा स्वास्थ्य मिशन* के तहत नजदीकी **कृषि विज्ञान केंद्र (KVK)** में 100% मुफ्त जांच और डिजिटल कार्ड उपलब्ध है।
+                    """)
+                elif "Telugu" in app_lang_choice:
+                    st.markdown("""
+                    * **ఎర్ర నేల (Red Loam):** ఇటుక ఎరుపు లేదా గోధుమ రంగు. నీరు వేగంగా ఇంకుతుంది, జిగటగా ఉండదు.
+                    * **నల్ల రేగడి నేల (Black Clay):** ముదురు గోధుమ లేదా నలుపు రంగు. తడిసినప్పుడు బాగా జిగురుగా ఉంటుంది; ఎండకాలంలో పగుళ్లు ఏర్పడతాయి.
+                    * **ఒండ్రు నేల (Alluvial Loam):** నదీ పరీవాహక ప్రాంతాల్లో లభించే చాలా సారవంతమైన మట్టి.
+                    * **లాటరైట్ నేల (Laterite Soil):** అధిక వర్షపాతం ఉండే కొండ మరియు తీరప్రాంతాల్లో కనిపించే ఎరుపు-పసుపు రంధ్రాల నేల.
+                    * **తీరప్రాంత ఇసుక నేల (Coastal Sandy Soil):** సముద్ర తీరప్రాంతాల్లో కనిపించే నీరు వేగంగా ఇంకే ఇసుక నేల.
+                    * **💡 ఉచిత ల్యాబ్ పరీక్ష:** *నేషనల్ సాయిల్ హెల్త్ మిషన్* కింద సమీపంలోని **రైతు భరోసా కేంద్రం / KVK** వద్ద 100% ఉచిత ల్యాబ్ పరీక్ష మరియు డిజిటల్ కార్డు పొందవచ్చు.
+                    """)
+                elif "Kannada" in app_lang_choice:
+                    st.markdown("""
+                    * **ಕೆಂಪು ಮಣ್ಣು (Red Loam):** ಇಟ್ಟಿಗೆ ಕೆಂಪು ಅಥವಾ ಕಂದು ಬಣ್ಣ. ನೀರು ಬೇಗ ಇಳಿಯುತ್ತದೆ, ಹೆಚ್ಚು ಜಿಗುಟಾಗುವುದಿಲ್ಲ.
+                    * **ಕಪ್ಪು ಮಣ್ಣು (Regur / Black Clay):** ಕಡು ಕಂದು ಅಥವಾ ಕಪ್ಪು ಬಣ್ಣ. ತೇವವಾದಾಗ ಜೇಡಿಮಣ್ಣಿನಂತೆ ಜಿಗುಟು; ಬೇಸಿಗೆಯಲ್ಲಿ ಬಿರುಕುಗಳು ಮೂಡುತ್ತವೆ.
+                    * **ಮೆಕ್ಕಲು ಮಣ್ಣು (Alluvial Loam):** ನದಿ ಮತ್ತು ಮುಖಜ ಭೂಮಿಗಳಲ್ಲಿ ಕಂಡುಬರುವ ಮೃದುವಾದ, ಅತ್ಯಂತ ಫಲವತ್ತಾದ ಮಣ್ಣು.
+                    * **ಲ್ಯಾಟರೈಟ್ ಮಣ್ಣು (Laterite Soil):** ಹೆಚ್ಚು ಮಳೆಯಾಗುವ ಮಲೆನಾಡು ಮತ್ತು ಕರಾವಳಿ ಬೆಲ್ಟ್‌ನಲ್ಲಿ ಕಂಡುಬರುವ ರಂಧ್ರಯುಕ್ತ ಕೆಂಪು-ಹಳದಿ ಮಣ್ಣು.
+                    * **ಕರಾವಳಿ ಮರಳು ಮಣ್ಣು (Coastal Sandy Soil):** ಕರಾವಳಿ ತೀರದಲ್ಲಿ ಕಂಡುಬರುವ ವೇಗವಾಗಿ ನೀರು ಇಳಿಯುವ ಮರಳು ಮಣ್ಣು.
+                    * **💡 ಉಚಿತ ಲ್ಯಾಬ್ ಪರೀಕ್ಷೆ:** *ರಾಷ್ಟ್ರೀಯ ಮಣ್ಣು ಆರೋಗ್ಯ ಅಭಿಯಾನ*ದಡಿ ಹತ್ತಿರದ **ಕೃಷಿ ಕೇಂದ್ರ (KVK)**ದಲ್ಲಿ 100% ಉಚಿತ ಪರೀಕ್ಷೆ ಮತ್ತು ಡಿಜಿಟಲ್ ಕಾರ್ಡ್ ಪಡೆಯಿರಿ.
+                    """)
+                elif "Malayalam" in app_lang_choice:
+                    st.markdown("""
+                    * **ചുവന്ന മണ്ണ് (Red Loam):** ഇഷ്ടിക ചുവപ്പ് അല്ലെങ്കിൽ തവിട്ട് നിറം. വെള്ളം വേഗത്തിൽ വാർന്നുപോകും, ഒട്ടുന്ന സ്വഭാവം കുറവാണ്.
+                    * **കറുത്ത മണ്ണ് (Regur / Black Clay):** കടും തവിട്ട് അല്ലെങ്കിൽ കറുപ്പ് നിറം. നനയുമ്പോൾ പശപോലെ ഒട്ടുന്നു; വേനൽക്കാലത്ത് വലിയ വിള്ളലുകൾ ഉണ്ടാകുന്നു.
+                    * **എക്കൽ മണ്ണ് (Alluvial Loam):** നദീതീരങ്ങളിലും ഡെൽറ്റ പ്രദേശങ്ങളിലും കാണപ്പെടുന്ന മൃദുവായ, ഉയർന്ന ഫലഭൂയിഷ്ഠമായ മണ്ണ്.
+                    * **ലാറ്ററൈറ്റ് മണ്ണ് (Laterite Soil):** കേരളത്തിലെ ഉയർന്ന മഴ ലഭിക്കുന്ന മലയോര, തീരദേശ മേഖലകളിൽ കാണപ്പെടുന്ന സുഷിരങ്ങളുള്ള ചുവപ്പ്-മഞ്ഞ മണ്ണ്.
+                    * **തീരദേശ മണൽ മണ്ണ് (Coastal Sandy Soil):** കടൽത്തീരങ്ങളിൽ കാണപ്പെടുന്ന അതിവേഗം വെള്ളം വാർന്നുപോകുന്ന മണൽ മണ്ണ്.
+                    * **💡 സൗജന്യ ലാബ് പരിശോധന:** *ദേശീയ മണ്ണ് ആരോഗ്യ മിഷൻ* പ്രകാരം അടുത്തുള്ള **കൃഷി ഭവനിലോ കൃഷി വിജ്ഞാന കേന്ദ്രത്തിലോ (KVK)** 100% സൗജന്യ പരിശോധനയും ഡിജിറ്റൽ കാർഡും ലഭിക്കും.
                     """)
                 else:
                     st.markdown("""
