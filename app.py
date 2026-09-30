@@ -99,7 +99,7 @@ TRANSLATIONS = {
         "upload_prompt": "Upload diseased leaf / crop photo (JPG, JPEG, PNG)",
         "camera_prompt": "Take a photo of diseased leaf",
         "diagnose_btn": "🔍 Diagnose Pathology & Prescribe Bio-Remedies",
-        "loc_error_diag": "🚨 **Location Required**: Unga Agro-Zone location select pannama plant diagnosis start panna mudiyathu! Please select your State & District in the left sidebar first.",
+        "loc_error_diag": "🚨 **Location Required**: Plant diagnosis cannot proceed without selecting your Agro-Zone! Please select your State & District in the left sidebar first.",
         "share_whatsapp": "💬 Share to Farmer WhatsApp",
         "download_voice": "🔊 Download Voice Note (.mp3)",
         "download_report": "📥 Download Report (.txt)",
@@ -1370,8 +1370,24 @@ with st.sidebar:
     if "app_lang" in st.session_state and st.session_state["app_lang"] in app_lang_list:
         default_lang_idx = app_lang_list.index(st.session_state["app_lang"])
 
+    cur_app_lang = st.session_state.get("app_lang", "English")
+    if cur_app_lang == "English":
+        dash_lang_label = "🌐 Select Dashboard Language"
+    elif "Tamil" in cur_app_lang:
+        dash_lang_label = "🌐 மொழியைத் தேர்ந்தெடுக்கவும் (Dashboard Language)"
+    elif "Hindi" in cur_app_lang:
+        dash_lang_label = "🌐 भाषा चुनें (Dashboard Language)"
+    elif "Telugu" in cur_app_lang:
+        dash_lang_label = "🌐 భాషను ఎంచుకోండి (Dashboard Language)"
+    elif "Kannada" in cur_app_lang:
+        dash_lang_label = "🌐 ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ (Dashboard Language)"
+    elif "Malayalam" in cur_app_lang:
+        dash_lang_label = "🌐 ഭാഷ തിരഞ്ഞെടുക്കുക (Dashboard Language)"
+    else:
+        dash_lang_label = "🌐 Select Dashboard Language"
+
     app_lang_choice = st.selectbox(
-        "🌐 மொழி / Dashboard Language",
+        dash_lang_label,
         app_lang_list,
         index=default_lang_idx,
         key="app_language_selector"
@@ -1482,6 +1498,481 @@ with st.sidebar:
 
 
 
+# --- Comprehensive Unified 4-Feature Multilingual Internationalization (UI_TEXT) ---
+UI_TEXT = {
+    "English": {
+        "hero_sub": "Smart Agriculture",
+        "hero_intel": "Intelligence",
+        "hero_tags": "🍃 Plant Doctor • 🌦️ Live Weather & Satellite • 🚨 Regional Pest Alerts • 💰 Mandi & DPC Fair Price",
+        "nav_f1_badge": "FEATURE 1 ↓",
+        "nav_f1_title": "Plant Doctor (Disease & Cure)",
+        "nav_f2_badge": "FEATURE 2 ↓",
+        "nav_f2_title": "Live Weather & Farm Satellite",
+        "nav_f3_badge": "FEATURE 3 ↓",
+        "nav_f3_title": "Regional Pest Attack Alerts",
+        "nav_f4_badge": "FEATURE 4 ↓",
+        "nav_f4_title": "Mandi & DPC Fair Price Shield",
+        "f1_badge": "⚡ 1-Tap Photo Check",
+        "f1_step1": "1. Snap / Upload Leaf",
+        "f1_step2": "2. 1-Tap AI Diagnosis",
+        "f1_step3": "3. Pictorial Recipe & Voice",
+        "f1_source": "Select Photo Source",
+        "f1_upload": "📁 Upload Leaf Photo",
+        "f1_camera": "📸 Live Camera Snap",
+        "f1_upload_hint": "Upload diseased crop leaf photo (JPG, PNG)",
+        "f1_camera_hint": "Point camera at diseased crop leaf",
+        "f1_btn": "🔍 Diagnose Pathology & Prescribe Bio-Remedies",
+        "f2_title": "Live Weather & Farm Satellite",
+        "f2_badge": "Hyperlocal Agro-Climate",
+        "f2_hud_title": "LIVE AGRO-METEOROLOGY & SATELLITE RADAR",
+        "f2_hud_sub": "Open-Meteo High-Resolution Grid • Sentinel-2 MSI Multi-Spectral Telemetry",
+        "f2_orbit_synced": "🛰️ ORBIT SYNCED",
+        "f2_temp": "Temperature",
+        "f2_humidity": "Humidity",
+        "f2_rain": "24h Rain Chance",
+        "f2_ndvi": "Sentinel NDVI Index",
+        "f2_spore_warn_title": "⚠️ 48-Hour Spore Germination Warning:",
+        "f2_spore_warn_desc": "Relative humidity (>75%) with warm canopy temperature indicates a high vulnerability window for <b>Fungal Blast & Downey Mildew</b>. Recommended Action: Postpone synthetic urea application; apply preventive Panchagavya or Cow Urine-Neem foliar spray.",
+        "f2_spore_stable": "🌤️ <b>Microclimate Window Stable</b>: Low immediate fungal spore germination pressure. Suitable for inter-row tilling and bio-mulching.",
+        "f2_wa_btn": "Share Live Weather & Spray Advisory to WhatsApp",
+        "f2_soil_title": "Soil Health & Climate-Resilient Rotation Engine",
+        "f2_soil_btn": "🌱 Calculate Data-Fused Regenerative Rotation Plan",
+        "f3_title": "Regional Pest Attack Alerts",
+        "f3_badge": "🛡️ Nearby Area Warnings",
+        "f3_radar_label": "🎯 Regional Threat Corridor Radar:",
+        "f3_sync_btn": "🔄 Sync Live Telemetry",
+        "f3_my_farm": "📍 My Farm",
+        "f3_target_crop": "Target Crop",
+        "f3_telemetry": "Telemetry Source",
+        "f3_farmer_benefit": "Farmer Benefit / Acre",
+        "f3_action_mandate": "Immediate Farmer Action Mandate:",
+        "f3_wa_btn": "Share Regional Warning to Village WhatsApp Group",
+        "f3_pan_india": "🌐 24/7 Live Pan-India Bio-Surveillance Radar (All 28 States & UTs)",
+        "f3_why_crit_title": "Pan-India Bio-Surveillance Significance (Why this is Critical):",
+        "f3_why_crit_p1": "• <b>⏳ 3-7 Days Advance Early Warning:</b> Detects airborne fungal spores and migratory pest swarms moving across inter-state river basins days before border crossing.",
+        "f3_why_crit_p2": "• <b>💰 ₹30,000 - ₹42,500/Acre Cost Avoidance:</b> Protects smallholders from emergency pesticide spending by deploying zero-cost organic bio-remedies (Neem, Hing-buttermilk, Pheromone traps) in advance.",
+        "f3_why_crit_p3": "• <b>🤝 Inter-State University Accord:</b> 15+ agricultural universities (TNAU, KAU, ANGRAU, PAU) synchronize real-time biosecurity telemetry.",
+        "f3_corridor_select_label": "Select Active Inter-State Surveillance Corridor to Inspect Live Radar:",
+        "f3_corridor_wa_btn": "Share Corridor Alert to WhatsApp Group",
+        "f4_title": "Mandi & DPC Fair Price Shield",
+        "f4_badge": "🛡️ Anti-Middleman Price Protection",
+        "f4_emp_title": "💡 Why this Protects Farmers (Anti-Middleman Shield):",
+        "f4_emp_p1": "• <b>Stop Middleman Exploitation:</b> Village traders exploit smallholders unaware of market rates by quoting ₹400 to ₹500/quintal below MSP. This tool provides full transparency to official Government DPC & MSP rates.",
+        "f4_emp_p2": "• <b>Moisture Penalty Protection:</b> Up to 17% moisture is accepted by Government DPCs with ZERO deduction. If moisture is above 17%, simply sun-dry for 4 hours to receive 100% full payment instead of losing money to middleman deductions!",
+        "f4_crop_label": "🌾 Select Harvest Crop:",
+        "f4_qty_label": "⚖️ Harvest Quantity (Quintals):",
+        "f4_offer_label": "🤝 Middleman Offer (Price offered ₹/q):",
+        "f4_moisture_label": "💧 Grain Moisture % (Govt Limit: {limit}%):",
+        "f4_faq_ok_title": "✅ FAQ Quality Verified",
+        "f4_faq_ok_desc": "Zero Price Cut Permitted! Govt DPC will accept at 100% full MSP.",
+        "f4_faq_warn_title": "⚠️ Moisture {m}% (+{diff}% Above Limit)",
+        "f4_faq_warn_desc": "Dry for {hrs} Hours in Sun! Do not accept middleman penalty cut. Dry before DPC sale.",
+        "f4_gov_rate": "🏛️ Govt DPC / MSP Rate",
+        "f4_gov_sub": "100% Guaranteed Minimum",
+        "f4_trader_offer": "🤝 Middleman Offer",
+        "f4_below_rate": "Below Govt Rate",
+        "f4_saved_cash": "💰 Money Saved in Pocket",
+        "f4_saved_sub": "+{pct}% More Profit vs Middleman",
+        "f4_local_dpc": "📍 Local DPC Center",
+        "f4_direct_pay": "● Direct Payment to Bank A/C",
+        "f4_dpc_dir_title": "📍 Verified Government Direct Purchase Centers (DPCs) in {dist}:",
+        "f4_wa_btn": "💬 Alert Village WhatsApp Group: Don't Sell Below Govt MSP!"
+    },
+    "Tamil (தமிழ்)": {
+        "hero_sub": "புத்திசாலி விவசாய",
+        "hero_intel": "நுண்ணறிவு",
+        "hero_tags": "🍃 பயிர் மருத்துவர் • 🌦️ நேரலை வானிலை & செயற்கைக்கோள் • 🚨 பூச்சி தாக்குதல் எச்சரிக்கை • 💰 மண்டி & DPC நியாய விலை",
+        "nav_f1_badge": "பயன் 1 ↓",
+        "nav_f1_title": "பயிர் மருத்துவர் (நோய் & தீர்வு)",
+        "nav_f2_badge": "பயன் 2 ↓",
+        "nav_f2_title": "நேரலை வானிலை & பண்ணை செயற்கைக்கோள்",
+        "nav_f3_badge": "பயன் 3 ↓",
+        "nav_f3_title": "பிராந்திய பூச்சி தாக்குதல் எச்சரிக்கை",
+        "nav_f4_badge": "பயன் 4 ↓",
+        "nav_f4_title": "மண்டி & DPC நியாய விலை கவசம்",
+        "f1_badge": "⚡ 1-கிளிக் இலை பரிசோதனை",
+        "f1_step1": "1. இலை படம் எடுக்கவும்",
+        "f1_step2": "2. உடனடி AI நோயறிதல்",
+        "f1_step3": "3. படமுறை மருந்து & குரல் ஆலோசனை",
+        "f1_source": "புகைப்பட முறை தேர்ந்தெடுக்கவும்",
+        "f1_upload": "📁 இலை படம் பதிவேற்றவும்",
+        "f1_camera": "📸 கேமராவில் எடுக்கவும்",
+        "f1_upload_hint": "பாதிக்கப்பட்ட இலை புகைப்படத்தை பதிவேற்றவும் (JPG, PNG)",
+        "f1_camera_hint": "பாதிக்கப்பட்ட இலையை நோக்கி கேமராவை பிடிக்கவும்",
+        "f1_btn": "🔍 நோயைக் கண்டறிந்து இயற்கை மருந்துகளைப் பெறுங்கள்",
+        "f2_title": "நேரலை வானிலை & பண்ணை செயற்கைக்கோள்",
+        "f2_badge": "துல்லிய உள்ளூர் தட்பவெப்பம்",
+        "f2_hud_title": "நேரலை வேளாண் வானிலை & செயற்கைக்கோள் ரேடார்",
+        "f2_hud_sub": "Open-Meteo துல்லிய வானிலை • சென்டினல்-2 செயற்கைக்கோள் தரவு",
+        "f2_orbit_synced": "🛰️ செயற்கைக்கோள் இணைப்பு",
+        "f2_temp": "வெப்பநிலை",
+        "f2_humidity": "ஈரப்பதம்",
+        "f2_rain": "24 மணி நேர மழை வாய்ப்பு",
+        "f2_ndvi": "சென்டினல் NDVI குறியீடு",
+        "f2_spore_warn_title": "⚠️ 48-மணி நேர பூஞ்சை காளான் வித்து எச்சரிக்கை:",
+        "f2_spore_warn_desc": "அதிக ஈரப்பதம் (>75%) மற்றும் வெப்பம் நிலவுவதால் <b>இலைக்கருகல் & பூஞ்சை நோய்</b> பரவும் அபாயம் அதிகம். ரசாயன யூரியாவை தவிர்த்து, புளித்த மோர்-பெருங்காயம் அல்லது பஞ்சகவ்யா தெளிக்கவும்.",
+        "f2_spore_stable": "🌤️ <b>தட்பவெப்ப நிலை சீரானது</b>: உடனடி பூஞ்சை தாக்குதல் அபாயம் குறைவு. களையெடுத்தல் மற்றும் இயற்கை மூடாக்கு செய்ய உகந்த நேரம்.",
+        "f2_wa_btn": "நேரலை வானிலை & தெளிப்பு ஆலோசனையை WhatsApp-ல் பகிருங்கள்",
+        "f2_soil_title": "மண் வளம் & காலநிலை பயிர் சுழற்சி கட்டமைப்பு",
+        "f2_soil_btn": "🌱 இயற்கை பயிர் சுழற்சி திட்டத்தைக் கணக்கிடுங்கள்",
+        "f3_title": "பிராந்திய பூச்சி தாக்குதல் எச்சரிக்கை",
+        "f3_badge": "🛡️ அருகிலுள்ள பகுதி எச்சரிக்கைகள்",
+        "f3_radar_label": "🎯 பிராந்திய பூச்சி தாக்குதல் ரேடார்:",
+        "f3_sync_btn": "🔄 நேரலை தகவலை புதுப்பி",
+        "f3_my_farm": "📍 என் தோட்டம்",
+        "f3_target_crop": "பாதிக்கப்படும் பயிர்",
+        "f3_telemetry": "வானிலை ரேடார் தகவல்",
+        "f3_farmer_benefit": "ஏக்கருக்கு மிச்சமாகும் பணம்",
+        "f3_action_mandate": "விவசாயிகள் செய்ய வேண்டிய உடனடி நடவடிக்கை:",
+        "f3_wa_btn": "ஊர் விவசாயிகள் வாட்ஸ்அப் குழுவிற்கு எச்சரிக்கையை அனுப்பு",
+        "f3_pan_india": "🌐 24/7 நேரலை தேசிய பூச்சி கண்காணிப்பு ரேடார் (அனைத்து 28 மாநிலங்கள்)",
+        "f3_why_crit_title": "தேசிய பூச்சி கண்காணிப்பு ரேடாரின் முக்கியத்துவம் (பயன்):",
+        "f3_why_crit_p1": "• <b>⏳ 3-7 நாட்கள் முன்கூட்டிய எச்சரிக்கை:</b> காற்று மற்றும் பருவமழை மூலம் பக்கத்து மாநிலங்களிலிருந்து பரவும் பூச்சி மற்றும் பூஞ்சை வித்துக்களை எல்லை தாண்டி வருவதற்கு முன்பே கண்டறிந்து எச்சரிக்கும்.",
+        "f3_why_crit_p2": "• <b>💰 ₹30,000 - ₹42,500/ஏக்கர் பண சேமிப்பு:</b> பயிர் சேதமான பின் ரசாயன மருந்துகளை வாங்குவதை தவிர்த்து, வேப்பெண்ணெய், புளித்த மோர் போன்ற ஜீரோ-பட்ஜெட் இயற்கை முறைகள் மூலம் முன்கூட்டியே தடுத்து பணத்தை காக்கலாம்.",
+        "f3_why_crit_p3": "• <b>🤝 மாநிலங்களுக்கிடையேயான கூட்டுறவு:</b> தமிழ்நாடு (TNAU), கேரளா (KAU), ஆந்திரா (ANGRAU), பஞ்சாப் (PAU) உள்ளிட்ட 15-க்கும் மேற்பட்ட வேளாண் பல்கலைக்கழகங்கள் நேரலை தரவுகளை பகிர்கின்றன.",
+        "f3_corridor_select_label": "நேரலை ரேடாரை ஆய்வு செய்ய பிராந்திய வழியைத் தேர்ந்தெடுக்கவும்:",
+        "f3_corridor_wa_btn": "ரேடார் எச்சரிக்கையை WhatsApp குழுவில் பகிருங்கள்",
+        "f4_title": "மண்டி & DPC நியாய விலை கவசம்",
+        "f4_badge": "🛡️ இடைத்தரகர் ஏமாற்று தடுப்பு",
+        "f4_emp_title": "💡 விவசாயிகளை பாதுகாக்கும் நியாய விலை கவசம் (பயன்):",
+        "f4_emp_p1": "• <b>இடைத்தரகர் ஏமாற்றுக்கு முற்றுப்புள்ளி:</b> அறுவடைக்கு பின் ஊருக்குள் வரும் இடைத்தரகர்கள் சந்தை நிலவரம் தெரியாத விவசாயிகளிடம் 'மார்க்கெட் டவுன்' என்று சொல்லி குவிண்டாலுக்கு ₹400 முதல் ₹500 வரை குறைத்து ஏமாற்றுவதை தடுத்து, அரசு அறிவித்த நேரடி கொள்முதல் விலை (DPC / MSP) நிலவரத்தை வெளிப்படையாக தருகிறது.",
+        "f4_emp_p2": "• <b>ஈரப்பதம் கமிஷன் பாதுகாப்பு:</b> 17% ஈரப்பதம் வரை அரசு நேரடி நெல் கொள்முதல் நிலையங்களில் (DPC) எந்தவித பிடித்தமும் இன்றி முழு பணமும் கிடைக்கும். ஈரப்பதம் 17%-க்கு மேல் இருந்தால் களத்திலேயே 4 மணி நேரம் காயவைத்து முழு விலையையும் பெறலாம்!",
+        "f4_crop_label": "🌾 அறுவடை பயிரைத் தேர்ந்தெடுக்கவும்:",
+        "f4_qty_label": "⚖️ அறுவடை அளவு (குவிண்டால்):",
+        "f4_offer_label": "🤝 வியாபாரி தரும் விலை (₹/குவிண்டால்):",
+        "f4_moisture_label": "💧 தானிய ஈரப்பதம் % (அரசு வரம்பு {limit}%):",
+        "f4_faq_ok_title": "✅ அரசு FAQ தரம் உறுதி செய்யப்பட்டது",
+        "f4_faq_ok_desc": "பிடித்தம் செய்ய அனுமதி இல்லை! அரசு DPC முழு தொகையையும் வழங்கும்.",
+        "f4_faq_warn_title": "⚠️ ஈரப்பதம் {m}% (வரம்பை விட +{diff}% அதிகம்)",
+        "f4_faq_warn_desc": "களத்தில் {hrs} மணி நேரம் காயவையுங்கள்! இடைத்தரகரிடம் கமிஷன் கொடுத்து ஏமாறாதீர்கள்.",
+        "f4_gov_rate": "🏛️ அரசு DPC / MSP விலை",
+        "f4_gov_sub": "100% குறைந்தபட்ச உறுதி விலை",
+        "f4_trader_offer": "🤝 வியாபாரி தரும் விலை",
+        "f4_below_rate": "அரசு விலையை விட குறைவு",
+        "f4_saved_cash": "💰 பாக்கெட்டில் தங்கும் கூடுதல் லாபம்",
+        "f4_saved_sub": "+{pct}% இடைத்தரகரை விட கூடுதல் லாபம்",
+        "f4_local_dpc": "📍 உள்ளூர் கொள்முதல் மையம்",
+        "f4_direct_pay": "● வங்கி கணக்கிற்கு நேரடி பணப்பரிவர்த்தனை",
+        "f4_dpc_dir_title": "📍 {dist} மாவட்ட அரசு நேரடி கொள்முதல் நிலையங்கள் (DPC):",
+        "f4_wa_btn": "💬 எச்சரிக்கை: ஊர் விவசாயிகள் WhatsApp குரூப்பிற்கு நியாய விலையை அனுப்பு"
+    },
+    "Hindi (हिन्दी)": {
+        "hero_sub": "स्मार्ट कृषि",
+        "hero_intel": "इंटेलिजेंस",
+        "hero_tags": "🍃 फसल डॉक्टर • 🌦️ लाइव मौसम और उपग्रह • 🚨 क्षेत्रीय कीट चेतावनी • 💰 मंडी और डीपीसी उचित मूल्य",
+        "nav_f1_badge": "फीचर 1 ↓",
+        "nav_f1_title": "फसल डॉक्टर (रोग और उपचार)",
+        "nav_f2_badge": "फीचर 2 ↓",
+        "nav_f2_title": "लाइव मौसम और खेत उपग्रह",
+        "nav_f3_badge": "फीचर 3 ↓",
+        "nav_f3_title": "क्षेत्रीय कीट हमला चेतावनी",
+        "nav_f4_badge": "फीचर 4 ↓",
+        "nav_f4_title": "मंडी और डीपीसी उचित मूल्य सुरक्षा",
+        "f1_badge": "⚡ 1-टैप फोटो जांच",
+        "f1_step1": "1. पत्ती की फोटो लें",
+        "f1_step2": "2. 1-टैप एआई निदान",
+        "f1_step3": "3. चित्र नुस्खा और आवाज",
+        "f1_source": "फोटो स्रोत चुनें",
+        "f1_upload": "📁 पत्ती की फोटो अपलोड करें",
+        "f1_camera": "📸 लाइव कैमरा फोटो",
+        "f1_upload_hint": "रोगग्रस्त फसल पत्ती की फोटो अपलोड करें",
+        "f1_camera_hint": "रोगग्रस्त पत्ती पर कैमरा केंद्रित करें",
+        "f1_btn": "🔍 रोग पहचानें और जैविक उपचार पाएं",
+        "f2_title": "लाइव मौसम और खेत उपग्रह",
+        "f2_badge": "सटीक स्थानीय मौसम",
+        "f2_hud_title": "लाइव कृषि मौसम और उपग्रह रडार",
+        "f2_hud_sub": "ओपन-मेटियो सटीक मौसम ग्रिड • सेंटिनल-2 उपग्रह डेटा",
+        "f2_orbit_synced": "🛰️ उपग्रह से जुड़ा हुआ",
+        "f2_temp": "तापमान",
+        "f2_humidity": "आर्द्रता",
+        "f2_rain": "24 घंटे बारिश की संभावना",
+        "f2_ndvi": "सेंटिनल एनडीवीआई सूचकांक",
+        "f2_spore_warn_title": "⚠️ 48 घंटे में कवक बीजाणु अंकुरण चेतावनी:",
+        "f2_spore_warn_desc": "उच्च आर्द्रता (>75%) और गर्म तापमान के कारण <b>झुलसा और फफूंद रोग</b> का खतरा अधिक है। रासायनिक यूरिया रोकें और नीम या छाछ-हींग का छिड़काव करें।",
+        "f2_spore_stable": "🌤️ <b>सूक्ष्म जलवायु स्थिर</b>: फंगल संक्रमण का तत्काल जोखिम कम है। निराई-गुड़ाई और मल्चिंग के लिए उपयुक्त समय।",
+        "f2_wa_btn": "व्हाट्सएप पर मौसम और छिड़काव सलाह साझा करें",
+        "f2_soil_title": "मृदा स्वास्थ्य और फसल चक्र इंजन",
+        "f2_soil_btn": "🌱 जैविक फसल चक्र योजना बनाएं",
+        "f3_title": "क्षेत्रीय कीट हमला चेतावनी",
+        "f3_badge": "🛡️ नजदीकी क्षेत्र चेतावनी",
+        "f3_radar_label": "🎯 क्षेत्रीय कीट खतरा रडार:",
+        "f3_sync_btn": "🔄 लाइव डेटा रीफ्रेश करें",
+        "f3_my_farm": "📍 मेरा खेत",
+        "f3_target_crop": "लक्षित फसल",
+        "f3_telemetry": "मौसम रडार स्रोत",
+        "f3_farmer_benefit": "किसान लाभ / एकड़",
+        "f3_action_mandate": "किसान के लिए तत्काल कदम:",
+        "f3_wa_btn": "गांव के व्हाट्सएप ग्रुप में चेतावनी साझा करें",
+        "f3_pan_india": "🌐 24/7 अखिल भारतीय जैव-निगरानी रडार (28 राज्य)",
+        "f3_why_crit_title": "अखिल भारतीय जैव-निगरानी रडार का महत्व (उपयोगिता):",
+        "f3_why_crit_p1": "• <b>⏳ 3-7 दिन पहले अग्रिम चेतावनी:</b> हवा के बहाव से पड़ोसी राज्यों से आने वाले कीट और फंगस को सीमा पार करने से पहले ही ट्रैक करके अलर्ट देता है।",
+        "f3_why_crit_p2": "• <b>💰 ₹30,000 - ₹42,500/एकड़ लागत बचाव:</b> फसल नुकसान के बाद महंगी रसायनों की जगह शून्य-लागत जैविक उपायों (नीम, छाछ-हींग, फेरोमोन ट्रैप) से पहले ही बचाव।",
+        "f3_why_crit_p3": "• <b>🤝 अंतर-राज्यीय कृषि विश्वविद्यालय नेटवर्क:</b> 15+ कृषि विश्वविद्यालय (TNAU, KAU, ANGRAU, PAU) लाइव डेटा साझा कर रहे हैं।",
+        "f3_corridor_select_label": "लाइव रडार देखने के लिए अंतर-राज्यीय गलियारा चुनें:",
+        "f3_corridor_wa_btn": "व्हाट्सएप ग्रुप में रडार चेतावनी साझा करें",
+        "f4_title": "मंडी और डीपीसी उचित मूल्य सुरक्षा",
+        "f4_badge": "🛡️ बिचौलिया शोषण से सुरक्षा",
+        "f4_emp_title": "💡 किसानों की सुरक्षा (बिचौलिया विरोधी ढाल):",
+        "f4_emp_p1": "• <b>बिचौलियों के शोषण पर रोक:</b> कटाई के बाद व्यापारी बाजार भाव से अनजान किसानों से ₹400 से ₹500 प्रति क्विंटल कम दाम देते हैं। यह टूल सरकारी डीपीसी और एमएसपी दरों की पूरी पारदर्शिता देता है।",
+        "f4_emp_p2": "• <b>नमी कटौती सुरक्षा:</b> सरकारी डीपीसी 17% तक नमी बिना किसी कटौती के स्वीकार करता है। यदि नमी अधिक है, तो 4 घंटे धूप में सुखाकर पूरा मूल्य प्राप्त करें!",
+        "f4_crop_label": "🌾 फसल चुनें:",
+        "f4_qty_label": "⚖️ फसल की मात्रा (क्विंटल):",
+        "f4_offer_label": "🤝 व्यापारी की पेशकश (₹/क्विंटल):",
+        "f4_moisture_label": "💧 अनाज की नमी % (सरकारी सीमा {limit}%):",
+        "f4_faq_ok_title": "✅ सरकारी गुणवत्ता प्रमाणित",
+        "f4_faq_ok_desc": "कोई कटौती नहीं! सरकारी डीपीसी पर पूरा एमएसपी मिलेगा।",
+        "f4_faq_warn_title": "⚠️ नमी {m}% (सीमा से +{diff}% अधिक)",
+        "f4_faq_warn_desc": "{hrs} घंटे धूप में सुखाएं! बिचौलियों को कटौती न दें।",
+        "f4_gov_rate": "🏛️ सरकारी डीपीसी / एमएसपी दर",
+        "f4_gov_sub": "100% गारंटीशुदा न्यूनतम मूल्य",
+        "f4_trader_offer": "🤝 व्यापारी की पेशकश",
+        "f4_below_rate": "सरकारी दर से कम",
+        "f4_saved_cash": "💰 जेब में बची अतिरिक्त कमाई",
+        "f4_saved_sub": "+{pct}% व्यापारी से अधिक लाभ",
+        "f4_local_dpc": "📍 स्थानीय डीपीसी केंद्र",
+        "f4_direct_pay": "● बैंक खाते में सीधा भुगतान",
+        "f4_dpc_dir_title": "📍 {dist} में सत्यापित सरकारी खरीद केंद्र (DPC):",
+        "f4_wa_btn": "💬 गांव के व्हाट्सएप ग्रुप को चेतावनी भेजें: एमएसपी से कम पर न बेचें!"
+    },
+    "Telugu (తెలుగు)": {
+        "hero_sub": "స్మార్ట్ వ్యవసాయ",
+        "hero_intel": "ఇంటెలిజెన్స్",
+        "hero_tags": "🍃 పంట డాక్టర్ • 🌦️ లైవ్ వాతావరణం & ఉపగ్రహం • 🚨 ప్రాంతీయ తెగులు హెచ్చరికలు • 💰 మండి & డిపిసి మద్దతు ధర",
+        "nav_f1_badge": "ఫీచర్ 1 ↓",
+        "nav_f1_title": "పంట డాక్టర్ (వ్యాధి & నివారణ)",
+        "nav_f2_badge": "ఫీచర్ 2 ↓",
+        "nav_f2_title": "లైవ్ వాతావరణం & ఉపగ్రహం",
+        "nav_f3_badge": "ఫీచర్ 3 ↓",
+        "nav_f3_title": "ప్రాంతీయ తెగులు హెచ్చరికలు",
+        "nav_f4_badge": "ఫీచర్ 4 ↓",
+        "nav_f4_title": "మండి & డిపిసి న్యాయ ధర రక్షణ",
+        "f1_badge": "⚡ 1-ట్యాప్ ఫోటో తనిఖీ",
+        "f1_step1": "1. ఆకు ఫోటో తీయండి",
+        "f1_step2": "2. తక్షణ AI నిర్ధారణ",
+        "f1_step3": "3. చిత్ర సూచిక & వాయిస్ సలహా",
+        "f1_source": "ఫోటో మూలాన్ని ఎంచుకోండి",
+        "f1_upload": "📁 ఆకు ఫోటో అప్‌లోడ్ చేయండి",
+        "f1_camera": "📸 కెమెరాతో తీయండి",
+        "f1_upload_hint": "వ్యాధి సోకిన ఆకు ఫోటోను అప్‌లోడ్ చేయండి (JPG, PNG)",
+        "f1_camera_hint": "వ్యాధి సోకిన ఆకుపై కెమెరా ఉంచండి",
+        "f1_btn": "🔍 వ్యాధిని గుర్తించి సహజ నివారణలను పొందండి",
+        "f2_title": "లైవ్ వాతావరణం & పొలం ఉపగ్రహం",
+        "f2_badge": "హైపర్‌లోకల్ వ్యవసాయ వాతావరణం",
+        "f2_hud_title": "లైవ్ వ్యవసాయ వాతావరణం & ఉపగ్రహ రడార్",
+        "f2_hud_sub": "ఓపెన్-మెటియో ఖచ్చితమైన గ్రిడ్ • సెంటినెల్-2 ఉపగ్రహం",
+        "f2_orbit_synced": "🛰️ కక్ష్య అనుసంధానం",
+        "f2_temp": "ఉష్ణోగ్రత",
+        "f2_humidity": "తేమ శాతం",
+        "f2_rain": "24 గంటల వర్షం అవకాశం",
+        "f2_ndvi": "సెంటినెల్ NDVI సూచిక",
+        "f2_spore_warn_title": "⚠️ 48-గంటల శిలీంధ్ర వ్యాప్తి హెచ్చరిక:",
+        "f2_spore_warn_desc": "అధిక తేమ (>75%) మరియు వెచ్చని వాతావరణం వలన అగ్గి తెగులు వ్యాపించే అవకాశం ఉంది. రసాయన యూరియా ఆపి, వేపనూనె లేదా పులిసిన మజ్జిగ పిచికారీ చేయండి.",
+        "f2_spore_stable": "🌤️ <b>వాతావరణం అనుకూలంగా ఉంది</b>: శిలీంధ్ర వ్యాప్తి ప్రభావం తక్కువ.",
+        "f2_wa_btn": "లైవ్ వాతావరణ సలహాను వాట్సాప్‌లో షేర్ చేయండి",
+        "f2_soil_title": "నేల ఆరోగ్యం & పంట మార్పిడి ప్రణాళిక",
+        "f2_soil_btn": "🌱 సహజ పంట మార్పిడి ప్రణాళికను లెక్కించండి",
+        "f3_title": "ప్రాంతీయ తెగులు హెచ్చరికలు",
+        "f3_badge": "🛡️ సమీప ప్రాంత హెచ్చరికలు",
+        "f3_radar_label": "🎯 ప్రాంతీయ తెగులు ముప్పు రడార్:",
+        "f3_sync_btn": "🔄 లైవ్ డేటా రిఫ్రెష్",
+        "f3_my_farm": "📍 నా పొలం",
+        "f3_target_crop": "ప్రభావిత పంట",
+        "f3_telemetry": "వాతావరణ రడార్ మూలం",
+        "f3_farmer_benefit": "ఎకరాకు ఆదా అయ్యే మొత్తం",
+        "f3_action_mandate": "రైతులు వెంటనే చేయవలసిన చర్య:",
+        "f3_wa_btn": "గ్రామ వాట్సాప్ గ్రూప్‌లో హెచ్చరికను పంచుకోండి",
+        "f3_pan_india": "🌐 24/7 జాతీయ తెగులు నిఘా రడార్ (28 రాష్ట్రాలు)",
+        "f3_why_crit_title": "జాతీయ తెగులు నిఘా రడార్ ప్రాముఖ్యత:",
+        "f3_why_crit_p1": "• <b>⏳ 3-7 రోజుల ముందస్తు హెచ్చరిక:</b> పక్క రాష్ట్రాల నుండి గాలి ద్వారా వచ్చే తెగుళ్లను సరిహద్దు దాటకముందే గుర్తించి హెచ్చరిస్తుంది.",
+        "f3_why_crit_p2": "• <b>💰 ₹30,000 - ₹42,500/ఎకరాకు ఖర్చు ఆదా:</b> పంట నాశనమైన తర్వాత రసాయన మందులు వాడకుండా, జీరో-కాస్ట్ సహజ పద్ధతుల ద్వారా ముందుగానే నివారించవచ్చు.",
+        "f3_why_crit_p3": "• <b>🤝 వ్యవసాయ విశ్వవిద్యాలయాల భాగస్వామ్యం:</b> 15+ విశ్వవిద్యాలయాలు ప్రత్యక్ష సమాచారాన్ని పంచుకుంటున్నాయి.",
+        "f3_corridor_select_label": "లైవ్ రడార్‌ను పరిశీలించడానికి సరిహద్దు మార్గాన్ని ఎంచుకోండి:",
+        "f3_corridor_wa_btn": "వాట్సాప్ గ్రూప్‌లో రడార్ హెచ్చరికను షేర్ చేయండి",
+        "f4_title": "మండి & డిపిసి న్యాయ ధర రక్షణ",
+        "f4_badge": "🛡️ దళారుల దోపిడీ నిరోధక కవచం",
+        "f4_emp_title": "💡 రైతులను రక్షించే న్యాయ ధర కవచం (ఉపయోగం):",
+        "f4_emp_p1": "• <b>దళారుల దోపిడీకి అడ్డుకట్ట:</b> మార్కెట్ ధర తెలియని రైతుల నుండి క్వింటాలుకు ₹400 నుండి ₹500 తక్కువకు కొనుగోలు చేయకుండా నిరోధించి, ప్రభుత్వ అధికారిక కొనుగోలు కేంద్రాల (DPC / MSP) ధరలను పారదర్శకంగా అందిస్తుంది.",
+        "f4_emp_p2": "• <b>తేమ తగ్గింపుల రక్షణ:</b> ప్రభుత్వ కొనుగోలు కేంద్రాల్లో 17% వరకు తేమ ఉన్న ధాన్యానికి ఎటువంటి కోత లేకుండా పూర్తి మద్దతు ధర లభిస్తుంది. తేమ ఎక్కువగా ఉంటే 4 గంటలు ఎండబెట్టి పూర్తి ధర పొందండి!",
+        "f4_crop_label": "🌾 పంటను ఎంచుకోండి:",
+        "f4_qty_label": "⚖️ దిగుబడి పరిమాణం (క్వింటాళ్ళు):",
+        "f4_offer_label": "🤝 వ్యాపారి ఇచ్చే ధర (₹/క్వింటాల్):",
+        "f4_moisture_label": "💧 ధాన్యం తేమ శాతం % (ప్రభుత్వ పరిమితి {limit}%):",
+        "f4_faq_ok_title": "✅ ప్రభుత్వ నాణ్యతా ప్రమాణం ధృవీకరించబడింది",
+        "f4_faq_ok_desc": "ఎటువంటి తగ్గింపు అనుమతించబడదు! ప్రభుత్వ కేంద్రంలో పూర్తి మద్దతు ధర లభిస్తుంది.",
+        "f4_faq_warn_title": "⚠️ తేమ {m}% (పరిమితి కంటే +{diff}% ఎక్కువ)",
+        "f4_faq_warn_desc": "ఎండలో {hrs} గంటలు ఆరబెట్టండి! దళారులకు తగ్గింపులు ఇవ్వకండి.",
+        "f4_gov_rate": "🏛️ ప్రభుత్వ మద్దతు ధర (MSP)",
+        "f4_gov_sub": "100% కనీస హామీ ధర",
+        "f4_trader_offer": "🤝 వ్యాపారి ఇచ్చిన ధర",
+        "f4_below_rate": "ప్రభుత్వ ధర కంటే తక్కువ",
+        "f4_saved_cash": "💰 రైతు జేబులో మిగిలిన అదనపు లాభం",
+        "f4_saved_sub": "+{pct}% దళారుల కంటే ఎక్కువ లాభం",
+        "f4_local_dpc": "📍 స్థానిక ప్రభుత్వ కొనుగోలు కేంద్రం",
+        "f4_direct_pay": "● నేరుగా బ్యాంక్ ఖాతాలో జమ",
+        "f4_dpc_dir_title": "📍 {dist} జిల్లాలోని ప్రభుత్వ కొనుగోలు కేంద్రాలు (DPC):",
+        "f4_wa_btn": "💬 గ్రామంలోని రైతు వాట్సాప్ గ్రూప్‌కు మద్దతు ధర హెచ్చరికను పంపండి"
+    },
+    "Kannada (ಕನ್ನಡ)": {
+        "hero_sub": "ಸ್ಮಾರ್ಟ್ ಕೃಷಿ",
+        "hero_intel": "ಬುದ್ಧಿವಂತಿಕೆ",
+        "hero_tags": "🍃 ಬೆಳೆ ವೈದ್ಯ • 🌦️ ಲೈವ್ ಹವಾಮಾನ & ಉಪಗ್ರಹ • 🚨 ಪ್ರಾದೇಶಿಕ ಕೀಟ ಎಚ್ಚರಿಕೆ • 💰 ಮಂಡಿ & ಬೆಂಬಲ ಬೆಲೆ",
+        "nav_f1_badge": "ವೈಶಿಷ್ಟ್ಯ 1 ↓",
+        "nav_f1_title": "ಬೆಳೆ ವೈದ್ಯ (ರೋಗ & ಪರಿಹಾರ)",
+        "nav_f2_badge": "ವೈಶಿಷ್ಟ್ಯ 2 ↓",
+        "nav_f2_title": "ಲೈವ್ ಹವಾಮಾನ & ಉಪಗ್ರಹ",
+        "nav_f3_badge": "ವೈಶಿಷ್ಟ್ಯ 3 ↓",
+        "nav_f3_title": "ಪ್ರಾದೇಶಿಕ ಕೀಟ ಎಚ್ಚರಿಕೆ",
+        "nav_f4_badge": "ವೈಶಿಷ್ಟ್ಯ 4 ↓",
+        "nav_f4_title": "ಮಂಡಿ & ಡಿಪಿಸಿ ನ್ಯಾಯ ಬೆಲೆ ಕವಚ",
+        "f1_badge": "⚡ 1-ಕ್ಲಿಕ್ ಫೋಟೋ ತಪಾಸಣೆ",
+        "f1_step1": "1. ಎಲೆಯ ಫೋಟೋ ತೆಗೆಯಿರಿ",
+        "f1_step2": "2. ತಕ್ಷಣದ AI ರೋಗನಿರ್ಣಯ",
+        "f1_step3": "3. ಚಿತ್ರ ಆಧಾರಿತ ಪರಿಹಾರ & ಧ್ವನಿ",
+        "f1_source": "ಫೋಟೋ ಮೂಲವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+        "f1_upload": "📁 ಎಲೆ ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        "f1_camera": "📸 ಲೈವ್ ಕ್ಯಾಮೆರಾ ಫೋಟೋ",
+        "f1_upload_hint": "ರೋಗಪೀಡಿತ ಎಲೆಯ ಫೋಟೋವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ (JPG, PNG)",
+        "f1_camera_hint": "ರೋಗಪೀಡಿತ ಎಲೆಯ ಮೇಲೆ ಕ್ಯಾಮೆರಾ ಇರಿಸಿ",
+        "f1_btn": "🔍 ರೋಗ ಪತ್ತೆಹಚ್ಚಿ ನೈಸರ್ಗಿಕ ಪರಿಹಾರ ಪಡೆಯಿರಿ",
+        "f2_title": "ಲೈವ್ ಹವಾಮಾನ & ಜಮೀನು ಉಪಗ್ರಹ",
+        "f2_badge": "ಸ್ಥಳೀಯ ಹವಾಮಾನ ಮಾಹಿತಿ",
+        "f2_hud_title": "ಲೈವ್ ಕೃಷಿ ಹವಾಮಾನ & ಉಪಗ್ರಹ ರಡಾರ್",
+        "f2_hud_sub": "ಓಪನ್-ಮೆಟಿಯೋ ನಿಖರ ಹವಾಮಾನ • ಸೆಂಟಿನೆಲ್-2 ಉಪಗ್ರಹ",
+        "f2_orbit_synced": "🛰️ ಉಪಗ್ರಹ ಸಂಪರ್ಕಿತ",
+        "f2_temp": "ತಾಪಮಾನ",
+        "f2_humidity": "ತೇವಾಂಶ",
+        "f2_rain": "24 ಗಂಟೆ ಮಳೆ ಸಾಧ್ಯತೆ",
+        "f2_ndvi": "ಸೆಂಟಿನೆಲ್ NDVI ಸೂಚ್ಯಂಕ",
+        "f2_spore_warn_title": "⚠️ 48-ಗಂಟೆಗಳ ಶಿಲೀಂಧ್ರ ಹರಡುವಿಕೆಯ ಎಚ್ಚರಿಕೆ:",
+        "f2_spore_warn_desc": "ಹೆಚ್ಚಿನ ತೇವಾಂಶ (>75%) ಮತ್ತು ಬೆಚ್ಚನೆಯ ವಾತಾವರಣದಿಂದ ರೋಗದ ಅಪಾಯವಿದೆ. ರಾಸಾಯನಿಕ ಯೂರಿಯಾ ತಪ್ಪಿಸಿ, ಹುಳಿ ಮಜ್ಜಿಗೆ-ಇಂಗು ದ್ರಾವಣ ಸಿಂಪಡಿಸಿ.",
+        "f2_spore_stable": "🌤️ <b>ಹವಾಮಾನ ಸ್ಥಿರವಾಗಿದೆ</b>: ತಕ್ಷಣದ ರೋಗದ ಅಪಾಯ ಕಡಿಮೆ.",
+        "f2_wa_btn": "ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಹವಾಮಾನ ಸಲಹೆ ಹಂಚಿಕೊಳ್ಳಿ",
+        "f2_soil_title": "ಮಣ್ಣಿನ ಆರೋಗ್ಯ & ಬೆಳೆ ಪರಿವರ್ತನೆ ಎಂಜಿನ್",
+        "f2_soil_btn": "🌱 ನೈಸರ್ಗಿಕ ಬೆಳೆ ಪರಿವರ್ತನೆ ಯೋಜನೆಯನ್ನು ಲೆಕ್ಕಹಾಕಿ",
+        "f3_title": "ಪ್ರಾದೇಶಿಕ ಕೀಟ ಎಚ್ಚರಿಕೆ",
+        "f3_badge": "🛡️ ಹತ್ತಿರದ ಪ್ರದೇಶದ ಎಚ್ಚರಿಕೆಗಳು",
+        "f3_radar_label": "🎯 ಪ್ರಾದೇಶಿಕ ಕೀಟ ದಾಳಿ ರಡಾರ್:",
+        "f3_sync_btn": "🔄 ಲೈವ್ ಮಾಹಿತಿ ನವೀಕರಿಸಿ",
+        "f3_my_farm": "📍 ನನ್ನ ಜಮೀನು",
+        "f3_target_crop": "ಬಾಧಿತ ಬೆಳೆ",
+        "f3_telemetry": "ಹವಾಮಾನ ರಡಾರ್ ಮಾಹಿತಿ",
+        "f3_farmer_benefit": "ಎಕರೆಗೆ ಉಳಿತಾಯವಾಗುವ ಹಣ",
+        "f3_action_mandate": "ರೈತರು ತಕ್ಷಣ ಕೈಗೊಳ್ಳಬೇಕಾದ ಕ್ರಮ:",
+        "f3_wa_btn": "ಗ್ರಾಮದ ವಾಟ್ಸಾಪ್ ಗ್ರೂಪ್‌ಗೆ ಎಚ್ಚರಿಕೆ ಕಳುಹಿಸಿ",
+        "f3_pan_india": "🌐 24/7 ರಾಷ್ಟ್ರೀಯ ಕೀಟ ಕಣ್ಗಾವಲು ರಡಾರ್ (28 ರಾಜ್ಯಗಳು)",
+        "f3_why_crit_title": "ರಾಷ್ಟ್ರೀಯ ಕೀಟ ಕಣ್ಗಾವಲು ರಡಾರ್‌ನ ಮಹತ್ವ:",
+        "f3_why_crit_p1": "• <b>⏳ 3-7 ದಿನ ಮುಂಚಿತ ಎಚ್ಚರಿಕೆ:</b> ಪಕ್ಕದ ರಾಜ್ಯಗಳಿಂದ ಗಾಳಿಯ ಮೂಲಕ ಬರುವ ಕೀಟಗಳನ್ನು ಗಡಿ ದಾಟುವ ಮುನ್ನವೇ ಪತ್ತೆಹಚ್ಚಿ ಎಚ್ಚರಿಸುತ್ತದೆ.",
+        "f3_why_crit_p2": "• <b>💰 ₹30,000 - ₹42,500/ಎಕರೆಗೆ ಉಳಿತಾಯ:</b> ಬೆಳೆ ಹಾಳಾದ ನಂತರ ರಾಸಾಯನಿಕ ಕೀಟನಾಶಕಗಳ ವೆಚ್ಚವಿಲ್ಲದೆ, ಶೂನ್ಯ-ವೆಚ್ಚದ ನೈಸರ್ಗಿಕ ಕ್ರಮಗಳಿಂದ ಮುಂಚಿತವಾಗಿಯೇ ತಡೆಯಬಹುದು.",
+        "f3_why_crit_p3": "• <b>🤝 ಕೃಷಿ ವಿಶ್ವವಿದ್ಯಾಲಯಗಳ ಜಾಲ:</b> 15ಕ್ಕೂ ಹೆಚ್ಚು ಕೃಷಿ ವಿಶ್ವವಿದ್ಯಾಲಯಗಳು ಲೈವ್ ಡೇಟಾ ಹಂಚಿಕೊಳ್ಳುತ್ತಿವೆ.",
+        "f3_corridor_select_label": "ಲೈವ್ ರಡಾರ್ ವೀಕ್ಷಿಸಲು ಕಾರಿಡಾರ್ ಆಯ್ಕೆಮಾಡಿ:",
+        "f3_corridor_wa_btn": "ವಾಟ್ಸಾಪ್ ಗ್ರೂಪ್‌ನಲ್ಲಿ ರಡಾರ್ ಎಚ್ಚರಿಕೆ ಹಂಚಿಕೊಳ್ಳಿ",
+        "f4_title": "ಮಂಡಿ & ಡಿಪಿಸಿ ನ್ಯಾಯ ಬೆಲೆ ಕವಚ",
+        "f4_badge": "🛡️ ದಲ್ಲಾಳಿಗಳ ಶೋಷಣೆ ತಡೆ ಕವಚ",
+        "f4_emp_title": "💡 ರೈತರನ್ನು ರಕ್ಷಿಸುವ ನ್ಯಾಯ ಬೆಲೆ ಕವಚ (ಉಪಯೋಗ):",
+        "f4_emp_p1": "• <b>ದಲ್ಲಾಳಿಗಳ ಮೋಸಕ್ಕೆ ಮುಕ್ತಿ:</b> ಮಾರುಕಟ್ಟೆ ದರ ತಿಳಿಯದ ರೈತರಿಂದ ಕ್ವಿಂಟಾಲ್‌ಗೆ ₹400 ರಿಂದ ₹500 ರಿಯಾಯಿತಿ ಹೇಳಿ ಮೋಸ ಮಾಡುವುದನ್ನು ತಡೆದು, ಸರಕಾರಿ ಖರೀದಿ ಕೇಂದ್ರಗಳ (DPC / MSP) ದರಗಳನ್ನು ಪಾರದರ್ಶಕವಾಗಿ ನೀಡುತ್ತದೆ.",
+        "f4_emp_p2": "• <b>ತೇವಾಂಶ ಕಡಿತದಿಂದ ರಕ್ಷಣೆ:</b> ಸರಕಾರಿ ಡಿಪಿಸಿ ಕೇಂದ್ರಗಳಲ್ಲಿ 17% ವರೆಗೆ ತೇವಾಂಶವಿರುವ ಧಾನ್ಯಕ್ಕೆ ಯಾವುದೇ ಕಡಿತವಿಲ್ಲದೆ ಪೂರ್ಣ ಹಣ ಸಿಗುತ್ತದೆ. ತೇವಾಂಶ ಹೆಚ್ಚಿದ್ದರೆ 4 ಗಂಟೆ ಬಿಸಿಲಿನಲ್ಲಿ ಒಣಗಿಸಿ ಪೂರ್ಣ ಬೆಲೆ ಪಡೆಯಿರಿ!",
+        "f4_crop_label": "🌾 ಬೆಳೆ ಆಯ್ಕೆಮಾಡಿ:",
+        "f4_qty_label": "⚖️ ಬೆಳೆ ಪ್ರಮಾಣ (ಕ್ವಿಂಟಾಲ್):",
+        "f4_offer_label": "🤝 ವ್ಯಾಪಾರಿ ನೀಡುವ ಬೆಲೆ (₹/ಕ್ವಿಂಟಾಲ್):",
+        "f4_moisture_label": "💧 ಧಾನ್ಯದ ತೇವಾಂಶ % (ಸರಕಾರಿ ಮಿತಿ {limit}%):",
+        "f4_faq_ok_title": "✅ ಸರಕಾರಿ ಗುಣಮಟ್ಟ ದೃಢೀಕರಿಸಲಾಗಿದೆ",
+        "f4_faq_ok_desc": "ಯಾವುದೇ ಕಡಿತವಿಲ್ಲ! ಸರಕಾರಿ ಡಿಪಿಸಿಯಲ್ಲಿ 100% ಪೂರ್ಣ ಬೆಂಬಲ ಬೆಲೆ ಸಿಗಲಿದೆ.",
+        "f4_faq_warn_title": "⚠️ ತೇವಾಂಶ {m}% (ಮಿತಿಗಿಂತ +{diff}% ಹೆಚ್ಚು)",
+        "f4_faq_warn_desc": "{hrs} ಗಂಟೆ ಬಿಸಿಲಿನಲ್ಲಿ ಒಣಗಿಸಿ! ದಲ್ಲಾಳಿಗಳಿಗೆ ಹಣ ಕಡಿತ ನೀಡಬೇಡಿ.",
+        "f4_gov_rate": "🏛️ ಸರಕಾರಿ ಬೆಂಬಲ ಬೆಲೆ (MSP)",
+        "f4_gov_sub": "100% ಖಾತರಿಯ ಕನಿಷ್ಠ ಬೆಲೆ",
+        "f4_trader_offer": "🤝 ವ್ಯಾಪಾರಿಯ ಆಫರ್",
+        "f4_below_rate": "ಸರಕಾರಿ ಬೆಲೆಗಿಂತ ಕಡಿಮೆ",
+        "f4_saved_cash": "💰 ಜೇಬಿನಲ್ಲಿ ಉಳಿಯುವ ಹೆಚ್ಚುವರಿ ಲಾಭ",
+        "f4_saved_sub": "+{pct}% ದಲ್ಲಾಳಿಗಿಂತ ಹೆಚ್ಚು ಲಾಭ",
+        "f4_local_dpc": "📍 ಸ್ಥಳೀಯ ಡಿಪಿಸಿ ಕೇಂದ್ರ",
+        "f4_direct_pay": "● ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ನೇರ ಹಣ ವರ್ಗಾವಣೆ",
+        "f4_dpc_dir_title": "📍 {dist} ಜಿಲ್ಲೆಯ ಸರಕಾರಿ ಖರೀದಿ ಕೇಂದ್ರಗಳು (DPC):",
+        "f4_wa_btn": "💬 ಗ್ರಾಮದ ವಾಟ್ಸಾಪ್ ಗ್ರೂಪ್‌ಗೆ ಬೆಂಬಲ ಬೆಲೆ ಎಚ್ಚರಿಕೆ ಕಳುಹಿಸಿ"
+    },
+    "Malayalam (മലയാളം)": {
+        "hero_sub": "സ്മാർട്ട് കാർഷിക",
+        "hero_intel": "ഇന്റലിജൻസ്",
+        "hero_tags": "🍃 വിള ഡോക്ടർ • 🌦️ തത്സമയ കാലാവസ്ഥ & ഉപഗ്രഹം • 🚨 പ്രാദേശിക കീട മുന്നറിയിപ്പ് • 💰 മണ്ടി & ന്യായവില കവചം",
+        "nav_f1_badge": "ഫീച്ചർ 1 ↓",
+        "nav_f1_title": "വിള ഡോക്ടർ (രോഗവും പ്രതിവിധിയും)",
+        "nav_f2_badge": "ഫീച്ചർ 2 ↓",
+        "nav_f2_title": "തത്സമയ കാലാവസ്ഥ & ഉപഗ്രഹം",
+        "nav_f3_badge": "ഫീച്ചർ 3 ↓",
+        "nav_f3_title": "പ്രാദേശിക കീട മുന്നറിയിപ്പ്",
+        "nav_f4_badge": "ഫീച്ചർ 4 ↓",
+        "nav_f4_title": "മണ്ടി & ഡിപിസി ന്യായവില കവചം",
+        "f1_badge": "⚡ 1-ടാപ്പ് ഫോട്ടോ പരിശോധന",
+        "f1_step1": "1. ഇലയുടെ ഫോട്ടോ എടുക്കുക",
+        "f1_step2": "2. തൽക്ഷണ AI രോഗനിർണ്ണയം",
+        "f1_step3": "3. ചിത്ര പ്രതിവിധിയും ശബ്ദ നിർദ്ദേശവും",
+        "f1_source": "ഫോട്ടോ ഉറവിടം തിരഞ്ഞെടുക്കുക",
+        "f1_upload": "📁 ഇലയുടെ ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക",
+        "f1_camera": "📸 ലൈവ് ക്യാമറ ഫോട്ടോ",
+        "f1_upload_hint": "രോഗം ബാധിച്ച ഇലയുടെ ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക (JPG, PNG)",
+        "f1_camera_hint": "രോഗം ബാധിച്ച ഇലയിലേക്ക് ക്യാമറ തിരിക്കുക",
+        "f1_btn": "🔍 രോഗം കണ്ടെത്തി ജൈവ പ്രതിവിധികൾ നേടുക",
+        "f2_title": "തത്സമയ കാലാവസ്ഥ & ഉപഗ്രഹം",
+        "f2_badge": "പ്രാദേശിക കാലാവസ്ഥ വിവരങ്ങൾ",
+        "f2_hud_title": "തത്സമയ കാർഷിക കാലാവസ്ഥ & ഉപഗ്രഹ റഡാർ",
+        "f2_hud_sub": "ഓപ്പൺ-മെറ്റിയോ കാലാവസ്ഥ • സെന്റിനൽ-2 ഉപഗ്രഹം",
+        "f2_orbit_synced": "🛰️ ഉപഗ്രഹ കണക്ഷൻ തത്സമയം",
+        "f2_temp": "താപനില",
+        "f2_humidity": "ഈർപ്പം",
+        "f2_rain": "24 മണിക്കൂർ മഴ സാധ്യത",
+        "f2_ndvi": "സെന്റിനൽ NDVI സൂചിക",
+        "f2_spore_warn_title": "⚠️ 48 മണിക്കൂർ ഫംഗസ് രോഗ മുന്നറിയിപ്പ്:",
+        "f2_spore_warn_desc": "ഉയർന്ന ഈർപ്പവും (>75%) ചൂടും കാരണം കുമിൾ രോഗ സാധ്യത കൂടുതലാണ്. രാസവളം ഒഴിവാക്കി പുളിച്ച മോര്-കായം മിശ്രിതം തളിക്കുക.",
+        "f2_spore_stable": "🌤️ <b>കാലാവസ്ഥ സുരക്ഷിതമാണ്</b>: പെട്ടെന്ന് കുമിൾ ബാധ ഉണ്ടാകാനുള്ള സാധ്യത കുറവാണ്.",
+        "f2_wa_btn": "കാലാവസ്ഥ നിർദ്ദേശം വാട്ട്‌സ്ആപ്പിൽ പങ്കിടുക",
+        "f2_soil_title": "മണ്ണ് സംരക്ഷണവും വിള പരിക്രമണവും",
+        "f2_soil_btn": "🌱 ജൈവ വിള പരിക്രമണ പദ്ധതി കണക്കാക്കുക",
+        "f3_title": "പ്രാദേശിക കീട മുന്നറിയിപ്പ്",
+        "f3_badge": "🛡️ സമീപ പ്രദേശത്തെ മുന്നറിയിപ്പുകൾ",
+        "f3_radar_label": "🎯 പ്രാദേശിക കീട ഭീഷണി റഡാർ:",
+        "f3_sync_btn": "🔄 ലൈവ് ഡാറ്റ പുതുക്കുക",
+        "f3_my_farm": "📍 എന്റെ കൃഷിയിടം",
+        "f3_target_crop": "ബാധിക്കുന്ന വിള",
+        "f3_telemetry": "കാലാവസ്ഥ റഡാർ ഉറവിടം",
+        "f3_farmer_benefit": "ഏക്കറിന് ലാഭിക്കുന്ന തുക",
+        "f3_action_mandate": "കർഷകൻ ഉടൻ ചെയ്യേണ്ട നടപടി:",
+        "f3_wa_btn": "ഗ്രാമ വാട്ട്‌സ്ആപ്പ് ഗ്രൂപ്പിൽ മുന്നറിയിപ്പ് പങ്കിടുക",
+        "f3_pan_india": "🌐 24/7 ദേശീയ കീട നിരീക്ഷണ റഡാർ (28 സംസ്ഥാനങ്ങൾ)",
+        "f3_why_crit_title": "ദേശീയ കീട നിരീക്ഷണ റഡാറിന്റെ പ്രാധാന്യം:",
+        "f3_why_crit_p1": "• <b>⏳ 3-7 ദിവസം മുൻകൂട്ടിയുള്ള മുന്നറിയിപ്പ്:</b> കാറ്റ് വഴി അയൽ സംസ്ഥാനങ്ങളിൽ നിന്ന് വരുന്ന കീടങ്ങളെ അതിർത്തി കടക്കുന്നതിന് മുൻപ് തന്നെ തിരിച്ചറിഞ്ഞ് മുന്നറിയിപ്പ് നൽകുന്നു.",
+        "f3_why_crit_p2": "• <b>💰 ₹30,000 - ₹42,500/ഏക്കറിന് ലാഭം:</b> വിള നശിച്ച ശേഷം കീടനാശിനി വാങ്ങാതെ, മുൻകൂട്ടി ജൈവ പ്രതിവിധികൾ (വേപ്പെണ്ണ, മോര്-കായം, ഫെറമോൺ ട്രാപ്പ്) ഉപയോഗിച്ച് ചെലവ് ഒഴിവാക്കാം.",
+        "f3_why_crit_p3": "• <b>🤝 കാർഷിക സർവകലാശാലകളുടെ സഹകരണം:</b> 15-ലധികം കാർഷിക സർവകലാശാലകൾ തത്സമയ വിവരങ്ങൾ പങ്കിടുന്നു.",
+        "f3_corridor_select_label": "ലൈവ് റഡാർ പരിശോധിക്കാൻ ഇടനാഴി തിരഞ്ഞെടുക്കുക:",
+        "f3_corridor_wa_btn": "വാട്ട്‌സ്ആപ്പ് ഗ്രൂപ്പിൽ റഡാർ മുന്നറിയിപ്പ് പങ്കിടുക",
+        "f4_title": "മണ്ടി & ഡിപിസി ന്യായവില കവചം",
+        "f4_badge": "🛡️ ഇടനിലക്കാരുടെ ചൂഷണം തടയൽ",
+        "f4_emp_title": "💡 കർഷകരെ സംരക്ഷിക്കുന്ന ന്യായവില കവചം (ഉപയോഗം):",
+        "f4_emp_p1": "• <b>ഇടനിലക്കാരുടെ ചൂഷണത്തിന് അറുതി:</b> കമ്പോള വിലയറിയാത്ത കർഷകരിൽ നിന്ന് ക്വിന്റലിന് ₹400 മുതൽ ₹500 വരെ കുറച്ച് പറ്റിക്കുന്നത് തടഞ്ഞ്, സർക്കാരിന്റെ സംഭരണ കേന്ദ്രങ്ങളുടെ (DPC / MSP) വില സുതാര്യമായി നൽകുന്നു.",
+        "f4_emp_p2": "• <b>ഈർപ്പ കിഴിവ് സംരക്ഷണം:</b> സർക്കാർ കേന്ദ്രങ്ങളിൽ 17% വരെ ഈർപ്പമുള്ള വിളകൾക്ക് ഒരു കിഴിവും കൂടാതെ മുഴുവൻ തുകയും ലഭിക്കും. ഈർപ്പം കൂടുതലാണെങ്കിൽ 4 മണിക്കൂർ വെയിലത്ത് ഉണക്കി മുഴുവൻ വിലയും വാങ്ങാം!",
+        "f4_crop_label": "🌾 വിള തിരഞ്ഞെടുക്കുക:",
+        "f4_qty_label": "⚖️ വിളവിന്റെ അളവ് (ക്വിന്റൽ):",
+        "f4_offer_label": "🤝 കച്ചവടക്കാരൻ നൽകുന്ന വില (₹/ക്വിന്റൽ):",
+        "f4_moisture_label": "💧 ധാന്യത്തിന്റെ ഈർപ്പം % (സർക്കാർ പരിധി {limit}%):",
+        "f4_faq_ok_title": "✅ സർക്കാർ ഗുണനിലവാരം ഉറപ്പുവരുത്തി",
+        "f4_faq_ok_desc": "ഒരു കിഴിവും അനുവദിക്കില്ല! സർക്കാർ ഡിപിസിയിൽ നിന്ന് 100% മുഴുവൻ തുകയും ലഭിക്കും.",
+        "f4_faq_warn_title": "⚠️ ഈർപ്പം {m}% (പരിധിയിൽ കൂടുതൽ +{diff}%)",
+        "f4_faq_warn_desc": "വെയിലത്ത് {hrs} മണിക്കൂർ ഉണക്കുക! ഇടനിലക്കാർക്ക് കിഴിവ് നൽകരുത്.",
+        "f4_gov_rate": "🏛️ സർക്കാർ സംഭരണ വില (MSP)",
+        "f4_gov_sub": "100% ഉറപ്പുള്ള കുറഞ്ഞ വില",
+        "f4_trader_offer": "🤝 കച്ചവടക്കാരന്റെ വാഗ്ദാനം",
+        "f4_below_rate": "സർക്കാർ വിലയേക്കാൾ കുറവ്",
+        "f4_saved_cash": "💰 കർഷകന്റെ കീശയിൽ ലഭിക്കുന്ന അധിക ലാഭം",
+        "f4_saved_sub": "+{pct}% ഇടനിലക്കാരനേക്കാൾ കൂടുതൽ ലാഭം",
+        "f4_local_dpc": "📍 പ്രാദേശിക സർക്കാർ സംഭരണ കേന്ദ്രം",
+        "f4_direct_pay": "● ബാങ്ക് അക്കൗണ്ടിലേക്ക് നേരിട്ട് പണം",
+        "f4_dpc_dir_title": "📍 {dist} ജില്ലയിലെ സർക്കാർ സംഭരണ കേന്ദ്രങ്ങൾ (DPC):",
+        "f4_wa_btn": "💬 ഗ്രാമത്തിലെ കർഷക വാട്ട്‌സ്ആപ്പ് ഗ്രൂപ്പിലേക്ക് ന്യായവില മുന്നറിയിപ്പ് അയക്കുക"
+    }
+}
+
+# Resolve active UI localization dictionary
+ui = UI_TEXT.get(app_lang_choice, UI_TEXT["English"])
+
 # --- Main App Header: Clean Agro Hero with Signature Font (Zero-Theory!) ---
 clean_loc_name = selected_district.split("(")[0].strip() if selected_district else "Thanjavur"
 clean_state_name = (active_location.get('state', 'India') if active_location else 'Tamil Nadu').split('(')[0].strip()
@@ -1506,16 +1997,10 @@ render_clean_html(f"""
         </div>
     </div>
     <h1 style="font-size: clamp(2.3rem, 4.8vw, 3.4rem); font-weight: 800; line-height: 1.15; color: #ffffff; margin: 0 0 10px 0; text-shadow: 0 4px 28px rgba(0,0,0,0.65); letter-spacing: -0.8px;">
-        <span style="font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400; color: #d4f938; text-shadow: 0 4px 24px rgba(197, 249, 57, 0.55);">Smart Agriculture</span> Intelligence
+        <span style="font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400; color: #d4f938; text-shadow: 0 4px 24px rgba(197, 249, 57, 0.55);">{ui['hero_sub']}</span> {ui['hero_intel']}
     </h1>
     <div style="font-size: 0.92rem; color: #e2f8eb; line-height: 1.5; margin-bottom: 4px; font-weight: 500; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-        <span style="color: #a7f3d0; font-weight: 700;">🍃 Plant Doctor</span>
-        <span style="opacity: 0.35;">•</span>
-        <span style="color: #67e8f9; font-weight: 700;">🌦️ Live Weather & Satellite</span>
-        <span style="opacity: 0.35;">•</span>
-        <span style="color: #fde68a; font-weight: 700;">🚨 Regional Pest Alerts</span>
-        <span style="opacity: 0.35;">•</span>
-        <span style="color: #c084fc; font-weight: 700;">💰 Mandi & DPC Fair Price</span>
+        {ui['hero_tags']}
     </div>
 </div>
 """)
@@ -1533,8 +2018,8 @@ render_clean_html(f"""
         <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(4, 38, 24, 0.75) 100%); border: 1.5px solid rgba(52, 211, 153, 0.45); border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
             <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(16, 185, 129, 0.3); display: flex; align-items: center; justify-content: center; font-size: 18px;">🍃</div>
             <div>
-                <div style="font-size: 0.68rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">FEATURE 1 ↓</div>
-                <div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">Plant Doctor (Disease & Cure)</div>
+                <div style="font-size: 0.68rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">{ui['nav_f1_badge']}</div>
+                <div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">{ui['nav_f1_title']}</div>
             </div>
         </div>
     </a>
@@ -1542,8 +2027,8 @@ render_clean_html(f"""
         <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(15, 23, 42, 0.75) 100%); border: 1.5px solid rgba(56, 189, 248, 0.45); border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
             <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(56, 189, 248, 0.3); display: flex; align-items: center; justify-content: center; font-size: 18px;">🌦️</div>
             <div>
-                <div style="font-size: 0.68rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">FEATURE 2 ↓</div>
-                <div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">Live Weather & Farm Satellite</div>
+                <div style="font-size: 0.68rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">{ui['nav_f2_badge']}</div>
+                <div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">{ui['nav_f2_title']}</div>
             </div>
         </div>
     </a>
@@ -1551,8 +2036,8 @@ render_clean_html(f"""
         <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(30, 20, 10, 0.75) 100%); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
             <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(245, 158, 11, 0.3); display: flex; align-items: center; justify-content: center; font-size: 18px;">🚨</div>
             <div>
-                <div style="font-size: 0.68rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">FEATURE 3 ↓</div>
-                <div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">Regional Pest Attack Alerts</div>
+                <div style="font-size: 0.68rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">{ui['nav_f3_badge']}</div>
+                <div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">{ui['nav_f3_title']}</div>
             </div>
         </div>
     </a>
@@ -1560,8 +2045,8 @@ render_clean_html(f"""
         <div style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(24, 9, 39, 0.75) 100%); border: 1.5px solid rgba(192, 132, 252, 0.45); border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);">
             <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(168, 85, 247, 0.3); display: flex; align-items: center; justify-content: center; font-size: 18px;">💰</div>
             <div>
-                <div style="font-size: 0.68rem; color: #e9d5ff; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">FEATURE 4 ↓</div>
-                <div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">Mandi & DPC Fair Price Shield</div>
+                <div style="font-size: 0.68rem; color: #e9d5ff; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">{ui['nav_f4_badge']}</div>
+                <div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">{ui['nav_f4_title']}</div>
             </div>
         </div>
     </a>
@@ -1993,19 +2478,19 @@ render_clean_html(f"""
     <div style="display: flex; align-items: center; gap: 12px;">
         <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🍃</div>
         <div>
-            <div style="font-size: 0.72rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">FEATURE 01</div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Plant Doctor (Crop Disease & Cure)</div>
+            <div style="font-size: 0.72rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">{ui['nav_f1_badge']}</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">{ui['nav_f1_title']}</div>
         </div>
     </div>
     <div style="background: rgba(16, 185, 129, 0.22); color: #a7f3d0; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #10b981;">
-        ⚡ 1-Tap Photo Check
+        {ui['f1_badge']}
     </div>
 </div>
 """)
 with st.container():
     st.markdown('<div id="plant-doctor-anchor" style="position: relative; top: -20px;"></div>', unsafe_allow_html=True)
     # Visual 3-Step Interactive Workflow Banner (Zero-Theory, Picture-First!)
-    render_clean_html("""
+    render_clean_html(f"""
     <div style="
         display: flex;
         align-items: center;
@@ -2020,17 +2505,17 @@ with st.container():
     ">
         <div style="display: flex; align-items: center; gap: 6px;">
             <span style="font-size: 16px;">📸</span>
-            <b style="color: #ffffff; font-size: 12.5px;">1. Snap / Upload Leaf</b>
+            <b style="color: #ffffff; font-size: 12.5px;">{ui['f1_step1']}</b>
         </div>
         <span style="color: #34d399; font-size: 12px;">➔</span>
         <div style="display: flex; align-items: center; gap: 6px;">
             <span style="font-size: 16px;">⚡</span>
-            <b style="color: #fde68a; font-size: 12.5px;">2. 1-Tap AI Diagnosis</b>
+            <b style="color: #fde68a; font-size: 12.5px;">{ui['f1_step2']}</b>
         </div>
         <span style="color: #34d399; font-size: 12px;">➔</span>
         <div style="display: flex; align-items: center; gap: 6px;">
             <span style="font-size: 16px;">🖼️</span>
-            <b style="color: #a7f3d0; font-size: 12.5px;">3. Pictorial Recipe & Voice</b>
+            <b style="color: #a7f3d0; font-size: 12.5px;">{ui['f1_step3']}</b>
         </div>
     </div>
     """)
@@ -2052,20 +2537,20 @@ with st.container():
         inspection_mode = "🔬 Single Leaf Deep Dive"
 
         input_method = st.radio(
-            "Select Photo Source", 
-            ["📁 Upload Leaf Photo", "📸 Live Camera Snap"], 
+            ui['f1_source'], 
+            [ui['f1_upload'], ui['f1_camera']], 
             horizontal=True
         )
         uploaded_image = None
         uploaded_file = None
         camera_file = None
 
-        if "Upload" in input_method:
-            uploaded_file = st.file_uploader("Upload diseased crop leaf photo (JPG, PNG)", type=["jpg", "jpeg", "png"])
+        if input_method == ui['f1_upload'] or "Upload" in input_method:
+            uploaded_file = st.file_uploader(ui['f1_upload_hint'], type=["jpg", "jpeg", "png"])
             if uploaded_file:
                 uploaded_image = Image.open(uploaded_file)
         else:
-            camera_file = st.camera_input("Point camera at diseased crop leaf")
+            camera_file = st.camera_input(ui['f1_camera_hint'])
             if camera_file:
                 uploaded_image = Image.open(camera_file)
 
@@ -2111,7 +2596,7 @@ with st.container():
 
     col_btn, col_audio = st.columns([1, 1])
     with col_btn:
-        analyze_clicked = st.button(t("diagnose_btn"), type="primary", use_container_width=True)
+        analyze_clicked = st.button(ui['f1_btn'], type="primary", use_container_width=True)
 
     if "foliar_diagnosis" not in st.session_state:
         st.session_state["foliar_diagnosis"] = None
@@ -2287,12 +2772,12 @@ At the very end of your response, write these exact metadata tags:
                     is_banana = True
 
                 if is_powdery_mildew:
-                    diagnosed_crop = "Rose / Horticultural Foliage (ரோஜா / பயிர் இலை மாதிரி)"
-                    diagnosed_disease = "Powdery Mildew (Podosphaera pannosa / சாம்பல் நோய்)"
+                    diagnosed_crop = "Rose / Horticultural Foliage" if iso_lang == "en" else ("ரோஜா / பயிர் இலை மாதிரி" if iso_lang == "ta" else "गुलाब / बागवानी पत्ती" if iso_lang == "hi" else "ಗುಲಾಬಿ / ತೋಟಗಾರಿಕಾ ಎಲೆ" if iso_lang == "kn" else "గులాబీ / ఉద్యాన పంట ఆకు" if iso_lang == "te" else "റോസ് / കാർഷിക ഇല")
+                    diagnosed_disease = "Powdery Mildew (Podosphaera pannosa)" if iso_lang == "en" else ("சாம்பல் நோய் (Powdery Mildew)" if iso_lang == "ta" else "चूर्णिल आसिता (Powdery Mildew)" if iso_lang == "hi" else "ಬೂದಿ ರೋಗ (Powdery Mildew)" if iso_lang == "kn" else "బూడిద తెగులు (Powdery Mildew)" if iso_lang == "te" else "ചാരപ്പൂപ്പ് രോഗം (Powdery Mildew)")
                     diagnosed_remedy = "Fermented Sour Buttermilk (500ml) + 5g Hing in 10L clean water OR 5% Neem Seed Kernel Extract (NSKE)"
                     display_text = f"""### 1. Crop & Disease Diagnosis
-* **Crop Name:** Rose / Horticultural & Field Foliage (ரோஜா / பயிர் இலை மாதிரி)
-* **Diagnosis:** Powdery Mildew (Podosphaera pannosa / Erysiphe cichoracearum / சாம்பல் நோய்)
+* **Crop Name:** Rose / Horticultural & Field Foliage
+* **Diagnosis:** Powdery Mildew (Podosphaera pannosa / Erysiphe cichoracearum)
 * **Confidence Level:** 96% (ICAR & TNAU Clinical Mycology Benchmark)
 * **Severity Index:** Severe (Extensive white superficial powdery fungal mycelium & conidia across foliar lamina)
 
@@ -2314,21 +2799,21 @@ At the very end of your response, write these exact metadata tags:
                     if iso_lang == "ta":
                         live_speech = "வணக்கம் விவசாயி அவர்களே... உங்கள் பயிர் இலையில், சாம்பல் நோய் (Powdery Mildew) தாக்கியுள்ளது. இலைகளில் வெள்ளை நிற மாவு போன்ற பூஞ்சாணம் படர்ந்துள்ளது. இன்று மாலையே, புளித்த மோர் கரைசலுடன் பெருங்காயம் கலந்து அல்லது வேப்ப எண்ணெய் தெளிக்கவும். சாம்பல் நோய் உடனடியாக கட்டுப்படும்."
                     elif iso_lang == "ml":
-                        live_speech = "നമസ്കാരം കർഷക സുഹൃത്തേ... വിളയിൽ ചാരപ്പൂപ്പ് രോഗം (Powdery Mildew / സാമ്പൽ രോഗം) കണ്ടെത്തി. ഇലകളിൽ വെളുത്ത പൊടി പടർന്നിരിക്കുന്നു. പുളിച്ച മോരും കായവും ചേർത്ത മിശ്രിതം വൈകുന്നേരം തളിക്കുക."
+                        live_speech = "നമസ്കാരം കർഷക സുഹൃത്തേ... വിളയിൽ ചാരപ്പൂപ്പ് രോഗം (Powdery Mildew) കണ്ടെത്തി. ഇലകളിൽ വെളുത്ത പൊടി പടർന്നിരിക്കുന്നു. പുളിച്ച മോരും കായവും ചേർത്ത മിശ്രിതം വൈകുന്നേരം തളിക്കുക."
                     elif iso_lang == "kn":
                         live_speech = "ನಮಸ್ಕಾರ ರೈತ ಬಾಂಧವರೇ... ಬೆಳೆಯಲ್ಲಿ ಬೂದಿ ರೋಗ (Powdery Mildew) ಕಾಣಿಸಿಕೊಂಡಿದೆ. ಎಲೆಗಳ ಮೇಲೆ ಬಿಳಿ ಬೂದಿಯಂತೆ ಶಿಲೀಂಧ್ರ ಹರಡಿದೆ. ಹುಳಿ ಮಜ್ಜಿಗೆ ಮತ್ತು ಇಂಗಿನ ದ್ರಾವಣ ಸಿಂಪಡಿಸಿ."
                     elif iso_lang == "te":
-                        live_speech = "నమస్కారం రైతు సోదరులారా... పంట ఆకులపై బూడిద తెగులు (Powdery Mildew) కనిపించింది. సాయంత్రం పులిసిన మజ్జిగ మరియు ఇంగువ ద్రావణాన్ని పిచికారీ చేయండి."
+                        live_speech = "నమస్కారం రైతు సోదరులారా... పంట ఆకులపై బూడిద తెగులు (Powdery Mildew) కనిపించింది. సాయంత్రం పులిసిన మజ్జిగ మరియు ఇంగువ ద్రావణాన్ని పిచಿಕారీ చేయండి."
                     elif iso_lang == "hi":
-                        live_speech = "नमस्ते किसान भाई... आपकी फसल की पत्ती में चूर्णिल आसिता / छाछिया रोग (Powdery Mildew / சாம்பல் நோய்) देखा गया है। शाम को खट्टी छाछ और हींग का घोल या नीम तेल का छिड़काव करें।"
+                        live_speech = "नमस्ते किसान भाई... आपकी फसल की पत्ती में चूर्णिल आसिता / छाछिया रोग (Powdery Mildew) देखा गया है। शाम को खट्टी छाछ और हींग का घोल या नीम तेल का छिड़काव करें।"
                     else:
-                        live_speech = "Hello farmer... Powdery Mildew disease (சாம்பல் நோய்) detected on foliage. White talcum-like fungal mycelium observed across leaf lamina. Spray fermented sour buttermilk with hing or five percent neem oil in the evening."
+                        live_speech = "Hello farmer... Powdery Mildew disease detected on foliage. White talcum-like fungal mycelium observed across leaf lamina. Spray fermented sour buttermilk with hing or five percent neem oil in the evening."
                 elif is_paddy:
-                    diagnosed_crop = "Paddy / Rice (Oryza sativa / நெல்)"
-                    diagnosed_disease = "Paddy Blast (Magnaporthe oryzae / இலைக்கருகல் நோய்)"
+                    diagnosed_crop = "Paddy / Rice (Oryza sativa)" if iso_lang == "en" else ("நெல் பயிர் (Oryza sativa / Paddy)" if iso_lang == "ta" else "धान / चावल (Oryza sativa)" if iso_lang == "hi" else "ಭತ್ತ (Oryza sativa)" if iso_lang == "kn" else "వరి (Oryza sativa)" if iso_lang == "te" else "നെല്ല് (Oryza sativa)")
+                    diagnosed_disease = "Paddy Blast (Magnaporthe oryzae)" if iso_lang == "en" else ("குலைநோய் / இலைக்கருகல் (Paddy Blast)" if iso_lang == "ta" else "धान का झुलसा रोग (Paddy Blast)" if iso_lang == "hi" else "ಬೆಂಕಿ ರೋಗ (Paddy Blast)" if iso_lang == "kn" else "అగ్గితెగులు (Paddy Blast)" if iso_lang == "te" else "കുമിൾ രോഗം (Paddy Blast)")
                     diagnosed_remedy = "5% Neem Seed Kernel Extract (NSKE) or Agniastram + Pseudomonas fluorescens (1kg/acre)"
                     display_text = f"""### 1. Crop & Disease Diagnosis
-* **Crop Name:** Oryza sativa (Paddy / Rice / நெல்)
+* **Crop Name:** Oryza sativa (Paddy / Rice)
 * **Diagnosis:** Paddy Blast (Magnaporthe oryzae / Pyricularia grisea)
 * **Confidence Level:** 95% (ICAR Delta Rice Benchmark Verified)
 * **Severity Index:** Severe (Spindle-shaped elliptical lesions with grey centers and brown borders)
@@ -2355,17 +2840,17 @@ At the very end of your response, write these exact metadata tags:
                     elif iso_lang == "kn":
                         live_speech = "ನಮಸ್ಕಾರ ರೈತ ಬಾಂಧವರೇ... ಭತ್ತದ ಬೆಳೆಗೆ ಬ್ಲಾಸ್ಟ್ ರೋಗ ತಗುಲಿದೆ. ಐದು ಪ್ರತಿಶತ ಬೇವಿನ ಬೀಜದ ಕಷಾಯ ಅಥವಾ ಸ್ಯೂಡೋಮೊನಾಸ್ ಸಿಂಪಡಿಸಿ."
                     elif iso_lang == "te":
-                        live_speech = "నమస్కారం రైతు సోదరులారా... వరి పంటలో అగ్గి తెగులు కనిపించింది. సాయంత్రం ఐదు శాతం వేప గಿంజల కషాయం పిచికారీ చేయండి."
+                        live_speech = "నమస్కారం రైతు సోదరులారా... వరి పంటలో అగ్గి తెగులు కనిపించింది. సాయంత్రం ఐదు శాతం వేప గింజల కషాయం పిచికారీ చేయండి."
                     elif iso_lang == "hi":
                         live_speech = "नमस्ते किसान भाई... धान की फसल में ब्लास्ट रोग देखा गया है। शाम के समय पांच प्रतिशत नीम अर्क का छिड़काव करें। यूरिया का अधिक प्रयोग न करें।"
                     else:
                         live_speech = "Hello farmer... Paddy Blast disease detected on foliage. Spray five percent neem seed kernel extract or Pseudomonas fluorescens this evening. Avoid excessive urea application."
                 elif is_tomato:
-                    diagnosed_crop = "Tomato (Solanum lycopersicum / தக்காளி)"
-                    diagnosed_disease = "Early Blight (Alternaria solani / இலைப்புள்ளி நோய்)"
+                    diagnosed_crop = "Tomato (Solanum lycopersicum)" if iso_lang == "en" else ("தக்காளி பயிர் (Tomato / Solanum lycopersicum)" if iso_lang == "ta" else "टमाटर (Solanum lycopersicum)" if iso_lang == "hi" else "ಟೊಮೆಟೊ (Solanum lycopersicum)" if iso_lang == "kn" else "టమోటా (Solanum lycopersicum)" if iso_lang == "te" else "തക്കാളി (Solanum lycopersicum)")
+                    diagnosed_disease = "Early Blight (Alternaria solani)" if iso_lang == "en" else ("அர்லி பிளைட் / இலைக்கருகல் (Early Blight)" if iso_lang == "ta" else "अगेती झुलसा (Early Blight)" if iso_lang == "hi" else "ಮುಂಚಿನ ಕಮಟು ರೋಗ (Early Blight)" if iso_lang == "kn" else "ముందస్తు తెగులు (Early Blight)" if iso_lang == "te" else "ഏർലി ബ്ലൈറ്റ് (Early Blight)")
                     diagnosed_remedy = "5% Neemastram or fermented sour buttermilk (500ml) + Hing (5g) in 10L water"
                     display_text = f"""### 1. Crop & Disease Diagnosis
-* **Crop Name:** Solanum lycopersicum (Tomato / தக்காளி)
+* **Crop Name:** Solanum lycopersicum (Tomato)
 * **Diagnosis:** Early Blight (Alternaria solani)
 * **Confidence Level:** 92% (High / ICAR Horti Benchmark Aligned)
 * **Severity Index:** Moderate (Concentric dark brown 'target' rings on lower foliage)
@@ -2388,7 +2873,7 @@ At the very end of your response, write these exact metadata tags:
                     if iso_lang == "ta":
                         live_speech = "வணக்கம் விவசாயி அவர்களே... தக்காளி இலைக்கு, அர்லி பிளைட் நோய் வந்துள்ளது. ஐந்து சதவீத வேப்ப எண்ணெய் கரைசலை, மாலையில் தெளிக்கவும். செடி மேல் நீர் தேங்காமல், பார்த்துக் கொள்ளவும்."
                     elif iso_lang == "ml":
-                        live_speech = "നമസ്കാരം കർഷക സുഹൃത്തേ... തക്കാളി இലയിൽ ഏർലി ബ്ലൈറ്റ് രോഗബാധ കണ്ടെത്തി. അഞ്ച് ശതമാനം വേപ്പെണ്ണ മിശ്രിതം വൈകുന്നേരം തളിക്കുക."
+                        live_speech = "നമസ്കാരം കർഷക സുഹൃത്തേ... തക്കാളി ഇലയിൽ ഏർലി ബ്ലൈറ്റ് രോഗബാധ കണ്ടെത്തി. അഞ്ച് ശതമാനം വേപ്പെണ്ണ മിശ്രിതം വൈകുന്നേരം തളിക്കുക."
                     elif iso_lang == "kn":
                         live_speech = "ನಮಸ್ಕಾರ ರೈತ ಬಾಂಧವರೇ... ಟೊಮೆಟೊ ಎಲೆಗೆ ಅರ್ಲಿ ಬ್ಲೈಟ್ ರೋಗ ಬಂದಿದೆ. ಐದು ಪ್ರತಿಶತ ಬೇವಿನ ಎಣ್ಣೆ ಸಿಂಪಡಿಸಿ."
                     elif iso_lang == "te":
@@ -2398,11 +2883,11 @@ At the very end of your response, write these exact metadata tags:
                     else:
                         live_speech = "Hello farmer... Tomato leaf early blight disease detected. Please spray five percent neem extract or sour buttermilk with hing in the evening."
                 elif is_banana:
-                    diagnosed_crop = "Banana / Plantain (Musa acuminata / வாழை)"
-                    diagnosed_disease = "Sigatoka Leaf Spot (Pseudocercospora musae / இலைப்புள்ளி நோய்)"
+                    diagnosed_crop = "Banana / Plantain (Musa acuminata)" if iso_lang == "en" else ("வாழை பயிர் (Banana / Musa acuminata)" if iso_lang == "ta" else "केला (Musa acuminata)" if iso_lang == "hi" else "ಬಾಳೆ (Musa acuminata)" if iso_lang == "kn" else "అరటి (Musa acuminata)" if iso_lang == "te" else "വാഴ (Musa acuminata)")
+                    diagnosed_disease = "Sigatoka Leaf Spot (Pseudocercospora musae)" if iso_lang == "en" else ("சிகடோகா இலைப்புள்ளி நோய் (Sigatoka Leaf Spot)" if iso_lang == "ta" else "सिगाटोका धब्बा रोग (Sigatoka Leaf Spot)" if iso_lang == "hi" else "ಸಿಗಾಟೋಕಾ ಎಲೆ ಚುಕ್ಕೆ ರೋಗ (Sigatoka Leaf Spot)" if iso_lang == "kn" else "సిగాటోకా ఆకుమచ్చ తెగులు (Sigatoka Leaf Spot)" if iso_lang == "te" else "സിഗാറ്റോക്ക ഇലപ്പുള്ളി രോഗം (Sigatoka Leaf Spot)")
                     diagnosed_remedy = "5% Neemastram or 3% Panchagavya foliar spray + fermented sour buttermilk-hing solution"
                     display_text = f"""### 1. Crop & Disease Diagnosis
-* **Crop Name:** Musa acuminata (Banana / Plantain / வாழை)
+* **Crop Name:** Musa acuminata (Banana / Plantain)
 * **Diagnosis:** Sigatoka Leaf Spot / Cercospora Leaf Spot (Pseudocercospora musae / Mycosphaerella musicola)
 * **Confidence Level:** 94% (TNAU / ICAR Tropical Horticulture Benchmark)
 * **Severity Index:** Moderate to Severe (Characteristic spindle-shaped yellow streaks turning necrotic brown with pale grey centers and bright yellow chlorotic halo rings)
@@ -2429,18 +2914,18 @@ At the very end of your response, write these exact metadata tags:
                     elif iso_lang == "kn":
                         live_speech = "ನಮಸ್ಕಾರ ರೈತ ಬಾಂಧವರೇ... ಬಾಳೆ ಎಲೆಗೆ ಸಿಗಾಟೋಕಾ ಚುಕ್ಕೆ ರೋಗ ಬಂದಿದೆ. ಹುಳಿ ಮಜ್ಜಿಗೆ ಮತ್ತು ಇಂಗಿನ ದ್ರಾವಣ ಸಿಂಪಡಿಸಿ."
                     elif iso_lang == "te":
-                        live_speech = "నమస్కారం రైతు సోదరులారా... అరటి ఆకుపై సిగాటోకా తెగులు కనిపించింది. పులిసిన మజ్జిగ మరియు ఇంగువ ద్రావణాన్ని పిచికారీ చేయండి."
+                        live_speech = "నమస్కారం రైతు సోదరులారా... అరటి ఆకుపై సిగాటోకా తెగులు కనిపించింది. పులిసిన మజ్జిగ మరియు ఇంగువ ద్రావణాన్ని పిచಿಕారీ చేయండి."
                     elif iso_lang == "hi":
                         live_speech = "नमस्ते किसान भाई... केले की पत्ती में सिगाटोका धब्बा रोग देखा गया है। खट्टी छाछ और हींग के घोल का शाम को छिड़काव करें।"
                     else:
                         live_speech = "Hello farmer... Banana Sigatoka leaf spot disease detected. Spray fermented sour buttermilk with hing in the evening and prune affected lower foliage."
                 else:
-                    diagnosed_crop = "Agricultural Crop Foliage (விவசாய இலை மாதிரி)"
-                    diagnosed_disease = "Cercospora Foliar Spotting & Micro-Nutrient Chlorosis (இலைப்புள்ளி மற்றும் ஊட்டச்சத்து குறைபாடு)"
+                    diagnosed_crop = "Agricultural Crop Foliage" if iso_lang == "en" else ("விவசாய இலை மாதிரி (Crop Foliage)" if iso_lang == "ta" else "फसल की पत्ती (Crop Foliage)" if iso_lang == "hi" else "ಬೆಳೆಯ ಎಲೆ (Crop Foliage)" if iso_lang == "kn" else "పంట ఆకు (Crop Foliage)" if iso_lang == "te" else "കാർഷിക ഇല (Crop Foliage)")
+                    diagnosed_disease = "Cercospora Foliar Spotting & Micro-Nutrient Chlorosis" if iso_lang == "en" else ("இலைப்புள்ளி மற்றும் ஊட்டச்சத்து குறைபாடு (Cercospora Spotting)" if iso_lang == "ta" else "सर्कॉस्पोरा पत्ती धब्बा एवं क्लोरोसिस" if iso_lang == "hi" else "ಸರ್ಕೋಸ್ಪೊರಾ ಎಲೆ ಚುಕ್ಕೆ ರೋಗ" if iso_lang == "kn" else "సర్కోస్పోరా ఆకుమచ్చ తెగులు" if iso_lang == "te" else "സെർക്കോസ്പോറ ഇലപ്പുള്ളി രോഗം")
                     diagnosed_remedy = "Panchagavya (3%) foliar spray + 5% Neemastram natural pest repellent"
                     display_text = f"""### 1. Crop & Disease Diagnosis
-* **Crop Name:** Field Agricultural Foliar Sample (பயிர் இலை மாதிரி)
-* **Diagnosis:** Cercospora Foliar Spotting & Micro-Nutrient Chlorosis (இலைப்புள்ளி நோய்)
+* **Crop Name:** Field Agricultural Foliar Sample
+* **Diagnosis:** Cercospora Foliar Spotting & Micro-Nutrient Chlorosis
 * **Confidence Level:** 89% (ICAR Multi-Crop Diagnostic Grid)
 * **Severity Index:** Moderate (Localized necrotic spotting with interveinal yellowing)
 
@@ -3100,12 +3585,12 @@ render_clean_html(f"""
     <div style="display: flex; align-items: center; gap: 12px;">
         <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(56, 189, 248, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🌦️</div>
         <div>
-            <div style="font-size: 0.72rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">FEATURE 02</div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Live Weather & Farm Satellite</div>
+            <div style="font-size: 0.72rem; color: #bae6fd; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">{ui['nav_f2_badge']}</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">{ui['nav_f2_title']}</div>
         </div>
     </div>
     <div style="background: rgba(56, 189, 248, 0.2); color: #bae6fd; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #38bdf8;">
-        📡 Live Sensors & Satellite View
+        {ui['f2_badge']}
     </div>
 </div>
 """)
@@ -3171,38 +3656,36 @@ with st.container():
             ndvi_status = "🔴 Severe Moisture Stress"
 
         # Live Telemetry HUD Bar
-        st.markdown("""
+        st.markdown(f"""
         <div style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(90deg, rgba(6, 44, 30, 0.75) 0%, rgba(4, 28, 19, 0.6) 100%); border: 1.5px solid rgba(52, 211, 153, 0.35); border-radius: 14px; padding: 12px 20px; margin: 16px 0 14px 0;">
             <div style="display: flex; align-items: center; gap: 12px;">
                 <span style="display: inline-block; width: 12px; height: 12px; background: #10b981; border-radius: 50%; box-shadow: 0 0 12px #10b981;"></span>
                 <div>
-                    <b style="color: #a7f3d0; font-size: 1.02rem; letter-spacing: 0.5px;">LIVE AGRO-METEOROLOGY & SATELLITE RADAR</b>
-                    <div style="font-size: 0.8rem; color: #6ee7b7;">Open-Meteo High-Resolution Grid • Sentinel-2 MSI Multi-Spectral Telemetry</div>
+                    <b style="color: #a7f3d0; font-size: 1.02rem; letter-spacing: 0.5px;">{ui['f2_hud_title']}</b>
+                    <div style="font-size: 0.8rem; color: #6ee7b7;">{ui['f2_hud_sub']}</div>
                 </div>
             </div>
-            <span style="background: rgba(16, 185, 129, 0.25); border: 1px solid rgba(52, 211, 153, 0.5); color: #ecfdf5; font-size: 0.74rem; font-weight: 700; padding: 4px 12px; border-radius: 14px;">🛰️ ORBIT SYNCED</span>
+            <span style="background: rgba(16, 185, 129, 0.25); border: 1px solid rgba(52, 211, 153, 0.5); color: #ecfdf5; font-size: 0.74rem; font-weight: 700; padding: 4px 12px; border-radius: 14px;">{ui['f2_orbit_synced']}</span>
         </div>
         """, unsafe_allow_html=True)
 
         # Display Metrics
         m1, m2, m3, m4 = st.columns(4)
-        m1.metric(t("metric_temp"), f"{curr_temp} °C", delta="Optimal 24-32°C")
-        m2.metric(t("metric_humidity"), f"{curr_humidity} %", delta="Fungal Risk >75%")
-        m3.metric(t("metric_rain"), f"{rain_prob} %", delta=f"{curr_precip} mm current")
-        m4.metric(t("metric_ndvi"), f"{simulated_ndvi}", delta=ndvi_status)
+        m1.metric(ui['f2_temp'], f"{curr_temp} °C", delta="Optimal 24-32°C")
+        m2.metric(ui['f2_humidity'], f"{curr_humidity} %", delta="Fungal Risk >75%")
+        m3.metric(ui['f2_rain'], f"{rain_prob} %", delta=f"{curr_precip} mm current")
+        m4.metric(ui['f2_ndvi'], f"{simulated_ndvi}", delta=ndvi_status)
 
         # 48-Hour Microclimate Pathogen Risk Banner
         if curr_humidity > 75 and curr_temp > 24:
-            st.markdown("""
+            st.markdown(f"""
             <div class="alert-box">
-                <b>⚠️ 48-Hour Spore Germination Warning:</b> 
-                Relative humidity (>75%) with warm canopy temperature indicates a high vulnerability window for 
-                <b>Fungal Blast & Downey Mildew</b>. Recommended Action: Postpone synthetic urea application; apply preventive 
-                Panchagavya or Cow Urine-Neem foliar spray.
+                <b>{ui['f2_spore_warn_title']}</b><br>
+                {ui['f2_spore_warn_desc']}
             </div>
             """, unsafe_allow_html=True)
         else:
-            st.info("🌤️ **Microclimate Window Stable**: Low immediate fungal spore germination pressure. Suitable for inter-row tilling and bio-mulching.")
+            st.info(ui['f2_spore_stable'])
 
         # 1-Click WhatsApp Weather & Spray Advisory Dispatch
         import urllib.parse
@@ -3221,50 +3704,93 @@ with st.container():
         <div style="margin-top: 10px; margin-bottom: 8px;">
             <a href="{weather_wa_url}" target="_blank" style="text-decoration: none;">
                 <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 10px 16px; border-radius: 12px; font-weight: 800; font-size: 0.84rem; text-align: center; max-width: 440px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35); display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                    <span>💬</span> Share Live Weather & Spray Advisory to WhatsApp
+                    <span>💬</span> {ui['f2_wa_btn']}
                 </div>
             </a>
         </div>
         """, unsafe_allow_html=True)
 
         st.markdown("---")
-        st.subheader(t("soil_title"))
+        st.subheader(ui['f2_soil_title'])
 
         # Intelligent Auto-Detection of default soil based on State / District
-        detected_soil_key = "Red Sandy Loam (செம்மண் / Red Soil)"
+        soil_display_map = {
+            "red_loam": {
+                "English": "Red Sandy Loam (Red Soil)",
+                "Tamil (தமிழ்)": "செம்மண் (Red Sandy Loam)",
+                "Hindi (हिन्दी)": "लाल रेतीली दोमट मिट्टी (Red Soil)",
+                "Telugu (తెలుగు)": "ఎర్ర ఇసుక నేల (Red Sandy Loam)",
+                "Kannada (ಕನ್ನಡ)": "ಕೆಂಪು ಮರಳು ಮಣ್ಣು (Red Sandy Loam)",
+                "Malayalam (മലയാളം)": "ചുവന്ന മണൽ മണ്ണ് (Red Sandy Loam)"
+            },
+            "black_clay": {
+                "English": "Black Clayey Soil (Regur / Deccan)",
+                "Tamil (தமிழ்)": "கரிசல் மண் (Black Clayey / Regur)",
+                "Hindi (हिन्दी)": "काली दोमट मिट्टी (Regur / Black Soil)",
+                "Telugu (తెలుగు)": "నల్ల నేల (Black Clayey Soil)",
+                "Kannada (ಕನ್ನಡ)": "ಕಪ್ಪು ಜೇಡಿ ಮಣ್ಣು (Black Clayey Soil)",
+                "Malayalam (മലയാളം)": "കരിമണ്ണ് (Black Clayey Soil)"
+            },
+            "alluvial_loam": {
+                "English": "Alluvial / River Basin Loam (Delta Plains)",
+                "Tamil (தமிழ்)": "வண்டல் மண் (Alluvial / Delta Plains)",
+                "Hindi (हिन्दी)": "जलोढ़ दोमट मिट्टी (Alluvial Loam)",
+                "Telugu (తెలుగు)": "ఒండ్రు నేల (Alluvial Loam)",
+                "Kannada (ಕನ್ನಡ)": "ಮೆಕ್ಕಲು ಮಣ್ಣು (Alluvial Loam)",
+                "Malayalam (മലയാളം)": "എക്കൽ മണ്ണ് (Alluvial Loam)"
+            },
+            "laterite": {
+                "English": "Laterite / Acidic Forest Soil (Coastal Hills)",
+                "Tamil (தமிழ்)": "செம்பொறை மண் (Laterite / Coastal Hills)",
+                "Hindi (हिन्दी)": "लैटेराइट / अम्लीय मिट्टी (Laterite Soil)",
+                "Telugu (తెలుగు)": "లేటరైట్ నేల (Laterite Soil)",
+                "Kannada (ಕನ್ನಡ)": "ಲ್ಯಾಟರೈಟ್ ಮಣ್ಣು (Laterite Soil)",
+                "Malayalam (മലയാളം)": "ലാറ്ററൈറ്റ് മണ്ണ് (Laterite Soil)"
+            },
+            "coastal_sand": {
+                "English": "Coastal Sandy Soil (Coastal Belt)",
+                "Tamil (தமிழ்)": "மணல் பாங்கான மண் (Coastal Sandy Soil)",
+                "Hindi (हिन्दी)": "तटीय रेतीली मिट्टी (Coastal Sandy Soil)",
+                "Telugu (తెలుగు)": "తీరప్రాంత ఇసుక నేల (Coastal Sandy Soil)",
+                "Kannada (ಕನ್ನಡ)": "ಕರಾವಳಿ ಮರಳು ಮಣ್ಣು (Coastal Sandy Soil)",
+                "Malayalam (മലയാളം)": "തീരദേശ മണൽ മണ്ണ് (Coastal Sandy Soil)"
+            }
+        }
+
+        detected_soil_id = "red_loam"
         active_state_str = str(active_location.get('state', '')).lower()
         district_str = str(selected_district).lower()
         if "kerala" in active_state_str or "laterite" in district_str or "konkan" in district_str or "kollam" in district_str or "wayanad" in district_str:
-            detected_soil_key = "Laterite / Acidic Forest Soil (செம்பொறை மண் / Kerala & Coastal Hills)"
+            detected_soil_id = "laterite"
         elif any(kw in district_str for kw in ["delta", "cauvery", "thanjavur", "gangetic", "basin", "bengal", "alluvial", "godavari", "krishna", "kole"]):
-            detected_soil_key = "Alluvial / River Basin Loam (வண்டல் மண் / Delta Plains)"
+            detected_soil_id = "alluvial_loam"
         elif any(kw in district_str for kw in ["cotton", "vidarbha", "malwa", "deccan", "black", "regur", "bellary", "yavatmal"]):
-            detected_soil_key = "Black Clayey Soil (கரிசல் மண் / Regur / Deccan & Vidarbha)"
+            detected_soil_id = "black_clay"
         elif any(kw in district_str for kw in ["coastal", "alappuzha", "puri", "cuddalore"]):
-            detected_soil_key = "Coastal Sandy Soil (மணல் பாங்கான மண் / Coastal Belt)"
+            detected_soil_id = "coastal_sand"
 
         soil_benchmarks = {
-            "Red Sandy Loam (செம்மண் / Red Soil)": {
+            "red_loam": {
                 "n": 95, "p": 24, "k": 125, "ph": 6.4,
                 "status": "Nitrogen Low, Phosphorus Medium, Potassium Adequate, pH 6.4 (Slightly Acidic)",
                 "desc": "Good aeration and permeability, but lower moisture and organic carbon retention. Responds excellently to compost, bio-mulching, and Sesbania green manure."
             },
-            "Black Clayey Soil (கரிசல் மண் / Regur / Deccan & Vidarbha)": {
+            "black_clay": {
                 "n": 110, "p": 18, "k": 210, "ph": 7.8,
                 "status": "Nitrogen Low-Medium, Phosphorus Deficient, Potassium High, pH 7.8 (Mildly Alkaline)",
                 "desc": "Deep cracking clay with massive water holding capacity. Prone to waterlogging; needs aerobic microbial inoculation (PSB) and deep-root legume rotation."
             },
-            "Alluvial / River Basin Loam (வண்டல் மண் / Delta Plains)": {
+            "alluvial_loam": {
                 "n": 140, "p": 42, "k": 165, "ph": 7.0,
                 "status": "Nitrogen Medium, Phosphorus Optimal, Potassium High, pH 7.0 (Neutral & Fertile)",
                 "desc": "High silt deposition from river irrigation. Highly fertile, balanced mineral profile, ideal for intense multi-cropping and green manuring."
             },
-            "Laterite / Acidic Forest Soil (செம்பொறை மண் / Kerala & Coastal Hills)": {
+            "laterite": {
                 "n": 80, "p": 14, "k": 90, "ph": 5.4,
                 "status": "Nitrogen Low, Phosphorus Strongly Bound, Potassium Low, pH 5.4 (Acidic)",
                 "desc": "Leached by heavy tropical monsoon rains. Rich in iron/aluminum oxides. Needs agricultural lime (dolomite/chunam) and mycorrhizal fungi to release fixed phosphorus."
             },
-            "Coastal Sandy Soil (மணல் பாங்கான மண் / Coastal Belt)": {
+            "coastal_sand": {
                 "n": 65, "p": 12, "k": 75, "ph": 6.8,
                 "status": "Nitrogen Deficient, Phosphorus Low, Potassium Low, pH 6.8 (Neutral)",
                 "desc": "Coarse sand with rapid nutrient leaching. Thrives under micro-drip fertigation, coconut husk bio-mulching, and green leaf incorporation."
@@ -3272,25 +3798,28 @@ with st.container():
         }
 
         # User Choice: Auto-Estimate or Exact Card
+        npk_label = "📊 Do you have a Soil Health Card (SHC) Lab Test Report?" if app_lang_choice == "English" else ("📊 உங்களிடம் மண் வள அட்டை (SHC) ஆய்வக சோதனை அறிக்கை உள்ளதா?" if "Tamil" in app_lang_choice else "📊 क्या आपके पास मृदा स्वास्थ्य कार्ड (SHC) लैब रिपोर्ट है?")
+        npk_opt1 = "💡 I don't know my NPK (Auto-Estimate via ICAR Regional Benchmark)" if app_lang_choice == "English" else ("💡 NPK அளவு தெரியாது (ICAR பிராந்திய அளவீடு மூலம் தானாகக் கணக்கிடுக)" if "Tamil" in app_lang_choice else "💡 मुझे NPK नहीं पता (ICAR मानक से स्वतः अनुमान लगाएं)")
+        npk_opt2 = "📋 Yes, I have exact Soil Health Card Lab Numbers" if app_lang_choice == "English" else ("📋 ஆம், என்னிடம் அரசு மண் வள அட்டை எண்கள் உள்ளன" if "Tamil" in app_lang_choice else "📋 हाँ, मेरे पास सटीक लैब नंबर हैं")
         npk_mode = st.radio(
-            "📊 Do you have a Soil Health Card (SHC) Lab Test Report?",
-            [
-                "💡 I don't know my NPK (Auto-Estimate via ICAR Regional Benchmark)",
-                "📋 Yes, I have exact Soil Health Card Lab Numbers"
-            ],
+            npk_label,
+            [npk_opt1, npk_opt2],
             horizontal=True
         )
 
-        if "Auto-Estimate" in npk_mode:
-            soil_keys = list(soil_benchmarks.keys())
-            default_idx = soil_keys.index(detected_soil_key) if detected_soil_key in soil_keys else 0
+        if npk_mode == npk_opt1 or "Auto-Estimate" in npk_mode:
+            soil_ids = list(soil_benchmarks.keys())
+            default_idx = soil_ids.index(detected_soil_id) if detected_soil_id in soil_ids else 0
 
-            soil_type = st.selectbox(
-                "Select Your Soil Appearance / Texture Class (Auto-detected for your district):",
-                soil_keys,
-                index=default_idx
+            sel_label = "Select Your Soil Appearance / Texture Class (Auto-detected for your district):" if app_lang_choice == "English" else ("உங்கள் மண் அமைப்பைத் தேர்ந்தெடுக்கவும் (மாவட்டம் வாரியாக கண்டறியப்பட்டது):" if "Tamil" in app_lang_choice else "अपनी मिट्टी का प्रकार चुनें:")
+            soil_id = st.selectbox(
+                sel_label,
+                soil_ids,
+                index=default_idx,
+                format_func=lambda sid: soil_display_map[sid].get(app_lang_choice, soil_display_map[sid]["English"])
             )
-            benchmark = soil_benchmarks[soil_type]
+            soil_type = soil_display_map[soil_id].get(app_lang_choice, soil_display_map[soil_id]["English"])
+            benchmark = soil_benchmarks[soil_id]
             n_val = benchmark["n"]
             p_val = benchmark["p"]
             k_val = benchmark["k"]
@@ -3305,14 +3834,34 @@ with st.container():
             sc3.metric("Est. Potassium (K)", f"{k_val} kg/ha", delta="High Mineral" if k_val > 150 else "Adequate")
             sc4.metric("Est. Soil pH", f"{ph_val}", delta="Acidic" if ph_val < 6.0 else ("Alkaline" if ph_val > 7.5 else "Neutral"))
 
-            with st.expander("🔍 Don't know which soil you have? Quick 1-minute Field Touch & Appearance Guide"):
-                st.markdown("""
-                * **Red Soil (செம்மண் / Red Loam):** Brick reddish or brown color. Gritty feel, water drains fast, does not become very sticky.
-                * **Black Soil (கரிசல் மண் / Karisal):** Dark brown to black. Very sticky like plasticine when wet; develops large wide cracks when dry in summer.
-                * **Alluvial Loam (வண்டல் மண் / Vandal):** Soft, powdery or silky loam found near rivers and deltas (e.g. Cauvery, Godavari). Highly fertile.
-                * **Laterite Soil (செம்பொறை மண் / Coastal Hills):** Rusty red-yellow porous soil found in high rainfall hill/coastal zones (Kerala, Malnad, Konkan).
-                * **💡 Free Lab Testing Tip:** Under the *National Mission on Soil Health*, any farmer can submit a soil sample at their nearest **Panchayat Krishi Bhavan** or **Krishi Vigyan Kendra (KVK)** for **100% free lab testing & digital SHC card**.
-                """)
+            expander_title = "🔍 Don't know which soil you have? Quick 1-minute Field Touch & Appearance Guide" if app_lang_choice == "English" else ("🔍 உங்கள் மண் எதுவென்று தெரியவில்லையா? 1 நிமிட கள வழிகாட்டி" if "Tamil" in app_lang_choice else "🔍 मिट्टी का प्रकार नहीं जानते? त्वरित 1-मिनट फील्ड गाइड")
+            with st.expander(expander_title):
+                if app_lang_choice == "English":
+                    st.markdown("""
+                    * **Red Soil (Red Sandy Loam):** Brick reddish or brown color. Gritty feel, water drains fast, does not become very sticky.
+                    * **Black Soil (Regur / Black Clay):** Dark brown to black. Very sticky like plasticine when wet; develops large wide cracks when dry in summer.
+                    * **Alluvial Loam (Delta Plains):** Soft, powdery or silky loam found near rivers and deltas (e.g. Cauvery, Godavari). Highly fertile.
+                    * **Laterite Soil (Coastal Hills):** Rusty red-yellow porous soil found in high rainfall hill/coastal zones (Kerala, Malnad, Konkan).
+                    * **Coastal Sandy Soil:** Coarse sand grains with rapid drainage, found along maritime coastlines.
+                    * **💡 Free Lab Testing Tip:** Under the *National Mission on Soil Health*, any farmer can submit a soil sample at their nearest **Panchayat Krishi Bhavan** or **Krishi Vigyan Kendra (KVK)** for **100% free lab testing & digital SHC card**.
+                    """)
+                elif "Tamil" in app_lang_choice:
+                    st.markdown("""
+                    * **செம்மண் (Red Loam):** செங்கல் சிவப்பு அல்லது பழுப்பு நிறம். நீர் விரைவாக வடிகிறது, அதிக ஒட்டும் தன்மை இருக்காது.
+                    * **கரிசல் மண் (Black Soil / Regur):** அடர் பழுப்பு முதல் கருப்பு நிறம். ஈரப்பதத்தில் களிமண் போல் ஒட்டும்; வெயில் காலத்தில் பெரிய விரிசல்கள் ஏற்படும்.
+                    * **வண்டல் மண் (Alluvial Loam):** நதிக்கரை மற்றும் டெல்டா பகுதிகளில் காணப்படும் மிருதுவான, அதிக வளமான மண்.
+                    * **செம்பொறை மண் (Laterite Soil):** அதிக மழை பெய்யும் மலை மற்றும் கடலோரப் பகுதிகளில் காணப்படும் நுண்துளைகள் கொண்ட சிவப்பு-மஞ்சள் மண்.
+                    * **மணல் பாங்கான மண் (Coastal Sandy Soil):** கடலோரப் பகுதிகளில் காணப்படும் அதிக நீர் வடியும் மணல் மண்.
+                    * **💡 இலவச மண் பரிசோதனை:** *தேசிய மண் வள இயக்கத்தின்* கீழ், எந்தவொரு விவசாயியும் தங்கள் கிராம **பஞ்சாயத்து வேளாண் விரிவாக்க மையம் (Krishi Bhavan)** அல்லது **வேளாண் அறிவியல் மையத்தில் (KVK)** **100% இலவசமாக மண் பரிசோதனை செய்து டிஜிட்டல் கார்டு பெறலாம்**.
+                    """)
+                else:
+                    st.markdown("""
+                    * **Red Soil (Red Sandy Loam):** Brick reddish or brown color. Gritty feel, water drains fast.
+                    * **Black Soil (Regur / Black Clay):** Dark brown to black. Very sticky when wet; cracks when dry.
+                    * **Alluvial Loam (Delta Plains):** Soft, powdery or silky loam found near rivers and deltas.
+                    * **Laterite Soil (Coastal Hills):** Rusty red-yellow porous soil in high rainfall hill/coastal zones.
+                    * **💡 Free Lab Testing:** Free lab testing & digital Soil Health Cards available at local Krishi Vigyan Kendras (KVK).
+                    """)
             data_source_str = f"ICAR Regional Agro-Ecological Benchmark for {soil_type}"
         else:
             st.caption("Enter the exact numerical values printed on your government Soil Health Card (SHC) or private lab report:")
@@ -3334,7 +3883,7 @@ with st.container():
         if "soil_dossier" not in st.session_state:
             st.session_state["soil_dossier"] = None
 
-        if st.button(t("soil_calc_btn"), type="primary"):
+        if st.button(ui['f2_soil_btn'], type="primary"):
             with st.spinner(f"Synthesizing Soil + Weather + Satellite NDVI models in {lang_name}..."):
                 custom_ai_text = None
                 cur_lang = app_lang_choice if app_lang_choice in REGEN_I18N else "English"
@@ -3518,12 +4067,12 @@ render_clean_html(f"""
     <div style="display: flex; align-items: center; gap: 12px;">
         <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(245, 158, 11, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">🚨</div>
         <div>
-            <div style="font-size: 0.72rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">FEATURE 03</div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Regional Pest Attack Alerts</div>
+            <div style="font-size: 0.72rem; color: #fde68a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">{ui['nav_f3_badge']}</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">{ui['nav_f3_title']}</div>
         </div>
     </div>
     <div style="background: rgba(245, 158, 11, 0.2); color: #fde68a; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #f59e0b;">
-        🛡️ Nearby Area Warnings
+        {ui['f3_badge']}
     </div>
 </div>
 """)
@@ -3543,14 +4092,14 @@ with st.container():
     with col_sw_head:
         st.markdown(f"""
         <div style="display: flex; align-items: center; gap: 8px; margin: 10px 0 6px 0;">
-            <span style="font-size: 0.9rem; font-weight: 800; color: #fde68a;">🎯 Regional Threat Corridor Radar:</span>
+            <span style="font-size: 0.9rem; font-weight: 800; color: #fde68a;">{ui['f3_radar_label']}</span>
             <span style="font-size: 0.72rem; color: #34d399; background: rgba(52, 211, 153, 0.15); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 12px; padding: 2px 8px; font-weight: 700;">
                 ● LIVE RADAR SYNCED {now_time_str}
             </span>
         </div>
         """, unsafe_allow_html=True)
     with col_sw_refresh:
-        if st.button("🔄 Sync Live Telemetry", key="refresh_feature3_telemetry", use_container_width=True):
+        if st.button(ui['f3_sync_btn'], key="refresh_feature3_telemetry", use_container_width=True):
             st.cache_data.clear()
             st.rerun()
 
@@ -3757,15 +4306,15 @@ with st.container():
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 12px;">
             <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 10px; padding: 10px 12px;">
-                <div style="font-size: 0.7rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">Target Crop</div>
+                <div style="font-size: 0.7rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">{ui['f3_target_crop']}</div>
                 <div style="font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-top: 2px;">🌱 {pest_crop}</div>
             </div>
             <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 10px; padding: 10px 12px;">
-                <div style="font-size: 0.7rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">Telemetry Source</div>
+                <div style="font-size: 0.7rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">{ui['f3_telemetry']}</div>
                 <div style="font-size: 0.85rem; font-weight: 700; color: #34d399; margin-top: 2px;">{telemetry_status}</div>
             </div>
             <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 10px; padding: 10px 12px;">
-                <div style="font-size: 0.7rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">Farmer Benefit / Acre</div>
+                <div style="font-size: 0.7rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">{ui['f3_farmer_benefit']}</div>
                 <div style="font-size: 0.95rem; font-weight: 800; color: #fde68a; margin-top: 2px;">💰 ₹{saved_value:,.0f} Protected</div>
             </div>
         </div>
@@ -3773,7 +4322,7 @@ with st.container():
         <div style="background: rgba(16, 185, 129, 0.15); border: 1.5px solid #10b981; border-radius: 10px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px;">
             <span style="font-size: 1.25rem; line-height: 1;">🛡️</span>
             <div>
-                <div style="font-size: 0.75rem; color: #6ee7b7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Immediate Farmer Action Mandate:</div>
+                <div style="font-size: 0.75rem; color: #6ee7b7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">{ui['f3_action_mandate']}</div>
                 <div style="font-size: 0.88rem; color: #ecfdf5; font-weight: 700; margin-top: 2px; line-height: 1.4;">{shield_action}</div>
             </div>
         </div>
@@ -3797,7 +4346,7 @@ with st.container():
     <div style="margin: 4px 0 16px 0;">
         <a href="{sim_wa_url}" target="_blank" style="text-decoration: none;">
             <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 10px 18px; border-radius: 12px; font-weight: 800; font-size: 0.86rem; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
-                <span>💬</span> Share Regional Warning to Village WhatsApp Group
+                <span>💬</span> {ui['f3_wa_btn']}
             </div>
         </a>
     </div>
@@ -3917,23 +4466,23 @@ with st.container():
         }
     }
 
-    with st.expander("🌐 24/7 Live Pan-India Bio-Surveillance Radar (All 28 States & UTs)", expanded=True):
+    with st.expander(ui['f3_pan_india'], expanded=True):
         # Educational Value Banner: What is the Use of this feature
-        render_clean_html("""
+        render_clean_html(f"""
         <div style="background: rgba(16, 185, 129, 0.08); border: 1.5px solid rgba(52, 211, 153, 0.35); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px;">
             <div style="font-size: 0.88rem; font-weight: 800; color: #34d399; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
-                <span>💡</span> <b>Pan-India Surveillance-oda Mukkiya Payan (Why this is Critical):</b>
+                <span>💡</span> <b>{ui['f3_why_crit_title']}</b>
             </div>
             <div style="font-size: 0.8rem; color: #ecfdf5; line-height: 1.6;">
-                • <b>⏳ 3-7 Days Advance Early Warning:</b> Kaatru moolamaga pakkathu state-la irundhu varum poochi & fungus pathogen-galai border thaandi varadhukku munnadiye detect panni alert tharum.<br>
-                • <b>💰 ₹30,000 - ₹42,500/Acre Cost Avoidance:</b> Payir azhinja apram chemical spray vanga vendiya thevai illamal, zero-cost iyarkai bio-remedies (Neem, Buttermilk-hing, Pheromone traps) moolam munkoottiye thadukkalam.<br>
-                • <b>🤝 Inter-State University Accord:</b> 15+ velanmai palkalaikazhangangal (TNAU, KAU, ANGRAU, PAU) real-time data-va share panni mutual bio-defense provide panranga.
+                {ui['f3_why_crit_p1']}<br>
+                {ui['f3_why_crit_p2']}<br>
+                {ui['f3_why_crit_p3']}
             </div>
         </div>
         """)
 
         selected_corridor_key = st.selectbox(
-            "Select Active Inter-State Surveillance Corridor to Inspect Live Radar:",
+            ui['f3_corridor_select_label'],
             list(corridors.keys()),
             key="full_corridor_dir_select"
         )
@@ -4006,7 +4555,7 @@ with st.container():
         <div style="margin-top: 6px;">
             <a href="{corridor_wa_url}" target="_blank" style="text-decoration: none;">
                 <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 9px 16px; border-radius: 10px; font-weight: 700; font-size: 0.82rem; text-align: center; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);">
-                    <span>💬</span> Share Corridor Alert to WhatsApp Group
+                    <span>💬</span> {ui['f3_corridor_wa_btn']}
                 </div>
             </a>
         </div>
@@ -4020,26 +4569,26 @@ render_clean_html(f"""
     <div style="display: flex; align-items: center; gap: 12px;">
         <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(192, 132, 252, 0.25); display: flex; align-items: center; justify-content: center; font-size: 22px;">💰</div>
         <div>
-            <div style="font-size: 0.72rem; color: #e9d5ff; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">FEATURE 04</div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">Mandi & DPC Fair Price Shield</div>
+            <div style="font-size: 0.72rem; color: #e9d5ff; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">{ui['nav_f4_badge']}</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.2px;">{ui['nav_f4_title']}</div>
         </div>
     </div>
     <div style="background: rgba(192, 132, 252, 0.2); color: #e9d5ff; font-size: 0.76rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid #c084fc;">
-        🛡️ Anti-Middleman Price Protection
+        {ui['f4_badge']}
     </div>
 </div>
 """)
 
 with st.container():
     # Farmer-Centric Empathy Notice: The ground-level reality
-    render_clean_html("""
+    render_clean_html(f"""
     <div style="background: rgba(168, 85, 247, 0.08); border: 1.5px solid rgba(192, 132, 252, 0.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px;">
         <div style="font-size: 0.88rem; font-weight: 800; color: #c084fc; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
-            <span>💡</span> <b>Oru Vivasaayiyin Kanneerai Thudaikkum Feature (Why this Protects Farmers):</b>
+            <span>💡</span> <b>{ui['f4_emp_title']}</b>
         </div>
         <div style="font-size: 0.8rem; color: #f5f3ff; line-height: 1.6;">
-            • <b>இடைத்தரகர் ஏமாற்றுக்கு முற்றுப்புள்ளி:</b> அறுவடைக்கு பின் ஊருக்குள் வரும் இடைத்தரகர்கள் (Middlemen) சந்தை நிலவரம் தெரியாத விவசாயிகளிடம் "மார்க்கெட் டவுன்" என்று சொல்லி குவிண்டாலுக்கு ₹400 முதல் ₹500 வரை குறைத்து ஏமாற்றுவதை தடுத்து, அரசு அறிவித்த நேரடி கொள்முதல் விலை (DPC / MSP) நிலவரத்தை வெளிப்படையாக தருகிறது.<br>
-            • <b>ஈரப்பதம் கமிஷன் பாதுகாப்பு:</b> 17% ஈரப்பதம் வரை அரசு நேரடி நெல் கொள்முதல் நிலையங்களில் (DPC) எந்தவித பிடித்தமும் இன்றி முழு பணமும் கிடைக்கும். ஈரப்பதம் 17%-க்கு மேல் இருந்தால் களத்திலேயே 4 மணி நேரம் காயவைத்து முழு விலையையும் பெறலாம்!
+            {ui['f4_emp_p1']}<br>
+            {ui['f4_emp_p2']}
         </div>
     </div>
     """)
@@ -4071,14 +4620,14 @@ with st.container():
     col_fc1, col_fc2, col_fc3 = st.columns([1.6, 1.2, 1.2])
     with col_fc1:
         sel_crop = st.selectbox(
-            "🌾 Select Harvest Crop (அறுவடை பயிர்):",
+            ui['f4_crop_label'],
             list(MSP_DATABASE.keys()),
             index=list(MSP_DATABASE.keys()).index(default_crop_key),
             key="mandi_shield_crop_select"
         )
     with col_fc2:
         harvest_quintals = st.number_input(
-            "⚖️ Harvest Quantity (குவிண்டால்):",
+            ui['f4_qty_label'],
             min_value=1.0,
             max_value=500.0,
             value=25.0,
@@ -4089,7 +4638,7 @@ with st.container():
         rec_msp = MSP_DATABASE[sel_crop]["msp"]
         default_offer = float(round(rec_msp * 0.82))
         middleman_offer = st.number_input(
-            "🤝 Middleman Offer (வியாபாரி தரும் விலை ₹/q):",
+            ui['f4_offer_label'],
             min_value=500.0,
             max_value=20000.0,
             value=default_offer,
@@ -4102,7 +4651,7 @@ with st.container():
     with col_mois_slider:
         crop_faq_limit = MSP_DATABASE[sel_crop]["faq_moisture"]
         grain_moisture = st.slider(
-            f"💧 Grain Moisture % (தானிய ஈரப்பதம் - அரசு வரம்பு {crop_faq_limit}%):",
+            ui['f4_moisture_label'].format(limit=crop_faq_limit),
             min_value=10,
             max_value=26,
             value=16,
@@ -4113,9 +4662,8 @@ with st.container():
         if grain_moisture <= crop_faq_limit:
             st.markdown(f"""
             <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 10px; padding: 10px 12px; margin-top: 10px;">
-                <div style="font-size: 0.74rem; color: #34d399; font-weight: 800; text-transform: uppercase;">✅ FAQ Quality Verified</div>
-                <div style="font-size: 0.84rem; color: #ffffff; font-weight: 700;">Zero Price Cut Permitted!</div>
-                <div style="font-size: 0.74rem; color: #a7f3d0;">Govt DPC will accept at 100% full MSP.</div>
+                <div style="font-size: 0.74rem; color: #34d399; font-weight: 800; text-transform: uppercase;">{ui['f4_faq_ok_title']}</div>
+                <div style="font-size: 0.84rem; color: #ffffff; font-weight: 700;">{ui['f4_faq_ok_desc']}</div>
             </div>
             """, unsafe_allow_html=True)
         else:
@@ -4123,9 +4671,8 @@ with st.container():
             dry_hrs = diff_m * 2
             st.markdown(f"""
             <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-radius: 10px; padding: 10px 12px; margin-top: 10px;">
-                <div style="font-size: 0.74rem; color: #fca5a5; font-weight: 800; text-transform: uppercase;">⚠️ Moisture {grain_moisture}% (+{diff_m}% Above Limit)</div>
-                <div style="font-size: 0.84rem; color: #ffffff; font-weight: 700;">Dry for {dry_hrs} Hours in Sun!</div>
-                <div style="font-size: 0.74rem; color: #fca5a5;">Do not accept middleman penalty cut. Dry before DPC sale.</div>
+                <div style="font-size: 0.74rem; color: #fca5a5; font-weight: 800; text-transform: uppercase;">{ui['f4_faq_warn_title'].format(m=grain_moisture, diff=diff_m)}</div>
+                <div style="font-size: 0.84rem; color: #ffffff; font-weight: 700;">{ui['f4_faq_warn_desc'].format(hrs=dry_hrs)}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -4138,24 +4685,24 @@ with st.container():
     st.markdown(f"""
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin: 14px 0 16px 0;">
         <div style="background: rgba(168, 85, 247, 0.15); border: 1.5px solid rgba(192, 132, 252, 0.4); border-radius: 12px; padding: 12px 14px;">
-            <div style="font-size: 0.7rem; color: #e9d5ff; font-weight: 700; text-transform: uppercase;">🏛️ Govt DPC / MSP Rate</div>
+            <div style="font-size: 0.7rem; color: #e9d5ff; font-weight: 700; text-transform: uppercase;">{ui['f4_gov_rate']}</div>
             <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-top: 2px;">₹{rec_msp:,} <span style="font-size: 0.75rem; color: #a7f3d0;">/q</span></div>
-            <div style="font-size: 0.7rem; color: #c084fc; margin-top: 3px;">100% Guaranteed Minimum</div>
+            <div style="font-size: 0.7rem; color: #c084fc; margin-top: 3px;">{ui['f4_gov_sub']}</div>
         </div>
         <div style="background: rgba(239, 68, 68, 0.15); border: 1.5px solid rgba(239, 68, 68, 0.4); border-radius: 12px; padding: 12px 14px;">
-            <div style="font-size: 0.7rem; color: #fca5a5; font-weight: 700; text-transform: uppercase;">🤝 Middleman Offer</div>
+            <div style="font-size: 0.7rem; color: #fca5a5; font-weight: 700; text-transform: uppercase;">{ui['f4_trader_offer']}</div>
             <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-top: 2px;">₹{middleman_offer:,.0f} <span style="font-size: 0.75rem; color: #fca5a5;">/q</span></div>
-            <div style="font-size: 0.7rem; color: #ef4444; margin-top: 3px;">-₹{loss_per_quintal:,.0f}/q Below Govt Rate</div>
+            <div style="font-size: 0.7rem; color: #ef4444; margin-top: 3px;">-₹{loss_per_quintal:,.0f}/q {ui['f4_below_rate']}</div>
         </div>
         <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 46, 22, 0.6) 100%); border: 1.5px solid #10b981; border-radius: 12px; padding: 12px 14px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);">
-            <div style="font-size: 0.7rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase;">💰 Money Saved in Pocket</div>
+            <div style="font-size: 0.7rem; color: #a7f3d0; font-weight: 800; text-transform: uppercase;">{ui['f4_saved_cash']}</div>
             <div style="font-size: 1.35rem; font-weight: 800; color: #34d399; margin-top: 2px;">+₹{total_hard_cash_saved:,.0f}</div>
-            <div style="font-size: 0.7rem; color: #d1fae5; margin-top: 3px;">+{pct_gain}% More Profit vs Middleman</div>
+            <div style="font-size: 0.7rem; color: #d1fae5; margin-top: 3px;">{ui['f4_saved_sub'].format(pct=pct_gain)}</div>
         </div>
         <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 12px; padding: 12px 14px;">
-            <div style="font-size: 0.7rem; color: #a7f3d0; font-weight: 700; text-transform: uppercase;">📍 Local DPC Center</div>
+            <div style="font-size: 0.7rem; color: #a7f3d0; font-weight: 700; text-transform: uppercase;">{ui['f4_local_dpc']}</div>
             <div style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-top: 2px;">{m_dist} DPC Hub</div>
-            <div style="font-size: 0.7rem; color: #34d399; margin-top: 3px;">● Direct Payment to Bank A/C</div>
+            <div style="font-size: 0.7rem; color: #34d399; margin-top: 3px;">{ui['f4_direct_pay']}</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -4194,7 +4741,7 @@ with st.container():
     st.markdown(f"""
     <div style="background: rgba(28, 12, 45, 0.6); border: 1px solid rgba(192, 132, 252, 0.25); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px;">
         <div style="font-size: 0.86rem; font-weight: 800; color: #e9d5ff; margin-bottom: 8px;">
-            📍 Verified Government Direct Purchase Centers (DPCs) in {m_dist}:
+            {ui['f4_dpc_dir_title'].format(dist=m_dist)}
         </div>
     """, unsafe_allow_html=True)
 
@@ -4214,23 +4761,84 @@ with st.container():
 
     # 1-Tap WhatsApp "Village Fair Price Alert" Dispatcher
     import urllib.parse
-    mandi_wa_text = (
-        f"📢 *AgriN-Connect — ஊர் விவசாயிகளுக்கு நேரடி கொள்முதல் நியாய விலை எச்சரிக்கை!*\n\n"
-        f"🌾 *பயிர்:* {sel_crop}\n"
-        f"🏛️ *அரசு நேரடி கொள்முதல் விலை (DPC MSP):* ₹{rec_msp:,} / குவிண்டால்\n"
-        f"⚠️ *எச்சரிக்கை:* இடைத்தரகர்கள் குறைவான விலைக்கு (₹{middleman_offer:,.0f}) கேட்டால் விற்காதீர்கள்!\n"
-        f"💰 *1 ஏக்கருக்கு இடைத்தரகரிடம் இழக்காமல் காக்கப்படும் பணம்:* ₹{total_hard_cash_saved:,.0f}!\n"
-        f"💧 *அரசு ஈரப்பதம் வரம்பு:* {crop_faq_limit}% (முறையாக காயவைத்து 100% முழு பணத்தை பெறுங்கள்)\n"
-        f"📍 *உள்ளூர் DPC மையம்:* {matched_dpcs[0]['name']}\n"
-        f"📞 *அரசு தொடர்பு:* {matched_dpcs[0]['phone']}\n\n"
-        f"✅ *Team Nexyra — Digital Public Good for Smallholders*"
-    )
+    if "Tamil" in app_lang_choice:
+        mandi_wa_text = (
+            f"📢 *AgriN-Connect — ஊர் விவசாயிகளுக்கு நேரடி கொள்முதல் நியாய விலை எச்சரிக்கை!*\n\n"
+            f"🌾 *பயிர்:* {sel_crop}\n"
+            f"🏛️ *அரசு நேரடி கொள்முதல் விலை (DPC MSP):* ₹{rec_msp:,} / குவிண்டால்\n"
+            f"⚠️ *எச்சரிக்கை:* இடைத்தரகர்கள் குறைவான விலைக்கு (₹{middleman_offer:,.0f}) கேட்டால் விற்காதீர்கள்!\n"
+            f"💰 *1 ஏக்கருக்கு இடைத்தரகரிடம் இழக்காமல் காக்கப்படும் பணம்:* ₹{total_hard_cash_saved:,.0f}!\n"
+            f"💧 *அரசு ஈரப்பதம் வரம்பு:* {crop_faq_limit}% (முறையாக காயவைத்து 100% முழு பணத்தை பெறுங்கள்)\n"
+            f"📍 *உள்ளூர் DPC மையம்:* {matched_dpcs[0]['name']}\n"
+            f"📞 *அரசு தொடர்பு:* {matched_dpcs[0]['phone']}\n\n"
+            f"✅ *Team Nexyra — Digital Public Good for Smallholders*"
+        )
+    elif "Hindi" in app_lang_choice:
+        mandi_wa_text = (
+            f"📢 *AgriN-Connect — किसानों के लिए सरकारी एमएसपी उचित मूल्य चेतावनी!*\n\n"
+            f"🌾 *फसल:* {sel_crop}\n"
+            f"🏛️ *सरकारी खरीद दर (DPC / MSP):* ₹{rec_msp:,} / क्विंटल\n"
+            f"⚠️ *चेतावनी:* बिचौलियों को कम कीमत (₹{middleman_offer:,.0f}) पर अपनी फसल न बेचें!\n"
+            f"💰 *प्रति एकड़ बिचौलियों से बचाई गई राशि:* ₹{total_hard_cash_saved:,.0f}!\n"
+            f"💧 *सरकारी नमी मानक:* {crop_faq_limit}% (धूप में सुखाकर पूरा 100% मूल्य पाएं)\n"
+            f"📍 *निकटतम सरकारी खरीद केंद्र:* {matched_dpcs[0]['name']}\n"
+            f"📞 *हेल्पलाइन:* {matched_dpcs[0]['phone']}\n\n"
+            f"✅ *Team Nexyra — National AgriGrid (DPG)*"
+        )
+    elif "Telugu" in app_lang_choice:
+        mandi_wa_text = (
+            f"📢 *AgriN-Connect — రైతులకు ప్రభుత్వ మద్దతు ధర (MSP) హెచ్చరిక!*\n\n"
+            f"🌾 *పంట:* {sel_crop}\n"
+            f"🏛️ *ప్రభుత్వ కొనుగోలు ధర (MSP):* ₹{rec_msp:,} / క్వింటాల్\n"
+            f"⚠️ *హెచ్చరిక:* దళారులకు తక్కువ ధరకు (₹{middleman_offer:,.0f}) అమ్మకండి!\n"
+            f"💰 *రైతు ఆదా చేసుకునే మొత్తం:* ₹{total_hard_cash_saved:,.0f}!\n"
+            f"💧 *తేమ పరిమితి:* {crop_faq_limit}% (ఆరబెట్టి పూర్తి ధర పొందండి)\n"
+            f"📍 *స్థానిక కొనుగోలు కేంద్రం:* {matched_dpcs[0]['name']}\n"
+            f"📞 *సంప్రదించండి:* {matched_dpcs[0]['phone']}\n\n"
+            f"✅ *Team Nexyra — National AgriGrid*"
+        )
+    elif "Kannada" in app_lang_choice:
+        mandi_wa_text = (
+            f"📢 *AgriN-Connect — ರೈತರಿಗೆ ಸರಕಾರಿ ಬೆಂಬಲ ಬೆಲೆ (MSP) ಎಚ್ಚರಿಕೆ!*\n\n"
+            f"🌾 *ಬೆಳೆ:* {sel_crop}\n"
+            f"🏛️ *ಸರಕಾರಿ ಖರೀದಿ ಬೆಲೆ (MSP):* ₹{rec_msp:,} / ಕ್ವಿಂಟಾಲ್\n"
+            f"⚠️ *ಎಚ್ಚರಿಕೆ:* ದಲ್ಲಾಳಿಗಳಿಗೆ ಕಡಿಮೆ ದರಕ್ಕೆ (₹{middleman_offer:,.0f}) ಮಾರಾಟ ಮಾಡಬೇಡಿ!\n"
+            f"💰 *ರೈತರ ಉಳಿತಾಯ:* ₹{total_hard_cash_saved:,.0f}!\n"
+            f"💧 *ತೇವಾಂಶ ಮಿತಿ:* {crop_faq_limit}% (ಒಣಗಿಸಿ ಸಂಪೂರ್ಣ ಹಣ ಪಡೆಯಿರಿ)\n"
+            f"📍 *ಸ್ಥಳೀಯ ಖರೀದಿ ಕೇಂದ್ರ:* {matched_dpcs[0]['name']}\n"
+            f"📞 *ದೂರವಾಣಿ:* {matched_dpcs[0]['phone']}\n\n"
+            f"✅ *Team Nexyra — National AgriGrid*"
+        )
+    elif "Malayalam" in app_lang_choice:
+        mandi_wa_text = (
+            f"📢 *AgriN-Connect — കർഷകർക്ക് സർക്കാർ സംഭരണ വില (MSP) മുന്നറിയിപ്പ്!*\n\n"
+            f"🌾 *വിള:* {sel_crop}\n"
+            f"🏛️ *സർക്കാർ സംഭരണ വില (MSP):* ₹{rec_msp:,} / ക്വിന്റൽ\n"
+            f"⚠️ *മുന്നറിയിപ്പ്:* ഇടനിലക്കാർക്ക് കുറഞ്ഞ വിലയ്ക്ക് (₹{middleman_offer:,.0f}) നൽകരുത്!\n"
+            f"💰 *കർഷകൻ ലാഭിക്കുന്ന തുക:* ₹{total_hard_cash_saved:,.0f}!\n"
+            f"💧 *ഈർപ്പ പരിധി:* {crop_faq_limit}% (ഉണക്കി മുഴുവൻ തുകയും വാങ്ങുക)\n"
+            f"📍 *പ്രാദേശിക സംഭരണ കേന്ദ്രം:* {matched_dpcs[0]['name']}\n"
+            f"📞 *ഫോൺ:* {matched_dpcs[0]['phone']}\n\n"
+            f"✅ *Team Nexyra — National AgriGrid*"
+        )
+    else:  # English
+        mandi_wa_text = (
+            f"📢 *AgriN-Connect — Direct Farmer Fair Price & MSP Alert!*\n\n"
+            f"🌾 *Crop:* {sel_crop}\n"
+            f"🏛️ *Govt Direct Purchase Price (MSP):* ₹{rec_msp:,} / Quintal\n"
+            f"⚠️ *Warning:* Do NOT sell to village middlemen below MSP (Offered: ₹{middleman_offer:,.0f})!\n"
+            f"💰 *Hard Cash Protected in Farmer's Pocket:* ₹{total_hard_cash_saved:,.0f}!\n"
+            f"💧 *Govt Moisture Limit:* {crop_faq_limit}% (Sun-dry for full 100% payment without cut)\n"
+            f"📍 *Local DPC Hub:* {matched_dpcs[0]['name']}\n"
+            f"📞 *Agri Support:* {matched_dpcs[0]['phone']}\n\n"
+            f"✅ *Team Nexyra — Digital Public Good for Smallholders*"
+        )
     mandi_wa_url = f"https://api.whatsapp.com/send?text={urllib.parse.quote(mandi_wa_text)}"
     st.markdown(f"""
     <div style="margin: 4px 0 16px 0;">
         <a href="{mandi_wa_url}" target="_blank" style="text-decoration: none;">
             <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 10px 18px; border-radius: 12px; font-weight: 800; font-size: 0.86rem; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
-                <span>💬</span> எச்சரிக்கை: ஊர் விவசாயிகள் WhatsApp குரூப்பிற்கு நியாய விலையை அனுப்பு
+                <span>💬</span> {ui['f4_wa_btn']}
             </div>
         </a>
     </div>
