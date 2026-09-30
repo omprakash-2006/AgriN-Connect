@@ -4,6 +4,7 @@ import os
 import io
 import json
 import base64
+import re
 import requests
 import datetime
 import random
@@ -4759,7 +4760,7 @@ with st.container():
     """, unsafe_allow_html=True)
 
     for dpc in matched_dpcs:
-        clean_tel = re.sub(r"[^0-9+]", "", str(dpc["phone"]).split("(")[0])
+        clean_tel = "".join(c for c in str(dpc["phone"]).split("(")[0] if c.isdigit() or c == "+")
         st.markdown(f"""
         <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(192, 132, 252, 0.2); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
             <div>
