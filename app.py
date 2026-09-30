@@ -4710,18 +4710,21 @@ with st.container():
     # Directory of Verified Local Direct Purchase Centers (DPCs) & Regulated Markets
     DPC_DIRECTORY = {
         "thanjavur": [
+            {"name": "Thanjavur TNCSC Senior Regional Manager (SRM) Paddy Control Room", "addr": "Sachidananda Moopanar Road, Thanjavur", "timing": "8:30 AM - 6:00 PM (Direct Govt)", "phone": "04362-230121"},
             {"name": "Pillaiyarpatti Central DPC Procurement Hub", "addr": "Karanthai Bypass Road, Thanjavur", "timing": "9:00 AM - 5:30 PM (Mon-Sat)", "phone": "04362-230451"},
             {"name": "Orathanadu Regulated Market Committee Yard", "addr": "Pattukkottai Main Road, Orathanadu", "timing": "9:30 AM - 5:00 PM (Daily)", "phone": "04362-257220"},
             {"name": "Kumbakonam Agricultural Cooperative DPC Center", "addr": "TNAU Road, Kumbakonam", "timing": "9:00 AM - 5:00 PM (Mon-Sat)", "phone": "0435-2421310"},
-            {"name": "Papanasam Cauvery Riverine DPC Station", "addr": "Near Railway Feeder Road, Papanasam", "timing": "9:00 AM - 6:00 PM", "phone": "04374-222415"}
+            {"name": "Govt National Kisan Call Center (MSP & DPC Helpline)", "addr": "Ministry of Agriculture & Farmers Welfare", "timing": "6:00 AM - 10:00 PM (All Days)", "phone": "1800-180-1551 (Toll-Free)"}
         ],
         "coimbatore": [
             {"name": "Pollachi Regulated Market Committee", "addr": "Market Yard, Pollachi", "timing": "9:00 AM - 5:00 PM", "phone": "04259-223450"},
-            {"name": "Sulur Farmers Direct Procurement Center", "addr": "Trichy Road, Sulur", "timing": "9:30 AM - 5:30 PM", "phone": "0422-2687110"}
+            {"name": "Sulur Farmers Direct Procurement Center", "addr": "Trichy Road, Sulur", "timing": "9:30 AM - 5:30 PM", "phone": "0422-2687110"},
+            {"name": "Govt National Kisan Call Center (MSP & DPC Helpline)", "addr": "Ministry of Agriculture & Farmers Welfare", "timing": "6:00 AM - 10:00 PM", "phone": "1800-180-1551 (Toll-Free)"}
         ],
         "madurai": [
             {"name": "Vadipatti Regulated Agricultural Market", "addr": "Dindigul Road, Vadipatti", "timing": "9:00 AM - 5:00 PM", "phone": "04543-254210"},
-            {"name": "Melur Paddy DPC & Grain Storage Hub", "addr": "Trichy Bypass, Melur", "timing": "9:00 AM - 5:30 PM", "phone": "0452-2415670"}
+            {"name": "Melur Paddy DPC & Grain Storage Hub", "addr": "Trichy Bypass, Melur", "timing": "9:00 AM - 5:30 PM", "phone": "0452-2415670"},
+            {"name": "Govt National Kisan Call Center (MSP & DPC Helpline)", "addr": "Ministry of Agriculture & Farmers Welfare", "timing": "6:00 AM - 10:00 PM", "phone": "1800-180-1551 (Toll-Free)"}
         ]
     }
 
@@ -4743,18 +4746,31 @@ with st.container():
         <div style="font-size: 0.86rem; font-weight: 800; color: #e9d5ff; margin-bottom: 8px;">
             {ui['f4_dpc_dir_title'].format(dist=m_dist)}
         </div>
+        <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+            <div style="font-size: 0.78rem; color: #a7f3d0; font-weight: 600;">
+                ⚡ <b>Govt 24/7 MSP & Procurement Helpline:</b> Direct line to Agricultural Officers
+            </div>
+            <a href="tel:18001801551" style="text-decoration: none;">
+                <span style="background: #10b981; color: #042618; font-weight: 800; font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; cursor: pointer;">
+                    📞 1800-180-1551 (Toll-Free)
+                </span>
+            </a>
+        </div>
     """, unsafe_allow_html=True)
 
     for dpc in matched_dpcs:
+        clean_tel = re.sub(r"[^0-9+]", "", str(dpc["phone"]).split("(")[0])
         st.markdown(f"""
         <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(192, 132, 252, 0.2); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
             <div>
                 <div style="font-weight: 800; font-size: 0.88rem; color: #ffffff;">🏛️ {dpc['name']}</div>
                 <div style="font-size: 0.76rem; color: #d8b4fe; margin-top: 2px;">📍 {dpc['addr']} • ⏰ {dpc['timing']}</div>
             </div>
-            <div style="background: rgba(168, 85, 247, 0.2); border: 1px solid #c084fc; border-radius: 8px; padding: 4px 10px; font-size: 0.78rem; font-weight: 800; color: #e9d5ff;">
-                📞 {dpc['phone']}
-            </div>
+            <a href="tel:{clean_tel}" style="text-decoration: none;">
+                <div style="background: rgba(168, 85, 247, 0.28); border: 1.5px solid #c084fc; border-radius: 8px; padding: 6px 12px; font-size: 0.8rem; font-weight: 800; color: #ffffff; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(168, 85, 247, 0.25); cursor: pointer;">
+                    📞 {dpc['phone']}
+                </div>
+            </a>
         </div>
         """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
