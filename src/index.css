@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --botanical-dark-0: #041710;
+  --botanical-dark-1: #082117;
+  --emerald-bright: #10b981;
+  --emerald-neon: #34d399;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #041710;
+  color: #ecfdf5;
+}
+
+.font-serif-signature {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+
+.bento-card {
+  background: linear-gradient(145deg, #092117 0%, #05140e 100%);
+  border: 1.5px solid rgba(52, 211, 153, 0.28);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
